@@ -2,11 +2,11 @@
 
 import re
 from collections.abc import Iterable
-from dataclasses import dataclass
 
 from rank_bm25 import BM25Okapi
 
 from ragforge.ingestion.chunking import TextChunk
+from ragforge.retrieval.types import SearchResult
 
 
 def tokenize(text: str) -> list[str]:
@@ -18,12 +18,7 @@ def tokenize(text: str) -> list[str]:
     return re.findall(r"\w+", text.casefold())
 
 
-@dataclass(frozen=True)
-class SearchResult:
-    """A retrieved chunk and its raw ranking score, not a probability."""
 
-    chunk: TextChunk
-    score: float
 
 
 class BM25Retriever:
