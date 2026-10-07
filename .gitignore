@@ -5,3 +5,25 @@ __pycache__/
 .env
 data/raw/
 data/processed/
+# Python environment and generated files
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Test and lint caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Local datasets and generated indexes
+data/
+*.egg-info/

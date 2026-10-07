@@ -1,8 +1,0 @@
-Metadata-Version: 2.4
-Name: ragforge
-Version: 0.1.0
-Summary: Evidence-grounded research intelligence system
-Requires-Python: >=3.11
-Provides-Extra: dev
-Requires-Dist: pytest<9,>=8; extra == "dev"
-Requires-Dist: ruff<1,>=0.9; extra == "dev"
