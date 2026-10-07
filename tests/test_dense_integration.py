@@ -45,8 +45,9 @@ def fake_backend(monkeypatch: pytest.MonkeyPatch) -> tuple[Mock, Mock]:
             dtype=np.float32,
         )
 
-    model = Mock()
-    model.get_sentence_embedding_dimension.return_value = 3
+    
+    model = Mock(spec_set=["encode", "get_embedding_dimension"])
+    model.get_embedding_dimension.return_value = 3
     model.encode.side_effect = encode
     factory = Mock(return_value=model)
 

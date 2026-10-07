@@ -47,7 +47,13 @@ class SentenceTransformerEmbedder:
             ) from exc
 
         self._model = SentenceTransformer(model_name, device=device)
-        dimension = self._model.get_sentence_embedding_dimension()
+        
+                # Prefer the current API while supporting older dependency versions.
+        get_dimension = getattr(self._model, "get_embedding_dimension", None)
+        if get_dimension is None:
+            get_dimension = self._model.get_sentence_embedding_dimension
+        dimension = get_dimension()
+
 
         if (
             isinstance(dimension, bool)

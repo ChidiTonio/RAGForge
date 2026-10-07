@@ -15,7 +15,7 @@ from ragforge.embeddings.sentence_transformers import SentenceTransformerEmbedde
 @pytest.fixture
 def fake_backend(monkeypatch: pytest.MonkeyPatch) -> tuple[Mock, Mock]:
     """Replace the optional package with a controllable fake backend."""
-    model = Mock()
+    model = Mock(spec_set=["encode", "get_sentence_embedding_dimension"])
     model.get_sentence_embedding_dimension.return_value = 3
     model.encode.return_value = np.array([[1, 2, 3]], dtype=np.float32)
     factory = Mock(return_value=model)
@@ -297,3 +297,76 @@ def test_missing_dependency_errors(
             SentenceTransformerEmbedder()
 
         assert caught.value is error
+
+
+def test_prefers_current_dimension_method(
+    fake_backend: tuple[Mock, Mock],
+) -> None:
+    factory, _ = fake_backend
+    model = Mock(
+        spec_set=[
+            "encode",
+            "get_embedding_dimension",
+            "get_sentence_embedding_dimension",
+        ]
+    )
+    model.get_embedding_dimension.return_value = 3
+    model.get_sentence_embedding_dimension.return_value = 999
+    factory.return_value = model
+
+    embedder = SentenceTransformerEmbedder()
+
+    assert embedder.dimension == 3
+    model.get_embedding_dimension.assert_called_once_with()
+    model.get_sentence_embedding_dimension.assert_not_called()
+
+
+@pytest.mark.parametrize("dimension", [None, 0, -1, True, False, 3.5, "3"])
+def test_invalid_current_dimension_does_not_fall_back(
+    fake_backend: tuple[Mock, Mock],
+    dimension: object,
+) -> None:
+    factory, _ = fake_backend
+    model = Mock(
+        spec_set=[
+            "encode",
+            "get_embedding_dimension",
+            "get_sentence_embedding_dimension",
+        ]
+    )
+    model.get_embedding_dimension.return_value = dimension
+    model.get_sentence_embedding_dimension.return_value = 3
+    factory.return_value = model
+
+    with pytest.raises(ValueError, match="positive integer embedding dimension"):
+        SentenceTransformerEmbedder()
+
+    model.get_embedding_dimension.assert_called_once_with()
+    model.get_sentence_embedding_dimension.assert_not_called()
+
+
+@pytest.mark.parametrize("error_type", [RuntimeError, AttributeError])
+def test_current_dimension_error_is_preserved(
+    fake_backend: tuple[Mock, Mock],
+    error_type: type[Exception],
+) -> None:
+    factory, _ = fake_backend
+    model = Mock(
+        spec_set=[
+            "encode",
+            "get_embedding_dimension",
+            "get_sentence_embedding_dimension",
+        ]
+    )
+    error = error_type("Synthetic dimension failure")
+    model.get_embedding_dimension.side_effect = error
+    model.get_sentence_embedding_dimension.return_value = 3
+    factory.return_value = model
+
+    with pytest.raises(error_type) as caught:
+        SentenceTransformerEmbedder()
+
+    assert caught.value is error
+    model.get_embedding_dimension.assert_called_once_with()
+    model.get_sentence_embedding_dimension.assert_not_called()
+    
