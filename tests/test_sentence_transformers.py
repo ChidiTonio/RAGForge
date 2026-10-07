@@ -369,4 +369,83 @@ def test_current_dimension_error_is_preserved(
     assert caught.value is error
     model.get_embedding_dimension.assert_called_once_with()
     model.get_sentence_embedding_dimension.assert_not_called()
-    
+
+
+def test_generator_input_preserves_order(
+    fake_backend: tuple[Mock, Mock],
+) -> None:
+    _, model = fake_backend
+    model.encode.return_value = np.array(
+        [[1, 0, 0], [0, 1, 0]],
+        dtype=np.float32,
+    )
+    embedder = SentenceTransformerEmbedder(batch_size=8)
+    texts = (text for text in ["second document", "first document"])
+
+    vectors = embedder.embed(texts)
+
+    model.encode.assert_called_once_with(
+        ["second document", "first document"],
+        batch_size=8,
+        show_progress_bar=False,
+        convert_to_numpy=True,
+        normalize_embeddings=False,
+    )
+    np.testing.assert_array_equal(vectors, [[1, 0, 0], [0, 1, 0]])
+
+
+@pytest.mark.parametrize("output", [[[1.0, 2.0, 3.0]], None])
+def test_non_numpy_output_is_rejected(
+    fake_backend: tuple[Mock, Mock],
+    output: object,
+) -> None:
+    _, model = fake_backend
+    model.encode.return_value = output
+    embedder = SentenceTransformerEmbedder()
+
+    with pytest.raises(TypeError, match="NumPy array"):
+        embedder.embed(["document"])
+
+
+@pytest.mark.parametrize(
+    "dtype",
+    [np.int64, np.bool_, np.complex64, object, np.str_],
+)
+def test_nonfloating_output_dtype_is_rejected(
+    fake_backend: tuple[Mock, Mock],
+    dtype: object,
+) -> None:
+    _, model = fake_backend
+    model.encode.return_value = np.array([[1, 2, 3]], dtype=dtype)
+    embedder = SentenceTransformerEmbedder()
+
+    with pytest.raises(TypeError, match="floating-point dtype"):
+        embedder.embed(["document"])
+
+
+def test_float32_conversion_overflow_is_rejected(
+    fake_backend: tuple[Mock, Mock],
+) -> None:
+    _, model = fake_backend
+    model.encode.return_value = np.array(
+        [[np.finfo(np.float64).max, 1, 0]],
+        dtype=np.float64,
+    )
+    embedder = SentenceTransformerEmbedder()
+
+    with pytest.raises(ValueError, match="finite after float32 conversion"):
+        embedder.embed(["document"])
+
+
+def test_float32_conversion_to_zero_vector_is_rejected(
+    fake_backend: tuple[Mock, Mock],
+) -> None:
+    _, model = fake_backend
+    model.encode.return_value = np.array(
+        [[1e-300, 0, 0]],
+        dtype=np.float64,
+    )
+    embedder = SentenceTransformerEmbedder()
+
+    with pytest.raises(ValueError, match="nonzero"):
+        embedder.embed(["document"])
