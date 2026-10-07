@@ -7,7 +7,10 @@ name = "ragforge"
 version = "0.1.0"
 description = "Evidence-grounded research intelligence system"
 requires-python = ">=3.11"
-dependencies = []
+
+dependencies = [
+    "pypdf>=5,<7",
+]
 
 [project.optional-dependencies]
 dev = [
