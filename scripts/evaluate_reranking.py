@@ -1,7 +1,8 @@
 """Compare hybrid ordering and cross-encoder ordering on fixed candidates.
 
 Run from the repository root. Model construction may download model files.
-This is a development-set retrieval diagnostic, not an answer evaluation.
+This evaluates passage retrieval, not generated answers or factual truth.
+Use --evaluation-role heldout for a frozen held-out evaluation.
 The embedding model revision is pinned; the reranker revision is not.
 """
 
@@ -90,6 +91,15 @@ def main():
         "--output", type=Path,
         default=Path("evaluation/equity_research/reranking_experiment_v1.json"),
     )
+    parser.add_argument(
+        "--evaluation-role",
+        choices=("development", "heldout"),
+        default="development",
+        help=(
+            "Report metadata only; does not change retrieval or scoring. "
+            "Use heldout for a frozen held-out dataset."
+        ),
+    )
     args = parser.parse_args()
 
     if args.output.exists():
@@ -112,10 +122,17 @@ def main():
     if len(set(query_texts)) != len(query_texts):
         parser.error("This experiment requires unique question texts.")
 
+    evaluation_scope = (
+        "held-out passage retrieval evaluation; not answer evaluation"
+        if args.evaluation_role == "heldout"
+        else "development diagnostic; not held-out"
+    )
+
     print(
         f"Validated: {len(chunks)} chunks | {len(questions)} questions",
         flush=True,
     )
+    print(f"Evaluation scope: {evaluation_scope}", flush=True)
     print("Loading models and building the hybrid index on CPU...", flush=True)
     started = perf_counter()
     embedder = SentenceTransformerEmbedder(
@@ -215,7 +232,10 @@ def main():
     report = {
         "report_schema_version": 1,
         "experiment": "fixed_hybrid_candidates_cross_encoder",
-        "evaluation_scope": "development diagnostic; not held-out",
+        "evaluation_scope": evaluation_scope,
+        "evaluation_role": args.evaluation_role,
+        "dataset_evaluation_role": dataset.get("evaluation_role"),
+        "label_status": dataset.get("label_status"),
         "created_at_utc": datetime.now(UTC).isoformat(),
         "dataset_id": dataset.get("dataset_id"),
         "corpus_path": str(args.corpus),
@@ -298,7 +318,7 @@ def main():
         )
     print(f"Saved report: {args.output}")
     print(
-        "Development diagnostic only; embedding revision is pinned, "
+        "Passage retrieval evaluation only; embedding revision is pinned, "
         "reranker revision is not pinned."
     )
 

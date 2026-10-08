@@ -1,0 +1,267 @@
+﻿{
+    "dataset_id":  "stem_education_v1_heldout",
+    "source":  "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+    "evaluation_role":  "heldout",
+    "label_status":  "human_approved_frozen",
+    "relevance_policy":  "A relevant chunk must directly support the complete expected answer. A reference entry or a topic mention alone is insufficient. Overlapping and repeated chunks are independently relevant when each supports the complete answer. Neighboring chunks are not combined to establish individual-chunk relevance.",
+    "benchmark_notes":  "Single-document, cross-domain retrieval evaluation drafted with assistant support. Not a broad independent benchmark. Questions and labels were drafted without viewing retrieval rankings. Keep retrieval configuration unchanged for the first evaluation. Answers describe what the document states, not independently verified findings.",
+    "source_caveat":  "The document describes an integrative review, includes proposed search and reporting procedures, explicitly states that a live database search has not yet been completed, and disclaims a PRISMA-completed systematic review.",
+    "questions":  [
+                      {
+                          "id":  "q001",
+                          "question":  "Why does the author consider an integrative literature review appropriate for this topic?",
+                          "expected_answer":  "The topic spans several bodies of literature, and an integrative review allows theoretical, empirical, and policy sources to be examined together to clarify concepts, identify patterns, compare contexts, and develop a conceptual framework.",
+                          "relevant_chunk_ids":  [
+                                                     "p005-c001"
+                                                 ],
+                          "label_notes":  "Contains both the cross-disciplinary rationale and the purposes of examining different source types together.",
+                          "evidence_family":  "integrative_review_rationale"
+                      },
+                      {
+                          "id":  "q002",
+                          "question":  "According to the PRISMA reporting template, has a live database search been completed, and how should numerical values be handled?",
+                          "expected_answer":  "A live database search has not yet been completed, so numerical values must not be fabricated; the reporting structure should be populated after searches are conducted.",
+                          "relevant_chunk_ids":  [
+                                                     "p008-c001"
+                                                 ],
+                          "label_notes":  "Explicitly states the search status and prohibition on fabricated values. p008-c002 starts after the complete search-status statement.",
+                          "evidence_family":  "search_completion_status"
+                      },
+                      {
+                          "id":  "q003",
+                          "question":  "Which three theoretical perspectives inform the review?",
+                          "expected_answer":  "Human capital theory, entrepreneurial mindset theory, and innovation ecosystem theory.",
+                          "relevant_chunk_ids":  [
+                                                     "p004-c002"
+                                                 ],
+                          "label_notes":  "Names all three perspectives together in the body text.",
+                          "evidence_family":  "theoretical_foundations"
+                      },
+                      {
+                          "id":  "q004",
+                          "question":  "Which publication years did the review prioritise, and when were earlier works retained?",
+                          "expected_answer":  "It prioritised literature published from 2013 to 2026, retaining earlier foundational works when needed for theoretical framing.",
+                          "relevant_chunk_ids":  [
+                                                     "p005-c004",
+                                                     "p006-c003"
+                                                 ],
+                          "label_notes":  "Both chunks independently state the date range and the exception for earlier foundational sources.",
+                          "evidence_family":  "publication_scope"
+                      },
+                      {
+                          "id":  "q005",
+                          "question":  "What five concept clusters organised the review\u0027s search terms?",
+                          "expected_answer":  "STEM education, entrepreneurship education, business integration, pedagogy, and innovation ecosystems.",
+                          "relevant_chunk_ids":  [
+                                                     "p005-c003"
+                                                 ],
+                          "label_notes":  "Explicitly identifies the five clusters. Broader lists of search concepts are not equivalent to this five-cluster grouping.",
+                          "evidence_family":  "search_concept_clusters"
+                      },
+                      {
+                          "id":  "q006",
+                          "question":  "What curriculum activities does the business-principles table suggest for customer discovery and user research?",
+                          "expected_answer":  "User interviews, empathy mapping, field observation, and stakeholder analysis.",
+                          "relevant_chunk_ids":  [
+                                                     "p007-c002"
+                                                 ],
+                          "label_notes":  "The complete table row contains all four activities.",
+                          "evidence_family":  "customer_discovery_activities"
+                      },
+                      {
+                          "id":  "q007",
+                          "question":  "What financial-literacy assignments does the business-principles table suggest?",
+                          "expected_answer":  "Prototype costing, grant budgeting, cash-flow exercises, and funding strategy assignments.",
+                          "relevant_chunk_ids":  [
+                                                     "p007-c003"
+                                                 ],
+                          "label_notes":  "Contains all four examples. p007-c002 truncates the financial-literacy row before the examples.",
+                          "evidence_family":  "financial_literacy_activities"
+                      },
+                      {
+                          "id":  "q008",
+                          "question":  "In university settings, what should intellectual property education be connected to?",
+                          "expected_answer":  "Institutional policies and technology transfer procedures.",
+                          "relevant_chunk_ids":  [
+                                                     "p013-c002"
+                                                 ],
+                          "label_notes":  "States both connections explicitly; generic references to intellectual property support do not establish this recommendation.",
+                          "evidence_family":  "institutional_ip_education"
+                      },
+                      {
+                          "id":  "q009",
+                          "question":  "Which responsible-innovation concerns does the regulatory and ethical discussion identify?",
+                          "expected_answer":  "Privacy, bias, environmental consequences, safety, accessibility, and social equity.",
+                          "relevant_chunk_ids":  [
+                                                     "p013-c003"
+                                                 ],
+                          "label_notes":  "Contains the complete six-item list. Other passages provide shorter or different lists.",
+                          "evidence_family":  "responsible_innovation_concerns"
+                      },
+                      {
+                          "id":  "q010",
+                          "question":  "Why might a technically functioning innovation still fail, according to the document?",
+                          "expected_answer":  "It may lack a defined user, market fit, funding strategy, regulatory pathway, or adoption model.",
+                          "relevant_chunk_ids":  [
+                                                     "p012-c002"
+                                                 ],
+                          "label_notes":  "Contains the functioning-innovation statement and all five missing conditions. p012-c001 cuts off before completing the explanation.",
+                          "evidence_family":  "technical_feasibility_vs_viability"
+                      },
+                      {
+                          "id":  "q011",
+                          "question":  "Which alternative pathways can business model thinking help STEM students compare?",
+                          "expected_answer":  "Licensing, direct sales, social enterprise, open-source models, public procurement, and partnership with existing firms.",
+                          "relevant_chunk_ids":  [
+                                                     "p013-c001"
+                                                 ],
+                          "label_notes":  "The body text lists all six pathways together.",
+                          "evidence_family":  "business_model_pathways"
+                      },
+                      {
+                          "id":  "q012",
+                          "question":  "What support and coordination do interdisciplinary capstone projects require?",
+                          "expected_answer":  "Careful coordination, shared assessment criteria, faculty collaboration, and institutional support.",
+                          "relevant_chunk_ids":  [
+                                                     "p014-c003"
+                                                 ],
+                          "label_notes":  "Contains the explicit requirements. The pedagogical table describes capstones but does not list these requirements.",
+                          "evidence_family":  "capstone_implementation"
+                      },
+                      {
+                          "id":  "q013",
+                          "question":  "What follow-up does the document recommend so a short innovation event can produce deeper learning?",
+                          "expected_answer":  "Reflection, mentoring, technical development, market validation, and resource access.",
+                          "relevant_chunk_ids":  [
+                                                     "p014-c004"
+                                                 ],
+                          "label_notes":  "Contains the short-event caveat and the complete follow-up list. p014-c003 truncates the final item.",
+                          "evidence_family":  "innovation_event_followup"
+                      },
+                      {
+                          "id":  "q014",
+                          "question":  "How does the document suggest integrating business principles when STEM curricula are already overloaded?",
+                          "expected_answer":  "Embed business principles in existing laboratories, design projects, research methods courses, capstones, and final-year projects rather than adding separate courses.",
+                          "relevant_chunk_ids":  [
+                                                     "p015-c004"
+                                                 ],
+                          "label_notes":  "Explicitly connects curriculum overload to the embedded approach and names all five settings.",
+                          "evidence_family":  "curriculum_overload_response"
+                      },
+                      {
+                          "id":  "q015",
+                          "question":  "Why are faculty incentives important for interdisciplinary teaching and entrepreneurship mentoring?",
+                          "expected_answer":  "These activities can require additional time that promotion systems may not recognise.",
+                          "relevant_chunk_ids":  [
+                                                     "p015-c001"
+                                                 ],
+                          "label_notes":  "States the time burden and the promotion-system issue together.",
+                          "evidence_family":  "faculty_incentives"
+                      },
+                      {
+                          "id":  "q016",
+                          "question":  "What determines whether policy frameworks translate into institutional change?",
+                          "expected_answer":  "Implementation, coordination, funding, and accountability.",
+                          "relevant_chunk_ids":  [
+                                                     "p015-c003"
+                                                 ],
+                          "label_notes":  "Lists all four determinants explicitly. Other policy passages mention only subsets or different conditions.",
+                          "evidence_family":  "policy_implementation_conditions"
+                      },
+                      {
+                          "id":  "q017",
+                          "question":  "What alternative does the proposed framework suggest when a full technology transfer office is not feasible?",
+                          "expected_answer":  "Partnerships with external innovation hubs may provide partial support.",
+                          "relevant_chunk_ids":  [
+                                                     "p020-c002"
+                                                 ],
+                          "label_notes":  "Contains the feasibility condition and the proposed alternative.",
+                          "evidence_family":  "low_resource_commercialisation_support"
+                      },
+                      {
+                          "id":  "q018",
+                          "question":  "According to the document, how does NSF I-Corps help researchers and students examine the commercial potential of research?",
+                          "expected_answer":  "Through customer discovery and entrepreneurial training, encouraging research teams to examine user needs, value propositions, and commercial pathways.",
+                          "relevant_chunk_ids":  [
+                                                     "p016-c003"
+                                                 ],
+                          "label_notes":  "The chunk explicitly names NSF I-Corps and supports both the training approach and the issues research teams are encouraged to examine.",
+                          "evidence_family":  "nsf_icorps_training_approach"
+                      },
+                      {
+                          "id":  "q019",
+                          "question":  "Which provisions of the Nigerian Startup Act 2022 does the document highlight?",
+                          "expected_answer":  "Startup labelling, coordination, incentives, and funding mechanisms.",
+                          "relevant_chunk_ids":  [
+                                                     "p017-c003"
+                                                 ],
+                          "label_notes":  "Lists all four provisions in the body text; general mentions of the Act do not support the complete answer.",
+                          "evidence_family":  "nigerian_startup_act_provisions"
+                      },
+                      {
+                          "id":  "q020",
+                          "question":  "Which two infrastructure problems does the Nigeria discussion specifically link to constrained experimentation and prototyping?",
+                          "expected_answer":  "Unreliable electricity and limited laboratory resources.",
+                          "relevant_chunk_ids":  [
+                                                     "p017-c004"
+                                                 ],
+                          "label_notes":  "Explicitly connects these two problems to experimentation and prototyping. Other chunks refer to infrastructure constraints more generally.",
+                          "evidence_family":  "nigeria_prototyping_constraints"
+                      },
+                      {
+                          "id":  "q021",
+                          "question":  "What does the document caution against presenting entrepreneurship education as a simple solution to?",
+                          "expected_answer":  "Structural employment problems; programmes should develop capabilities while recognising broader economic constraints.",
+                          "relevant_chunk_ids":  [
+                                                     "p016-c002"
+                                                 ],
+                          "label_notes":  "Contains both the caution and the recommended framing. p016-c001 cuts off before completing the structural-employment statement.",
+                          "evidence_family":  "structural_employment_caution"
+                      },
+                      {
+                          "id":  "q022",
+                          "question":  "Which social and geographic inequalities does the document identify as affecting participation in entrepreneurial STEM opportunities in the United States?",
+                          "expected_answer":  "Gender, race, class, disability, and regional inequalities.",
+                          "relevant_chunk_ids":  [
+                                                     "p017-c001",
+                                                     "p019-c001"
+                                                 ],
+                          "label_notes":  "p017-c001 explicitly identifies the United States and lists all five dimensions. p019-c001 includes the country-column headers and the complete inclusion row. p009-c002 and p009-c003 contain the five dimensions but lack country-column headers, so they are excluded under the strict independent-support policy.",
+                          "evidence_family":  "us_participation_inequalities"
+                      },
+                      {
+                          "id":  "q023",
+                          "question":  "What are the six dimensions of the framework proposed for integrating business principles into STEM education?",
+                          "expected_answer":  "Curriculum integration, experiential learning, ecosystem partnerships, commercialisation infrastructure, faculty development, and policy support.",
+                          "relevant_chunk_ids":  [
+                                                     "p001-c003",
+                                                     "p019-c002",
+                                                     "p024-c002"
+                                                 ],
+                          "label_notes":  "Each chunk independently lists all six dimensions. The framework table divides the dimensions across p011-c001 and p011-c002, so neither table chunk alone supports the complete answer.",
+                          "evidence_family":  "six_dimensional_framework"
+                      },
+                      {
+                          "id":  "q024",
+                          "question":  "Which outcomes does the future-research discussion recommend examining in longitudinal studies of entrepreneurial STEM education?",
+                          "expected_answer":  "Employability, venture creation, innovation activity, patenting, leadership roles, and contributions to local economies.",
+                          "relevant_chunk_ids":  [
+                                                     "p021-c003",
+                                                     "p022-c004"
+                                                 ],
+                          "label_notes":  "Both repeated future-research passages independently contain the longitudinal-study recommendation and all six outcomes.",
+                          "evidence_family":  "longitudinal_research_outcomes"
+                      },
+                      {
+                          "id":  "q025",
+                          "question":  "What potential uses and concerns does the document identify for AI and digital tools in entrepreneurial STEM education?",
+                          "expected_answer":  "Potential uses include prototyping, simulation, coding, market research, and personalised learning. Concerns include academic integrity, intellectual property, data privacy, labour market change, and equitable access.",
+                          "relevant_chunk_ids":  [
+                                                     "p022-c001",
+                                                     "p023-c002"
+                                                 ],
+                          "label_notes":  "Both repeated passages independently contain the complete uses and concerns lists.",
+                          "evidence_family":  "ai_digital_tools_research"
+                      }
+                  ]
+}

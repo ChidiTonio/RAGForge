@@ -1,0 +1,875 @@
+{
+  "schema_version": 1,
+  "pdf_filename": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+  "pdf_sha256": "029e332018e365f3b080321eae1ab890ede8a241cb082b680efdc11b11ed2512",
+  "chunk_size": 1000,
+  "overlap": 150,
+  "page_count": 26,
+  "chunk_count": 96,
+  "chunks": [
+    {
+      "id": "p001-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 1,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "1 \n \nSTEM Education and Innovation Ecosystems: A Comparative Integrative Review of \nBusiness Integration in STEM Curricula in the USA and Nigeria \nAbstract \nThe capacity to transform scientific and technological knowledge into usable products, services, \nenterprises, and social innovations has become an important concern in STEM education. While \nscience, technology, engineering, and mathematics programmes often  develop analytical and \ntechnical competence, many curricula provide limited engagement with business principles . \nSuch as opportunity recognition, customer discovery, intellectual property, financial literacy, \nmarket validation, business modelling, regulatory awareness, and technology \ncommercialisation. This review examines literature on the integration of business principles \ninto STEM education, with attention to entrepreneurial STEM education and innovation \necosystems in the United States and Nigeria. The review follows a PRISMA -informed design \nand synt hesises liter"
+    },
+    {
+      "id": "p001-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 1,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "urial STEM education and innovation \necosystems in the United States and Nigeria. The review follows a PRISMA -informed design \nand synt hesises literature from entrepreneurship education, STEM education, engineering \neducation, higher education, innovation studies, and policy research. It addresses five questions \nconcerning the conceptualisation of entrepreneurial STEM education, the busine ss principles \nintegrated into STEM learning, pedagogical approaches, institutional and policy enablers. The \nsynthesis suggests that effective entrepreneurial STEM education is associated with experiential \npedagogy, interdisciplinary curriculum design, industry and community engagement, faculty \ncapacity development, incubation support, and alignment with innovation policy. In the United \nStates, established mechanisms such as university technology transfer offices, federal \ninnovation funding, etc, provide structured support for STEM-based venture development and \ncommercialisation. In Nigeria,"
+    },
+    {
+      "id": "p001-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 1,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": " transfer offices, federal \ninnovation funding, etc, provide structured support for STEM-based venture development and \ncommercialisation. In Nigeria, entrepreneurship education has expanded through higher \neducation policies, university centres, digital innovation activity, and the Nigerian Startup Act \n2022. However, implementation is shaped by funding limitations, infrastructure constraints, \nweak university-industry linkages, and uneven commercialisation capacity. The article suggests \nsix-dimensional patterns  for entrepreneurial STEM education . This is based on curriculum \nintegration, experiential learning, ecosystem partnerships, commercialisation infrastructure, \nfaculty development, and policy support. \nKeywords: entrepreneurial STEM education; entrepreneurship education; innovation \necosystems; technology commercialisation; STEM curriculum; United States; Nigeria; \nsystematic review \n1. Introduction \nSTEM education has become a central component of educational and economic "
+    },
+    {
+      "id": "p001-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 1,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3360,
+      "text": "EM curriculum; United States; Nigeria; \nsystematic review \n1. Introduction \nSTEM education has become a central component of educational and economic policy because \nscientific and technological capabilities are associated with innovation, productivity, industrial \ndevelopment, and social problem -solving. Across national contexts, g overnments and \nuniversities increasingly view competence in science, technology, engineering, and \nmathematics as necessary for participation in knowledge-based economies. However, technical \ncompetence alone does not ensure that scientific ideas, engineerin g designs, or technological \nprototypes become useful innovations. The movement from technical knowledge to social or \neconomic value often requires additional capacities related to identifying needs, understanding"
+    },
+    {
+      "id": "p002-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 2,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "2 \n \nusers, estimating costs, protecting intellectual property, mobilising resources, navigating \nregulation, forming teams, communicating value, and developing viable organisational models. \nThis concern has contributed to growing interest in entrepreneurial STEM education. \nEntrepreneurial STEM education may be understood as the intentional integration of \nentrepreneurship, innovation, and business principles into STEM learning environments. It does \nnot only refer to the creation of startups. It also includes the ability to apply technical knowledge \nin ways that create value within firms, public institutions, research organisations, communities, \nand social enterprises. In this sense, entrepreneu rial STEM education is relevant to students \nwho may become founders, engineers, scientists, product developers, educators, public -sector \ninnovators, or technology managers. \nThe need for such integration has become more visible as economies are reshaped by \ndigitalisation, artificial in"
+    },
+    {
+      "id": "p002-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 2,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "innovators, or technology managers. \nThe need for such integration has become more visible as economies are reshaped by \ndigitalisation, artificial intelligence, biotechnology, energy transition, advanced manufacturing, \ndata science, and platform-based services. These domains often require professionals who can \nwork across technical, commercial, regulatory, and social boundaries. The World Economic \nForum’s Future of Jobs Report 2023 identifies analytical thinking, creative thinking, \ntechnological literacy, resilience, flexibility, leadership, a nd social influence among the skills \nassociated with changing labour markets (World Economic Forum, 2023). Such findings \nsupport the view that STEM education should be connected to broader capabilities for \ninnovation and enterprise. \nThe United States and Nigeria offer useful contexts for examining entrepreneurial STEM \neducation because they represent different innovation ecosystem conditions. The United States \nhas a mature research and"
+    },
+    {
+      "id": "p002-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 2,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "amining entrepreneurial STEM \neducation because they represent different innovation ecosystem conditions. The United States \nhas a mature research and innovation infrastructure, with established resea rch universities, \ntechnology transfer offices, federal innovation programmes, venture capital networks, \nincubators, accelerators, and industry partnerships. Programmes such as the National Science \nFoundation Innovation Corps, commonly known as NSF I -Corps, have supported the \ncommercialisation orientation of academic research by training researchers and students in \ncustomer discovery and technology entrepreneurship (National Science Foundation, n.d.; \nNnakwe et al., 2018). Nigeria, by contrast, represents an emerging innovation ecosystem with \na large youth population, growing technology startup activity, policy interest in digital \ntransformation, and increasing attention to entrepreneurship education. H owever, Nigerian \ninstitutions operate within constraints related to infrastruc"
+    },
+    {
+      "id": "p002-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 2,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3535,
+      "text": "nsformation, and increasing attention to entrepreneurship education. H owever, Nigerian \ninstitutions operate within constraints related to infrastructure, funding, research \ncommercialisation, industry linkages, and graduate employment. \nA comparison between the two countries does not imply that the United States provides a model \nto be transferred directly to Nigeria. Innovation ecosystems are embedded in institutional, \nhistorical, economic, and policy contexts. Rather, the comparison prov ides a basis for \nexamining how entrepreneurial STEM education may be designed differently under different \necosystem conditions. It also supports a more context-sensitive understanding of how business \nprinciples can be incorporated into STEM education in bo th mature and emerging innovation \nenvironments. \nAlthough entrepreneurship education, STEM education, and innovation ecosystem research \nhave each developed substantial bodies of literature, the intersection among them remains"
+    },
+    {
+      "id": "p003-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 3,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "3 \n \nfragmented. Entrepreneurship education studies often focus on business students or general \nhigher education populations. STEM education research often focuses on inquiry, disciplinary \nlearning, teacher preparation, or workforce development. Innovation ecos ystem studies often \nexamine firms, universities, technology transfer, and regional systems without focusing closely \non curriculum. This review responds to that fragmentation by synthesising literature on the \nintegration of business principles into STEM edu cation, with attention to pedagogical, \ninstitutional, and ecosystem dimensions. \nThe review addresses five research questions. First, how has entrepreneurial STEM education \nbeen conceptualised in the literature? Second, which business principles are considered relevant \nto STEM curricula and learning activities? Third, what pedagogical approaches are used to \nsupport entrepreneurial learning among STEM students and educators? Fourth, what \ninstitutional, policy, and inn"
+    },
+    {
+      "id": "p003-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 3,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "t pedagogical approaches are used to \nsupport entrepreneurial learning among STEM students and educators? Fourth, what \ninstitutional, policy, and innovation ecosystem factors enable or constrain implementation? \nFifth, how do the United States and Nigeria compare in relat ion to entrepreneurial STEM \neducation? \nThe article contributes to scholarship and practice in three ways. It consolidates literature across \nSTEM education, entrepreneurship education, and innovation ecosystem studies. It provides a \ncomparative discussion of the United States and Nigeria while a voiding a one -directional \ntransfer assumption. It also proposes a six -dimensional framework for integrating business \nprinciples into STEM education across broader educational levels and institutional settings. \n \n2. Conceptual and Theoretical Background \nSTEM education refers to teaching and learning in science, technology, engineering, and \nmathematics, either as separate disciplines or through integrated approaches. "
+    },
+    {
+      "id": "p003-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 3,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "fers to teaching and learning in science, technology, engineering, and \nmathematics, either as separate disciplines or through integrated approaches. Integrated STEM \neducation often emphasises the use of knowledge across disciplinary bounda ries to address \nauthentic problems (Breiner et al., 2012; National Research Council, 2011). It is commonly \nassociated with inquiry, modelling, experimentation, mathematical reasoning, technological \nliteracy, and design-based problem-solving. \nEntrepreneurship education refers to educational practices that develop entrepreneurial \nknowledge, attitudes, skills, and behaviours. Earlier approaches often treated entrepreneurship \neducation as instruction in business planning. More recent approaches em phasise action, \nexperimentation, opportunity development, value creation, uncertainty management, and \nlearning through practice (Fayolle, 2013; Lackéus , 2015; Neck & Greene, 2011). This shift \nmakes entrepreneurship education relevant beyond business"
+    },
+    {
+      "id": "p003-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 3,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3349,
+      "text": "\nlearning through practice (Fayolle, 2013; Lackéus , 2015; Neck & Greene, 2011). This shift \nmakes entrepreneurship education relevant beyond business schools because many \nentrepreneurial processes resemble inquiry, experimentation, and iterative problem -solving, \nwhich are already familiar to STEM disciplines. \nEntrepreneurial STEM education sits at the intersection of these traditions. It may be defined \nas the integration of business, entrepreneurship, innovation, and commercialisation principles \ninto STEM teaching and learning in order to enable learners to tra nslate technical knowledge \ninto social, economic, or technological value. It includes but is not limited to venture creation. \nIt may also involve innovation within existing organisations, research commercialisation, social"
+    },
+    {
+      "id": "p004-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 4,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "4 \n \ninnovation, community-based problem-solving, technology transfer, product development, and \npublic-sector innovation. \nSeveral business principles are particularly relevant to STEM education. Opportunity \nrecognition helps learners identify unmet needs and problem spaces rather than beginning only \nfrom available technologies. Customer discovery and user research help studen ts test \nassumptions about users, beneficiaries, buyers, and other stakeholders. Market analysis assists \nstudents in understanding demand, competition, adoption barriers, pricing, and distribution. \nBusiness model development helps students examine how innov ations create, deliver, and \ncapture value. Financial literacy supports cost estimation, budgeting, funding decisions, and \nresource planning. Intellectual property knowledge is relevant where students develop \ninventions, software, designs, or research outputs. Regulatory and ethical awareness is needed \nin areas such as health technology, biotechnology,"
+    },
+    {
+      "id": "p004-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 4,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "op \ninventions, software, designs, or research outputs. Regulatory and ethical awareness is needed \nin areas such as health technology, biotechnology, artificial intelligence, energy, environmental \nscience, and data -driven systems. Leadership, teamwork, and communication are necessary \nbecause innovation normally occurs through collaboration across technical and non -technical \ndomains. \nThis review is informed by three theoretical perspectives: human capital theory, entrepreneurial \nmindset theory, and innovation ecosystem theory. Human capital theory argues that education \ndevelops knowledge and capabilities that increase individual and societal productivity (Becker, \n1964). From this perspective, business-integrated STEM education develops a broader form of \nhuman capital by combining technical competence with innovation, commercialisation, and \nenterprise-related capabilities. \nEntrepreneurial mindset theory focuses on cognitive and behavioural orientations associated \nwith entre"
+    },
+    {
+      "id": "p004-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 4,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "sation, and \nenterprise-related capabilities. \nEntrepreneurial mindset theory focuses on cognitive and behavioural orientations associated \nwith entrepreneurial action. These include opportunity recognition, creativity, adaptability, \nresilience, initiative, and the ability to act under uncertainty (Hayn ie et al., 2010; McGrath & \nMacMillan, 2000). In STEM education, the entrepreneurial mindset helps students move from \nsolving predefined technical problems to framing open -ended problems, evaluating \nalternatives, working with users, and iterating toward feasible and useful solutions. \nInnovation ecosystem theory explains entrepreneurial outcomes as products of interactions \namong individuals, organisations, policies, resources, networks, and institutions. The Triple \nHelix model emphasises university -industry-government interaction in inn ovation processes \n(Etzkowitz & Leydesdorff, 2000). More recent ecosystem scholarship extends this perspective \nby considering finance, culture, "
+    },
+    {
+      "id": "p004-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 4,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3479,
+      "text": " inn ovation processes \n(Etzkowitz & Leydesdorff, 2000). More recent ecosystem scholarship extends this perspective \nby considering finance, culture, infrastructure, talent, networks, and institutions as parts of \nentrepreneurial environments (Spigel, 2017; Stam, 2015). For entrepreneurial STEM education, \nthis means that curriculum reform alone is insufficient. Students require connections to \nlaboratories, mentors, industry partners, community users, intellectual property systems, \nincubators, accelerators, investors, and supportive policies. \nTogether, these perspectives suggest that entrepreneurial STEM education operates at \nindividual, institutional, and ecosystem levels. At the individual level, it develops technical, \nentrepreneurial, and business capabilities. At the institutional level, it  requires curriculum \ndesign, faculty development, interdisciplinary structures, and practical support systems. At the"
+    },
+    {
+      "id": "p005-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 5,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "5 \n \necosystem level, it depends on university -industry-government-community relationships, \nfunding structures, policy frameworks, and innovation infrastructure. \n3. Methods \nThis article adopts an integrative literature review approach to examine the integration of \nbusiness principles into STEM education, with attention to entrepreneurial STEM education \nand innovation ecosystems in the United States and Nigeria. An integrative  review was \nconsidered appropriate because the topic spans several bodies of literature, including STEM \neducation, entrepreneurship education, engineering education, higher education studies, \ninnovation ecosystem research, technology commercialisation, and development policy. Unlike \na narrow systematic review focused on a single intervention or outcome, an integrative review \nallows theoretical, empirical, and policy sources to be examined together in order to clarify \nconcepts, identify patterns, compare contexts, and develop a conceptual framework. \nTh"
+    },
+    {
+      "id": "p005-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 5,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "and policy sources to be examined together in order to clarify \nconcepts, identify patterns, compare contexts, and develop a conceptual framework. \nThe review was guided by five research questions. The first examined how entrepreneurial \nSTEM education is conceptualised across relevant literature. The second examined the business \nprinciples considered relevant to STEM curricula. The third considered pedagogical approaches \nused to support entrepreneurial learning in STEM contexts. The fourth examined institutional, \npolicy, and ecosystem factors that enable or constrain implementation. The fifth compared the \nUnited States and Nigeria as different innovation ecosystem contexts. \nRelevant literature was identified through searches of multidisciplinary and field -specific \ndatabases, including Scopus, Web of Science, ERIC, IEEE Xplore, ScienceDirect, \nSpringerLink, Emerald Insight, Taylor & Francis Online, Wiley Online Library, and Goo gle \nScholar. Additional institutional and policy s"
+    },
+    {
+      "id": "p005-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 5,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "enceDirect, \nSpringerLink, Emerald Insight, Taylor & Francis Online, Wiley Online Library, and Goo gle \nScholar. Additional institutional and policy sources were considered where they came from \nrecognised organisations such as UNESCO, OECD, World Bank, World Economic Forum, \nWorld Intellectual Property Organization, National Science Foundation, National Academies of \nSciences, Engineering, and Medicine, and relevant Nigerian public agencies. \nSearch terms were organised around five concept clusters: STEM education, entrepreneurship \neducation, business integration, pedagogy, and innovation ecosystems. Terms included “STEM \neducation,” “engineering education,” “science education,” “technology educ ation,” \n“mathematics education,” “entrepreneurship education,” “entrepreneurial learning,” \n“technology entrepreneurship,” “business education,” “venture creation,” “curriculum,” \n“pedagogy,” “technology commercialisation,” “innovation ecosystem,” “universit y-industry \ncollaboration,” “incu"
+    },
+    {
+      "id": "p005-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 5,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3449,
+      "text": ",” “venture creation,” “curriculum,” \n“pedagogy,” “technology commercialisation,” “innovation ecosystem,” “universit y-industry \ncollaboration,” “incubator,” “accelerator,” “United States,” and “Nigeria.” \nThe review prioritised literature published between 2013 and 2026, while retaining earlier \nfoundational works where necessary for theoretical framing. Foundational sources were \nincluded where they informed concepts such as human capital theory, entrepreneurial mindset, \nentrepreneurship education, and the Triple Helix model. Sources were considered eligible \nwhere they addressed at least one of the following areas: STEM education, entrepreneurship \neducation, business integration in technical curricula, innova tion ecosystems, technology \ncommercialisation, entrepreneurial pedagogy, university -industry collaboration, or policy \nconditions relevant to entrepreneurial STEM education."
+    },
+    {
+      "id": "p006-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 6,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "6 \n \nThe literature was analysed thematically. Initial reading focused on identifying how \nentrepreneurial STEM education was defined, what business principles were discussed, what \npedagogical approaches were used, and what institutional or ecosystem factors wer e \nemphasised. Sources were then grouped into themes relating to conceptualisation, business \nprinciples, pedagogy, institutional supports, barriers, comparative context, and policy \nimplications. The synthesis was interpretive rather than statistical because  the literature \nincluded conceptual papers, empirical studies, programme analyses, and policy reports. The \nreview therefore aimed to develop a conceptual and comparative framework rather than \nestimate the effect size of a single intervention. \n4. Search Strategy, Screening, and Eligibility Protocol \nA structured search strategy should be used to locate literature across education, \nentrepreneurship, innovation, and STEM -related databases. The search process should be "
+    },
+    {
+      "id": "p006-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 6,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "rategy should be used to locate literature across education, \nentrepreneurship, innovation, and STEM -related databases. The search process should be \nreported in a transparent manner to allow replication. Table 1 provides the proposed s earch \nstrings and database strategy. \nTable 1 \nProposed Database Search Strings \nLiterature Search and Selection Framework for the Integrative Review \nReview \ncomponent Description \nReview \napproach Comparative integrative literature review \nMain purpose \nTo synthesise theoretical, empirical, and policy literature on business \nintegration in STEM education, with attention to entrepreneurial STEM \neducation and innovation ecosystems in the United States and Nigeria \nMain fields \nsearched \nSTEM education, entrepreneurship education, engineering education, higher \neducation, innovation studies, technology commercialisation, and \ndevelopment policy \nDatabases \nconsulted \nScopus, Web of Science, ERIC, IEEE Xplore, ScienceDirect, SpringerLink, \nEmerald Insi"
+    },
+    {
+      "id": "p006-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 6,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2672,
+      "text": "ommercialisation, and \ndevelopment policy \nDatabases \nconsulted \nScopus, Web of Science, ERIC, IEEE Xplore, ScienceDirect, SpringerLink, \nEmerald Insight, Taylor & Francis Online, Wiley Online Library, and \nGoogle Scholar \nSupplementary \nsources \nReports and policy documents from recognised organisations, including \nUNESCO, OECD, World Bank, World Economic Forum, World Intellectual \nProperty Organization, National Science Foundation, National Academies \nof Sciences, Engineering, and Medicine, and rele vant Nigerian public \nagencies \nMain search \nconcepts \nSTEM education, entrepreneurship education, business principles, \ncurriculum integration, entrepreneurial learning, technology \nentrepreneurship, innovation ecosystems, technology commercialisation, \nuniversity-industry collaboration, United States, and Nigeria \nPublication \nperiod \nLiterature from 2013 to 2026 was prioritised; earlier foundational works \nwere retained where required for theoretical framing"
+    },
+    {
+      "id": "p007-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 7,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "7 \n \nReview \ncomponent Description \nSource types Peer-reviewed journal articles, review articles, academic books, book \nchapters, conference papers, institutional reports, and policy documents \nInclusion focus \nSources addressing STEM education, entrepreneurship education, business \nintegration, entrepreneurial pedagogy, innovation ecosystems, technology \ncommercialisation, or policy conditions relevant to entrepreneurial STEM \neducation \nAnalytical \nstrategy Thematic synthesis of conceptual, empirical, and policy literature \nMain analytical \nthemes \nConceptualisation of entrepreneurial STEM education, business principles \nin STEM curricula, pedagogical approaches, institutional supports, barriers, \ncomparative context, and policy implications \n \nTable 2 \nInclusion and Exclusion Criteria \nCore Business Principles Relevant to STEM Education \nBusiness principle Relevance to STEM education Examples of curriculum \nintegration \nOpportunity \nrecognition \nHelps students identify unmet needs, "
+    },
+    {
+      "id": "p007-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 7,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "n \nBusiness principle Relevance to STEM education Examples of curriculum \nintegration \nOpportunity \nrecognition \nHelps students identify unmet needs, \ntechnical problems, and areas where \nscientific or technological knowledge \nmay create value \nProblem-framing exercises, \ncommunity needs assessment, \ninnovation opportunity mapping \nCustomer discovery \nand user research \nEnables students to test assumptions \nabout users, beneficiaries, buyers, and \nstakeholders \nUser interviews, empathy \nmapping, field observation, \nstakeholder analysis \nMarket analysis \nSupports understanding of demand, \ncompetition, adoption barriers, pricing, \nand distribution \nMarket scans, competitor \nanalysis, technology adoption \nstudies \nBusiness model \ndevelopment \nHelps students examine how \ninnovations create, deliver, and sustain \nvalue \nBusiness model canvas, value \nproposition design, revenue and \ncost structure analysis \nFinancial literacy \nEnables students to estimate costs, \nprepare budgets, understand "
+    },
+    {
+      "id": "p007-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 7,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2452,
+      "text": "value \nproposition design, revenue and \ncost structure analysis \nFinancial literacy \nEnables students to estimate costs, \nprepare budgets, understand funding \noptions, and assess financial feasibility \nPrototype costing, grant \nbudgeting, cash -flow exercises, \nfunding strategy assignments \nIntellectual property \nSupports awareness of patents, \ncopyrights, trade secrets, licensing, \nownership, and invention disclosure \nPatent searches, invention \ndisclosure simulations, \ntechnology transfer case \nanalysis \nRegulatory and \nethical awareness \nHelps students consider safety, \nprivacy, environmental effects, public \naccountability, and compliance \nrequirements \nRegulatory pathway mapping, \nethics review exercises, \nresponsible innovation analysis"
+    },
+    {
+      "id": "p008-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 8,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "8 \n \nBusiness principle Relevance to STEM education Examples of curriculum \nintegration \nCommunication and \npitching \nDevelops the ability to explain \ntechnical ideas to non -specialist \naudiences, partners, funders, and users \nPitch presentations, technical -\nto-business translation \nexercises, investor briefings \nLeadership and \nteamwork \nSupports collaboration across \ntechnical and non -technical roles in \ninnovation projects \nInterdisciplinary team projects, \npeer leadership roles, project \nmanagement exercises \nScaling and \nsustainability \nHelps students consider how \ninnovations can be maintained, \nexpanded, and adapted over time \nScaling strategy, sustainability \nassessment, implementation \nplanning \n \nPRISMA Reporting Template \nThe final submission should include a PRISMA flow diagram. Since a live database search has \nnot yet been completed, numerical values must not be fabricated. The following structure \nshould be used after searches are conducted: \n5. Data Extraction and Qu"
+    },
+    {
+      "id": "p008-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 8,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "n completed, numerical values must not be fabricated. The following structure \nshould be used after searches are conducted: \n5. Data Extraction and Quality Appraisal \nThe review should use a structured data extraction matrix to ensure consistency across included \nstudies. The extraction fields are presented in Table 3. \nTable 3 \nData Extraction Matrix \nComparative Matrix for Entrepreneurial STEM Education in the United States and \nNigeria \nDimension United States Nigeria \nImplication for \nentrepreneurial \nSTEM education \nInnovation \necosystem \nmaturity \nMore established \nuniversity-industry-\ngovernment linkages, \ntechnology transfer \nsystems, venture \nfunding, and federal \ninnovation programmes \nEmerging ecosystem \nwith active digital \nentrepreneurship, \npolicy interest, and \nstartup growth, but \nuneven institutional \ncapacity \nIntegration models \nshould consider \ndifferent ecosystem \nmaturity levels \nSTEM \nentrepreneurship \ninfrastructure \nMany universities host \nentrepreneurship \ncen"
+    },
+    {
+      "id": "p008-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 8,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2261,
+      "text": "n models \nshould consider \ndifferent ecosystem \nmaturity levels \nSTEM \nentrepreneurship \ninfrastructure \nMany universities host \nentrepreneurship \ncentres, accelerators, \nmakerspaces, and \ntechnology transfer \noffices \nEntrepreneurship \ncentres exist in many \nuniversities, but \npractical STEM -\nspecific support varies \nNigeria may require \nstronger links between \nentrepreneurship \ncentres and STEM \ndepartments \nTechnology \ncommercialisation \nSupported by \ntechnology transfer \nCommercialisation \npathways remain less \nCurriculum should \ninclude intellectual"
+    },
+    {
+      "id": "p009-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 9,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "9 \n \nDimension United States Nigeria \nImplication for \nentrepreneurial \nSTEM education \noffices, patent systems, \nlicensing pathways, and \nprogrammes such as \nNSF I-Corps \ninstitutionalised in \nmany universities \nproperty, \ncommercialisation, \nand low -resource \ninnovation pathways \nFunding \nFederal grants, \nSBIR/STTR \nmechanisms, venture \ncapital, university seed \nfunds, and philanthropic \nsupport \nFunding sources \ninclude government \nprogrammes, \ncompetitions, \naccelerators, angel \ninvestors, development \nfinance, and personal \nnetworks \nStudents require \ncontext-specific \ntraining in funding \npathways and resource \nmobilisation \nPedagogy \nProject-based learning, \ndesign thinking, lean \nstartup, customer \ndiscovery, capstones, \nand industry -sponsored \nprojects are used in \nmany innovation -\noriented institutions \nEntrepreneurship \nteaching may remain \nmore general or \ntheoretical in some \ninstitutions, although \npractical models are \nemerging \nExperiential and \nSTEM-specific \nentrep"
+    },
+    {
+      "id": "p009-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 9,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "hing may remain \nmore general or \ntheoretical in some \ninstitutions, although \npractical models are \nemerging \nExperiential and \nSTEM-specific \nentrepreneurship \npedagogy should be \nexpanded \nIndustry linkage \nStrong in some sectors \nand institutions but \nuneven across regions \nand institution types \nOften limited by weak \nuniversity-industry \ncollaboration and \nresource constraints \nStructured industry \nprojects and local \nproblem-solving \npartnerships may \nimprove relevance \nPolicy \nenvironment \nStrong federal science \nand innovation \ninfrastructure, although \naccess varies across \ninstitutions and regions \nStartup Act 2022, \ndigital economy \npolicies, higher \neducation \nentrepreneurship \nmandates, and \ninnovation policy \ninterest \nPolicy implementation \nand institutional \ncoordination are \ncentral \nInclusion \nPersistent disparities by \nrace, gender, class, \nregion, disability, and \ninstitution type \nGender, \nsocioeconomic, rural -\nurban, disability, and \ninfrastructure \ninequalities"
+    },
+    {
+      "id": "p009-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 9,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2256,
+      "text": "\nrace, gender, class, \nregion, disability, and \ninstitution type \nGender, \nsocioeconomic, rural -\nurban, disability, and \ninfrastructure \ninequalities affect \naccess \nInclusive programme \ndesign should be \ntreated as a core \nrequirement \nLocal problem \norientation \nOften tied to advanced \ntechnology sectors, \nnational \ncompetitiveness, and \nresearch \ncommercialisation \nStrong potential in \nagriculture, health, \nenergy, water, mobility, \neducation, and digital \nservices \nEntrepreneurial STEM \neducation should \nconnect to local \ndevelopment \nchallenges"
+    },
+    {
+      "id": "p010-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 10,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "10 \n \n \nTable 4 \nPedagogical Approaches for Entrepreneurial STEM Education \nPedagogical \napproach Description Relevance to business -\nintegrated STEM education \nProject-based \nlearning \nStudents work on extended projects \nthat require inquiry, design, testing, \nand presentation \nAllows technical and business \nprinciples to be applied within \nthe same learning experience \nProblem-based \nlearning \nStudents begin with open -ended \nproblems and determine what \nknowledge is needed to address them \nEncourages problem framing, \nuncertainty management, \nresearch, and solution \ndevelopment \nDesign thinking \nStudents engage in empathy, problem \ndefinition, ideation, prototyping, and \ntesting \nConnects technical design with \nuser needs, adoption context, and \nvalue creation \nLean startup \npedagogy \nStudents test assumptions through \ncustomer discovery, \nexperimentation, and iteration \nHelps students evaluate whether \ntechnical ideas respond to real \nuser or market needs \nCase-based learning \nStud"
+    },
+    {
+      "id": "p010-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 10,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "ry, \nexperimentation, and iteration \nHelps students evaluate whether \ntechnical ideas respond to real \nuser or market needs \nCase-based learning \nStudents analyse real or simulated \nexamples of innovation, \ncommercialisation, or venture \ndevelopment \nShows the interaction between \ntechnical, financial, \norganisational, legal, and market \nfactors \nInterdisciplinary \ncapstone projects \nStudents from STEM, business, \ndesign, and other fields work together \non applied projects \nReflects the multidisciplinary \nnature of innovation and venture \ndevelopment \nHackathons and \ninnovation \nchallenges \nStudents work under time constraints \nto develop solutions and present them \nto evaluators \nEncourages rapid ideation, \nteamwork, prototyping, and \nentrepreneurial communication \nIncubation and \nacceleration \nStudents receive structured support \nfor developing ideas into ventures or \nimplementation-ready projects \nProvides mentoring, networks, \nbusiness development support, \nand access to resources "
+    },
+    {
+      "id": "p010-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 10,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2438,
+      "text": "veloping ideas into ventures or \nimplementation-ready projects \nProvides mentoring, networks, \nbusiness development support, \nand access to resources \nCommunity-based \ninnovation projects \nStudents work with local \ncommunities to address social, \ntechnical, or environmental problems \nConnects STEM learning to local \nneeds, social value, and context -\nsensitive innovation \nIndustry-sponsored \nprojects \nFirms or organisations provide real \nproblems, data, mentorship, or \nresources for student projects \nStrengthens university -industry \nlinkage and exposes students to \npractical constraints \n \nTable 5 \nProposed Coding Framework for Thematic Synthesis \nSix-Dimensional Framework for Integrating Business Principles into STEM Education"
+    },
+    {
+      "id": "p011-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 11,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "11 \n \nFramework \ndimension Description Institutional application \nCurriculum \nintegration \nEmbedding business, \nentrepreneurship, and innovation \nprinciples into STEM courses \nand projects \nInclude market analysis, customer \ndiscovery, intellectual property, \nfinance, business models, and \nregulatory issues in STEM modules \nExperiential learning \nUsing applied learning activities \nthat require students to identify \nproblems, test ideas, and revise \nsolutions \nProject-based learning, design \nchallenges, capstones, prototyping, \nfieldwork, and community -based \nprojects \nEcosystem \npartnerships \nConnecting STEM learners with \nfirms, entrepreneurs, investors, \ngovernment agencies, \ncommunities, and innovation \nhubs \nIndustry mentorship, internships, \nsponsored projects, guest lectures, \ncommunity partnerships, and \ninvestor feedback sessions \nCommercialisation \ninfrastructure \nProviding pathways for moving \ntechnical ideas beyond \ncoursework or laboratory settings \nTechnology transfer sup"
+    },
+    {
+      "id": "p011-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 11,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": " \nCommercialisation \ninfrastructure \nProviding pathways for moving \ntechnical ideas beyond \ncoursework or laboratory settings \nTechnology transfer support, \nincubators, accelerators, \nmakerspaces, seed funding, patent \nguidance, and legal support \nFaculty development \nPreparing educators to teach \nbusiness-integrated STEM using \ninterdisciplinary and experiential \nmethods \nFaculty workshops, team teaching, \nentrepreneurship pedagogy training, \nindustry immersion, and incentives \nfor interdisciplinary teaching \nPolicy and funding \nsupport \nAligning institutional and \nnational policies with \nentrepreneurship, STEM \ndevelopment, innovation, and \nworkforce needs \nStartup policy, STEM policy, higher \neducation funding, research \ncommercialisation grants, innovation \nfunds, and public -private \npartnerships \n \n \n6. Findings and Thematic Synthesis \n6.1 Conceptualisation of Entrepreneurial STEM Education \nThe literature suggests that entrepreneurial STEM education is not a single programme mod"
+    },
+    {
+      "id": "p011-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 11,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "is \n6.1 Conceptualisation of Entrepreneurial STEM Education \nThe literature suggests that entrepreneurial STEM education is not a single programme model \nbut a family of approaches that connect technical knowledge with value creation. In some \nstudies, the concept is framed around venture creation, especially where st udents are expected \nto develop prototypes, business models, and startup ideas. In others, it is framed more broadly \nas innovation capability, employability, or the development of an entrepreneurial mindset. This \nbroader interpretation is useful because many STEM graduates will not establish firms but may \nstill require entrepreneurial capabilities in research, industry, public service, education, and \ncommunity development. \nEntrepreneurship education scholarship has increasingly moved away from passive instruction \ntoward practice -based and action -oriented learning. Neck and Greene (2011) argued that \nentrepreneurship should be taught as a method, involving practice"
+    },
+    {
+      "id": "p011-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 11,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 2728,
+      "text": "d practice -based and action -oriented learning. Neck and Greene (2011) argued that \nentrepreneurship should be taught as a method, involving practice, experiment ation, empathy,"
+    },
+    {
+      "id": "p012-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 12,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "12 \n \ncreativity, and reflection. Lackéus (2015) similarly placed emphasis on value creation as a basis \nfor entrepreneurship in education. These approaches align with STEM learning because STEM \ndisciplines already involve inquiry, design, experimentation, and evidence-based revision. \nIn engineering and technology education, entrepreneurial STEM education is often linked to \nproduct development, technology commercialisation, prototyping, and design. In science \neducation, it may involve research translation, biotechnology, health innovation, environmental \ntechnology, or laboratory-based discovery. In computing and digital technology, entrepreneurial \nSTEM education often appears through software development, platform creation, artificial \nintelligence applications, hackathons, and digital st artups. Across these fields, a central issue \nremains the relationship between technical feasibility and broader viability. A technically \nfunctioning innovation may fail if it lacks a defined u"
+    },
+    {
+      "id": "p012-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 12,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": " \nremains the relationship between technical feasibility and broader viability. A technically \nfunctioning innovation may fail if it lacks a defined user, market fit, funding strategy, regulatory \npathway, or adoption model. \nThe literature also indicates that entrepreneurial STEM education is better understood as a \ndevelopmental process rather than a single course. Learners may first be introduced to \ncreativity, problem identification, and social relevance at early levels of education. At secondary \nlevel, they may engage in design challenges, digital projects, school enterprises, or community-\nbased STEM problem -solving. At tertiary level, they may work on prototypes, intellectual \nproperty, customer discovery, business models, a nd venture development. For postgraduate \nstudents and researchers, entrepreneurial STEM education may focus on technology transfer, \nresearch commercialisation, licensing, startup formation, and industry collaboration. \n6.2 Business Principles Integrated"
+    },
+    {
+      "id": "p012-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 12,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "cus on technology transfer, \nresearch commercialisation, licensing, startup formation, and industry collaboration. \n6.2 Business Principles Integrated into STEM Education \nThe literature identifies several business principles that are relevant to STEM curricula. \nOpportunity recognition is one of the most frequently discussed. STEM students often begin \nwith a technical solution, but entrepreneurial education encourages them t o begin with a \nproblem, need, or opportunity. This shift is significant because technological novelty does not \nautomatically translate into usefulness. Students must learn to ask whether a problem is \nimportant, who experiences it, what alternatives already  exist, and why a proposed solution \nwould be adopted. \nCustomer discovery is closely related to opportunity recognition. It involves direct engagement \nwith potential users, customers, beneficiaries, or stakeholders. In technology entrepreneurship \neducation, customer discovery helps students test assumptio"
+    },
+    {
+      "id": "p012-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 12,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3440,
+      "text": "otential users, customers, beneficiaries, or stakeholders. In technology entrepreneurship \neducation, customer discovery helps students test assumptions before committing resources to \nproduct development. NSF I -Corps is a prominent example of this approach because it trains \nteams to examine whether their research -based innovations address real market or user needs \n(National Science Foundation, n.d.; Nnakwe et al., 2018). \nMarket analysis is also central. Students need to understand market size, segmentation, \ncompetition, pricing, distribution, and adoption barriers. This is not only relevant to commercial \nmarkets. Social innovations and public -sector technologies also requi re analysis of \nstakeholders, users, institutions, and implementation environments. A water purification \nsystem, educational technology platform, diagnostic device, or renewable energy solution must"
+    },
+    {
+      "id": "p013-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 13,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "13 \n \nbe technically sound, but it must also be affordable, acceptable, maintainable, and institutionally \nfeasible. \nBusiness model development helps students understand how value is created, delivered, and \nsustained. The business model concept is useful because it moves beyond product design to \nexamine users, channels, partnerships, revenue, costs, and organisational pr ocesses. In STEM \ncontexts, business model thinking can help students compare different pathways, such as \nlicensing, direct sales, social enterprise, open -source models, public procurement, or \npartnership with existing firms. \nFinancial literacy is another important area. Technology-based ideas often require resources for \nequipment, prototyping, testing, certification, intellectual property, staffing, and distribution. \nStudents need to understand basic budgeting, cost structures , cash flow, grant funding, equity \ninvestment, debt, and revenue projections. Such knowledge does not replace specialised \nfinancial "
+    },
+    {
+      "id": "p013-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 13,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "cost structures , cash flow, grant funding, equity \ninvestment, debt, and revenue projections. Such knowledge does not replace specialised \nfinancial expertise, but it allows STEM students to make informed decisions and communicate \nwith funders, investors, and institutional partners. \nIntellectual property knowledge is particularly relevant in STEM because students and \nresearchers may produce patentable inventions, software, designs, or technical processes. \nUnderstanding patents, copyrights, trade secrets, licensing, invention disclosure, and ownership \nrules can help students avoid losing rights or misunderstanding commercialisation pathways. \nIn university settings, intellectual property education should be connected to institutional \npolicies and technology transfer procedures. \nRegulatory and ethical principles are also essential. Biomedical devices, drugs, artificial \nintelligence systems, environmental technologies, energy systems, and data -driven platforms \nmay require regul"
+    },
+    {
+      "id": "p013-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 13,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "Biomedical devices, drugs, artificial \nintelligence systems, environmental technologies, energy systems, and data -driven platforms \nmay require regulatory approval or ethical review. Students should understand that innovation \nis not only a technical and commercial process but also a social and governance process. \nPrivacy, bias, environmental consequences, safety, accessibility, and social equity are part of \nresponsible entrepreneurial STEM education. \nCommunication, leadership, and teamwork complete the set of relevant business principles. \nSTEM students often need to communicate complex ideas to audiences without technical \nexpertise. They may need to pitch to investors, explain to community users, negot iate with \npartners, write grant proposals, lead teams, and manage conflict. These capabilities are often \ndescribed as soft skills, but in innovation settings they are operationally important. \n6.3 Pedagogical Approaches \nThe reviewed literature supports pedagogies that allow lea"
+    },
+    {
+      "id": "p013-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 13,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3165,
+      "text": ", but in innovation settings they are operationally important. \n6.3 Pedagogical Approaches \nThe reviewed literature supports pedagogies that allow learners to practise entrepreneurship \nrather than only study it. Project-based learning is one of the most frequently used approaches. \nIt allows students to work on authentic problems, develop technica l solutions, examine users, \nconsider costs, and present implementation strategies. Project -based learning is suitable for \nentrepreneurial STEM education because it permits the integration of technical and business \ndecisions within a single learning experience."
+    },
+    {
+      "id": "p014-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 14,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "14 \n \nProblem-based learning is also relevant because it begins with open-ended problems. Students \nmust define the problem, identify what they need to learn, collect information, and develop \npossible solutions. This process mirrors entrepreneurial uncertainty, where problems are often \nambiguous and solutions must be revised as new information becomes available. \nDesign thinking has become influential in innovation education because it emphasises empathy, \nproblem framing, ideation, prototyping, testing, and iteration. In STEM education, design \nthinking can help students pay attention to user experience, context, accessibility, and adoption. \nIt is particularly useful in health technology, engineering design, digital product development, \nenvironmental innovation, and community-based STEM projects. \nLean startup pedagogy and customer discovery have gained relevance in technology \nentrepreneurship education. These approaches encourage students to formulate hypotheses \nabout users and"
+    },
+    {
+      "id": "p014-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 14,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "iscovery have gained relevance in technology \nentrepreneurship education. These approaches encourage students to formulate hypotheses \nabout users and markets, test those hypotheses through interviews and experiments, and revise \ntheir assumptions. Rather than treating business planning as a static exercise, lean startup \npedagogy treats entrepreneurship as a process of learning under uncertainty. \nCase-based teaching remains useful, especially when students analyse real examples of \ntechnology ventures, commercialisation failures, regulatory challenges, or innovation strategy. \nCase studies allow students to examine the relationship between technical,  financial, \norganisational, legal, and market factors. However, case-based teaching may be more effective \nwhen combined with active projects because students need opportunities to apply concepts \nrather than only analyse past events. \nInterdisciplinary capstone projects provide another useful model. These projects may bring \ntogether s"
+    },
+    {
+      "id": "p014-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 14,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "oncepts \nrather than only analyse past events. \nInterdisciplinary capstone projects provide another useful model. These projects may bring \ntogether students from engineering, science, business, design, computing, and social science \ndisciplines. Such collaboration reflects the composition of many innovation teams. It also helps \nstudents recognise the limits of their own disciplinary training. However, interdisciplinary \ncapstones require careful coordination, shared assessment criteria, faculty collaboration, and \ninstitutional support. \nHackathons, innovation challenges, pitch competitions, incubators, and accelerators can extend \nclassroom learning. They expose students to time -limited problem -solving, mentorship, \nfeedback, and public presentation. Their educational value depends on wheth er they are \nconnected to sustained support. A short event may produce ideas but not deep learning unless \nfollowed by reflection, mentoring, technical development, market validation, and resou"
+    },
+    {
+      "id": "p014-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 14,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3237,
+      "text": ". A short event may produce ideas but not deep learning unless \nfollowed by reflection, mentoring, technical development, market validation, and resource \naccess. \n6.4 Institutional Enablers \nThe literature indicates that entrepreneurial STEM education requires institutional support. \nLeadership commitment is one enabling factor. Universities that identify entrepreneurship and \ninnovation as institutional priorities are more likely to support centres, laboratories, seed funds, \nfaculty training, industry partnerships, and interdisciplinary programmes. Without such \ncommitment, entrepreneurial initiatives may depend on individual champions and remain \nvulnerable to discontinuity."
+    },
+    {
+      "id": "p015-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 15,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "15 \n \nFaculty capacity is another condition. STEM educators may have limited experience in \nentrepreneurship, while entrepreneurship educators may have limited familiarity with technical \nfields. This gap can be addressed through team teaching, professional develo pment, industry \nimmersion, collaborative curriculum design, and interdisciplinary research groups. Faculty \nincentives are also important because interdisciplinary teaching and entrepreneurship \nmentoring can require additional time that may not be recognised in promotion systems. \nCommercialisation infrastructure matters, especially in research -intensive institutions. \nTechnology transfer offices, intellectual property support, incubators, accelerators, \nmakerspaces, prototyping laboratories, and seed funding mechanisms create pathway s for \nmoving student and faculty ideas toward application. In the United States, many universities \nhave established formal technology transfer structures. In Nigeria, some universities have"
+    },
+    {
+      "id": "p015-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 15,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "oward application. In the United States, many universities \nhave established formal technology transfer structures. In Nigeria, some universities have \nentrepreneurship centres, but practical links to STEM research com mercialisation may be \nuneven. \nIndustry and community partnerships strengthen relevance. Industry partners can provide real \nproblems, equipment, mentors, internships, technical feedback, and pathways for adoption. \nCommunity partners can help students understand local needs and evaluate whether solutions \nare socially appropriate. This is important in contexts where STEM innovation is expected to \naddress public problems such as energy access, health delivery, agricultural productivity, \nsanitation, mobility, and digital inclusion. \nPolicy support also influences institutional practice. Policies related to science, technology, \ninnovation, startups, higher education funding, intellectual property, digital economy \ndevelopment, and youth employment shape the environment"
+    },
+    {
+      "id": "p015-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 15,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "logy, \ninnovation, startups, higher education funding, intellectual property, digital economy \ndevelopment, and youth employment shape the environment in which entrepre neurial STEM \neducation takes place. The presence of policy frameworks is not sufficient by itself. \nImplementation, coordination, funding, and accountability determine whether policy translates \ninto institutional change. \n6.5 Barriers to Implementation \nSeveral barriers appear across the literature. Disciplinary separation remains a persistent \nchallenge. STEM departments may prioritise technical depth and accreditation requirements, \nwhile entrepreneurship courses may be located in business schools and taught without reference \nto technical fields. This separation may cause entrepreneurship education to appear generic or \ndisconnected from STEM students’ projects and career pathways. \nCurriculum overload also constrains integration. STEM programmes often have dense \nrequirements, leaving limited space for new content"
+    },
+    {
+      "id": "p015-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 15,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3215,
+      "text": "reer pathways. \nCurriculum overload also constrains integration. STEM programmes often have dense \nrequirements, leaving limited space for new content. This makes embedded approaches \nimportant. Instead of adding separate courses, business principles may be incorporated int o \nexisting laboratories, design projects, research methods courses, capstones, and final -year \nprojects. \nResource limitations are significant, particularly in underfunded institutions. Entrepreneurial \nSTEM education may require laboratories, internet access, fabrication tools, software, mentors, \nlegal advice, and seed funding. Where these resources are scarce , programmes may become"
+    },
+    {
+      "id": "p016-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 16,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "16 \n \ntheoretical. This issue is especially relevant in Nigerian institutions facing infrastructure and \nfunding constraints. \nAssessment is another challenge. Conventional examinations may not measure entrepreneurial \nlearning adequately. Entrepreneurial STEM education involves iteration, uncertainty, \nteamwork, stakeholder engagement, and learning from failure. Alternative assessment methods \nmay include reflective portfolios, prototype demonstrations, customer discovery reports, \nbusiness model presentations, peer assessment, and project documentation. \nCultural and economic conditions also matter. Students may face pressure to seek stable \nemployment rather than uncertain entrepreneurial pathways. In contexts with high \nunemployment, entrepreneurship may be promoted as a necessity, but necessity \nentrepreneurship is not the same as innovation -driven entrepreneurship. Educational \nprogrammes should therefore avoid presenting entrepreneurship as a simple solution to \nstructural empl"
+    },
+    {
+      "id": "p016-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 16,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "novation -driven entrepreneurship. Educational \nprogrammes should therefore avoid presenting entrepreneurship as a simple solution to \nstructural employment problems. Instead, they should develop capabilities while also \nrecognising broader economic constraints. \n7. Comparative Analysis of the United States and Nigeria \n7.1 United States \nThe United States has a developed infrastructure for university -based innovation and \ntechnology entrepreneurship. Research universities are connected to federal science funding, \nintellectual property systems, industry partnerships, venture capital markets,  incubators, \naccelerators, and entrepreneurship education programmes. This environment provides \nrelatively structured pathways for STEM students and researchers to explore \ncommercialisation. \nThe Bayh-Dole Act of 1980 is often discussed in relation to university technology transfer \nbecause it allowed universities, small businesses, and nonprofit organisations to retain rights to \ninventions a"
+    },
+    {
+      "id": "p016-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 16,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "on to university technology transfer \nbecause it allowed universities, small businesses, and nonprofit organisations to retain rights to \ninventions arising from federally funded research under specified conditions. The Act \ncontributed to the institutionalisation of technology transfer offices in American universities. \nAlthough its effects remain debated, it remains a major reference point in discussions of \nuniversity commercialisation. \nNSF I-Corps is one of the more visible examples of entrepreneurial STEM education in the \nUnited States. The programme focuses on helping researchers and students examine the \ncommercial potential of research through customer discovery and entrepreneurial tr aining. It \nreflects a movement away from assuming that research novelty is sufficient for market \nadoption. Instead, research teams are encouraged to examine user needs, value propositions, \nand commercial pathways. \nMany US universities also maintain entrepreneurship centres, engineering entre"
+    },
+    {
+      "id": "p016-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 16,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3092,
+      "text": "d to examine user needs, value propositions, \nand commercial pathways. \nMany US universities also maintain entrepreneurship centres, engineering entrepreneurship \nprogrammes, makerspaces, venture studios, accelerators, and innovation labs. These structures \nprovide students with exposure to mentoring, prototyping, pitching, interdisciplinary teamwork, \nand venture development. Institutions such as Massachusetts Institute of Technology, Stanford \nUniversity, and University of Pennsylvania are often cited because of their entrepreneurship"
+    },
+    {
+      "id": "p017-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 17,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "17 \n \necosystems, although the resources available at such institutions should not be assumed to \nrepresent the entire US higher education system. \nDespite its developed ecosystem, the United States also faces challenges. Access to \nentrepreneurial STEM opportunities is uneven across institutions and student groups. Students \nin well -funded research universities may have access to laboratories, investor s, alumni \nnetworks, and technology transfer offices, while students in less -resourced institutions may \nhave fewer opportunities. Gender, race, class, disability, and regional inequalities also affect \nparticipation in STEM and entrepreneurship. These dispar ities suggest that entrepreneurial \nSTEM education in the United States should be examined not only in terms of \ncommercialisation but also in terms of inclusion. \n7.2 Nigeria \nNigeria provides a different context for entrepreneurial STEM education. The country has a \nlarge youth population, high demand for employment, and growin"
+    },
+    {
+      "id": "p017-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 17,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "ria provides a different context for entrepreneurial STEM education. The country has a \nlarge youth population, high demand for employment, and growing interest in digital \ninnovation. Technology startups in areas such as fintech, logistics, health technology, education \ntechnology, and software services have contributed to Nigeria’s reputation as an important \nAfrican innovation hub. Lagos, in particular, has become visible in discussions of African \ntechnology entrepreneurship. \nEntrepreneurship education has been incorporated into Nigerian higher education policy, and \nmany universities operate entrepreneurship development centres. These initiatives reflect \nrecognition that graduates require capabilities beyond disciplinary knowle dge. However, the \nintegration of entrepreneurship into STEM education remains uneven. In some cases, \nentrepreneurship courses are taught as general studies requirements rather than as field-specific, \npractice-based components of STEM programmes. This s"
+    },
+    {
+      "id": "p017-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 17,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "trepreneurship courses are taught as general studies requirements rather than as field-specific, \npractice-based components of STEM programmes. This separation may reduce their relevance \nfor students developing technical projects. \nThe Nigerian Startup Act 2022 represents an important policy development because it provides \na framework for supporting startups, including provisions related to startup labelling, \ncoordination, incentives, and funding mechanisms. Its relevance to entrepre neurial STEM \neducation lies in the possibility of connecting university innovation, student ventures, digital \nentrepreneurship, and national startup policy. However, the impact of the Act depends on \nimplementation, institutional coordination, awareness amo ng universities, and the ability of \nstudents and researchers to access support. \nNigeria faces several constraints that affect entrepreneurial STEM education. Infrastructure \nchallenges, including unreliable electricity and limited laboratory reso"
+    },
+    {
+      "id": "p017-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 17,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3373,
+      "text": "veral constraints that affect entrepreneurial STEM education. Infrastructure \nchallenges, including unreliable electricity and limited laboratory resources, can constrain \ntechnical experimentation and prototyping. Research funding is limited  relative to the scale of \nnational needs. University -industry collaboration remains underdeveloped in many sectors. \nTechnology transfer systems are not consistently institutionalised across universities. Access to \nearly-stage capital can also be difficult for students and early-career innovators. \nAt the same time, Nigeria’s context offers distinctive opportunities. Local problems in \nagriculture, health, energy, water, transportation, education, manufacturing, and digital services \ncreate demand for applied STEM innovation. Entrepreneurial STEM education in Nigeria may"
+    },
+    {
+      "id": "p018-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 18,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "18 \n \ntherefore be most relevant when connected to local development challenges. Students can be \nencouraged to develop affordable, maintainable, and context -sensitive solutions rather than \nonly imitating models from high-income economies. \n7.3 Comparative Matrix \nTable 6 \nComparative Matrix for Entrepreneurial STEM Education in the United States and Nigeria \nDimension United States Nigeria \nImplication for \nentrepreneurial \nSTEM education \nInnovation \necosystem \nmaturity \nMore established \nuniversity-industry-\ngovernment linkages, \ntechnology transfer \nsystems, venture \nfunding, and federal \ninnovation programmes \nEmerging ecosystem \nwith active digital \nentrepreneurship, \npolicy interest, and \nstartup growth, but \nuneven institutional \ncapacity \nIntegration models \nshould consider \ndifferent ecosystem \nmaturity levels \nSTEM \nentrepreneurship \ninfrastructure \nMany universities host \nentrepreneurship \ncentres, accelerators, \nmakerspaces, and \ntechnology transfer \noffices \nEntrepreneu"
+    },
+    {
+      "id": "p018-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 18,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "eurship \ninfrastructure \nMany universities host \nentrepreneurship \ncentres, accelerators, \nmakerspaces, and \ntechnology transfer \noffices \nEntrepreneurship \ncentres exist in many \nuniversities, but \npractical STEM-\nspecific support varies \nNigeria may require \nstronger links between \nentrepreneurship \ncentres and STEM \ndepartments \nTechnology \ncommercialisation \nSupported by \ntechnology transfer \noffices, patent systems, \nlicensing pathways, and \nprogrammes such as \nNSF I-Corps \nCommercialisation \npathways remain less \ninstitutionalised in \nmany universities \nCurriculum should \ninclude intellectual \nproperty, \ncommercialisation, \nand low-resource \ninnovation pathways \nFunding \nFederal grants, \nSBIR/STTR \nmechanisms, venture \ncapital, university seed \nfunds, and philanthropic \nsupport \nFunding sources \ninclude government \nprogrammes, \ncompetitions, \naccelerators, angel \ninvestors, development \nfinance, and personal \nnetworks \nStudents require \ncontext-specific \ntraining in funding \npath"
+    },
+    {
+      "id": "p018-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 18,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2281,
+      "text": "etitions, \naccelerators, angel \ninvestors, development \nfinance, and personal \nnetworks \nStudents require \ncontext-specific \ntraining in funding \npathways and resource \nmobilisation \nPedagogy \nProject-based learning, \ndesign thinking, lean \nstartup, customer \ndiscovery, capstones, \nand industry-sponsored \nprojects are used in \nmany innovation-\noriented institutions \nEntrepreneurship \nteaching may remain \nmore general or \ntheoretical in some \ninstitutions, although \npractical models are \nemerging \nExperiential and \nSTEM-specific \nentrepreneurship \npedagogy should be \nexpanded"
+    },
+    {
+      "id": "p019-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 19,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "19 \n \nDimension United States Nigeria \nImplication for \nentrepreneurial \nSTEM education \nIndustry linkage \nStrong in some sectors \nand institutions but \nuneven across regions \nand institution types \nOften limited by weak \nuniversity-industry \ncollaboration and \nresource constraints \nStructured industry \nprojects and local \nproblem-solving \npartnerships may \nimprove relevance \nPolicy \nenvironment \nStrong federal science \nand innovation \ninfrastructure, although \naccess varies across \ninstitutions and regions \nStartup Act 2022, \ndigital economy \npolicies, higher \neducation \nentrepreneurship \nmandates, and \ninnovation policy \ninterest \nPolicy implementation \nand institutional \ncoordination are \ncentral \nInclusion \nPersistent disparities by \nrace, gender, class, \nregion, disability, and \ninstitution type \nGender, \nsocioeconomic, rural-\nurban, disability, and \ninfrastructure \ninequalities affect \naccess \nInclusive programme \ndesign should be \ntreated as a core \nrequirement \nLocal problem \no"
+    },
+    {
+      "id": "p019-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 19,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": " disability, and \ninfrastructure \ninequalities affect \naccess \nInclusive programme \ndesign should be \ntreated as a core \nrequirement \nLocal problem \norientation \nOften tied to advanced \ntechnology sectors, \nnational \ncompetitiveness, and \nresearch \ncommercialisation \nStrong potential in \nagriculture, health, \nenergy, water, mobility, \neducation, and digital \nservices \nEntrepreneurial \nSTEM education \nshould connect to \nlocal development \nchallenges \n \n8. Proposed Framework for Entrepreneurial STEM Education \nThe synthesis supports a six -dimensional framework for integrating business principles into \nSTEM education. The framework includes curriculum integration, experiential learning, \necosystem partnerships, commercialisation infrastructure, faculty development,  and policy \nsupport. \nCurriculum integration refers to the embedding of business and entrepreneurship principles \nwithin STEM learning rather than treating entrepreneurship as an unrelated general course. This \nmay involve in"
+    },
+    {
+      "id": "p019-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 19,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2415,
+      "text": "iness and entrepreneurship principles \nwithin STEM learning rather than treating entrepreneurship as an unrelated general course. This \nmay involve introducing market analysis into engineering design, inte llectual property into \nresearch methods, financial literacy into technology development, regulatory strategy into \nhealth innovation, and business model development into computer science or design projects. \nIntegration should be progressive across educational levels. At earlier levels, learners may focus \non creativity, problem identification, teamwork, and simple value creation. At higher levels, \nthey may engage with prototypes, users, intellectual property, business models, and venture \ndevelopment."
+    },
+    {
+      "id": "p020-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 20,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "20 \n \nExperiential learning is required because entrepreneurship involves action under uncertainty. \nStudents should have opportunities to identify problems, engage users, develop prototypes, test \nassumptions, estimate costs, and communicate value. These experien ces can be organised \nthrough project -based learning, problem -based learning, design challenges, capstones, \ninternships, community-based projects, and research commercialisation assignments. \nEcosystem partnerships connect schools and universities with external actors. Industry partners \ncan provide real problems, mentoring, equipment, internships, and feedback. Community \npartners can identify local needs and evaluate whether proposed solutions are socially \nappropriate. Government agencies can align student innovation with policy priorities. Investors, \nentrepreneurs, and incubators can expose students to venture development. \nCommercialisation infrastructure provides support for moving ideas beyond coursework. This \ninc"
+    },
+    {
+      "id": "p020-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 20,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "ncubators can expose students to venture development. \nCommercialisation infrastructure provides support for moving ideas beyond coursework. This \nincludes technology transfer offices, intellectual property guidance, prototyping laboratories, \nmakerspaces, incubators, accelerators, legal support, and seed fundin g. In institutions where \nfull technology transfer offices are not feasible, partnerships with external innovation hubs may \nprovide partial support. \nFaculty development is central to implementation. STEM educators may need training in \nentrepreneurship pedagogy, while business educators may need exposure to technical \ninnovation. Team teaching, faculty development workshops, industry placements, \ninterdisciplinary research groups, and incentives for entrepreneurial teaching can support this \ndimension. \nPolicy support provides an enabling environment. National and institutional policies on science, \ntechnology, startups, higher education, intellectual property, and workforce "
+    },
+    {
+      "id": "p020-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 20,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "n enabling environment. National and institutional policies on science, \ntechnology, startups, higher education, intellectual property, and workforce development shape \nwhat schools and universities can implement. In Nigeria, policy alignment may involve \nconnecting STEM entrepreneurship education to the Startup Act, digital economy policy, youth \nemployment strategies, and local industrial needs. In the United States, policy alignment may \ninvolve strengthening access to innovation programmes beyond elite institutions and addressing \nparticipation gaps. \nThe framework suggests that entrepreneurial STEM education should not be treated as a short-\nterm add -on. It requires coordinated change across curriculum, pedagogy, institutions, and \necosystems. \n9. Implications \nThe review has implications for educational institutions. Schools, colleges, and universities \nseeking to integrate business principles into STEM education should avoid relying only on \nlecture-based entrepreneurship cours"
+    },
+    {
+      "id": "p020-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 20,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3217,
+      "text": "ges, and universities \nseeking to integrate business principles into STEM education should avoid relying only on \nlecture-based entrepreneurship courses. Such courses may provide introductory knowledge, but \nthey are unlikely to produce strong entrepreneurial capability unless linked to technical projects, \npractical problem-solving, and ecosystem engagement. Institutions should therefore identify \npoints in STEM curricula where business concepts can be embedded naturally. \nFor educators, the findings suggest the need for pedagogies that involve inquiry, action, and \nreflection. Students should be encouraged to work with real problems, communicate with users,"
+    },
+    {
+      "id": "p021-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 21,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "21 \n \nrevise assumptions, and evaluate both technical and non-technical dimensions of their solutions. \nAssessment should capture process as well as product. Reflective portfolios, prototype testing, \ncustomer discovery reports, business model presentations, and t eam evaluations may be more \nsuitable than conventional examinations alone. \nFor policymakers, the review indicates that entrepreneurship education mandates should be \nsupported by funding, infrastructure, and implementation strategies. Policy statements alone \ncannot produce entrepreneurial STEM education if schools and universities  lack laboratories, \ninternet access, faculty training, industry links, or seed funding. In Nigeria, attention should be \ngiven to strengthening university -industry collaboration, technology transfer systems, and \npractical entrepreneurship education in STEM departments. In the United States, attention \nshould be given to equitable access, regional inclusion, and support for institutions with fe"
+    },
+    {
+      "id": "p021-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 21,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "on in STEM departments. In the United States, attention \nshould be given to equitable access, regional inclusion, and support for institutions with fewer \ninnovation resources. \nFor industry and community partners, entrepreneurial STEM education provides opportunities \nto shape talent development and support innovation pipelines. Firms can contribute through \ninternships, sponsored projects, mentoring, challenge -based learning, equi pment access, and \ncollaborative research. Community organisations can help ensure that STEM innovation \nresponds to real social needs rather than only abstract technical interests. \nFor students, entrepreneurial STEM education broadens career possibilities. It prepares learners \nnot only to seek employment but also to create value in uncertain and changing environments. \nIt may support startup formation, but it may also prepare students  for innovation roles within \nestablished organisations, public institutions, research laboratories, and community \ndeve"
+    },
+    {
+      "id": "p021-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 21,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": " it may also prepare students  for innovation roles within \nestablished organisations, public institutions, research laboratories, and community \ndevelopment initiatives. \n10. Future Research Directions \nFurther research is required in several areas. Longitudinal studies are needed to examine \nwhether students who participate in entrepreneurial STEM education experience different \noutcomes from those who do not. Such studies should examine employability, venture creation, \ninnovation activity, patenting, leadership roles, and contributions to local economies. \nMore empirical studies are needed in Nigeria and similar emerging innovation ecosystems. \nMuch of the literature on university commercialisation and STEM entrepreneurship is based on \nhigh-income contexts. Nigerian studies should examine how entrepreneurship  education is \nactually delivered in STEM departments, how students experience it, and which institutional \nconditions affect its outcomes. \nComparative research should also "
+    },
+    {
+      "id": "p021-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 21,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3212,
+      "text": "delivered in STEM departments, how students experience it, and which institutional \nconditions affect its outcomes. \nComparative research should also examine entrepreneurial STEM education across educational \nlevels. While higher education receives substantial attention, early exposure at primary and \nsecondary levels may influence creativity, confidence, problem-solving, and career orientation. \nHowever, business principles must be developmentally appropriate. Younger learners may \nengage with simple value creation, teamwork, and community problem -solving, while \nuniversity students may engage with intellectual property, finance, and commercialisation."
+    },
+    {
+      "id": "p022-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 22,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "22 \n \nInclusion should be treated as a central research issue. Women, rural learners, low -income \nstudents, persons with disabilities, and underrepresented groups may face unequal access to \nSTEM and entrepreneurship opportunities. Entrepreneurial STEM education m ay reproduce \nexisting inequalities if access to mentors, funding, laboratories, networks, and competitions is \nuneven. \nFuture studies should also examine the role of artificial intelligence and digital tools in \nentrepreneurial STEM education. These tools may support prototyping, simulation, coding, \nmarket research, and personalised learning. At the same time, they raise qu estions about \nacademic integrity, intellectual property, data privacy, labour market change, and equitable \naccess. \nFinally, better measurement tools are needed. Entrepreneurial mindset, opportunity recognition, \ninnovation competence, and commercialisation readiness are difficult to assess through \nconventional examinations. Mixed -method approaches"
+    },
+    {
+      "id": "p022-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 22,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "ognition, \ninnovation competence, and commercialisation readiness are difficult to assess through \nconventional examinations. Mixed -method approaches that combine surveys, interviews, \nbehavioural tasks, portfolios, project outputs, and post -graduation tracking may provide \nstronger evidence. \n11. Limitations \nThis article is limited by its integrative review design. Although the review draws on \nmultidisciplinary academic literature and policy sources, it does not claim to provide a \nPRISMA-completed systematic review with exhaustive database screening, duplicate  \nindependent review, or quantitative synthesis of included studies. The interdisciplinary nature \nof entrepreneurial STEM education also means that relevant studies may be indexed under \ndifferent terms across education, entrepreneurship, engineering, manage ment, and innovation \nstudies databases. In addition, the comparison between the United States and Nigeria is affected \nby differences in the volume and visibility of "
+    },
+    {
+      "id": "p022-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 22,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "ion \nstudies databases. In addition, the comparison between the United States and Nigeria is affected \nby differences in the volume and visibility of published literature. More studies are available \non university technology commercialisation  and STEM entrepreneurship in the United States \nthan on comparable practices in Nigeria. The inclusion of policy reports and institutional \ndocuments provides useful ecosystem context, but such sources vary in methodological \ntransparency. Future research can extend this review through a registered systematic or scoping \nreview using formal PRISMA procedures, duplicate screening, quality appraisal, bibliometric \nanalysis, and a completed database-derived evidence map. \nFuture Research Directions \nFurther research is required to strengthen the evidence base on entrepreneurial STEM \neducation. Longitudinal studies are needed to examine whether students who participate in \nbusiness-integrated STEM education experience different outcomes from those w"
+    },
+    {
+      "id": "p022-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 22,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3135,
+      "text": "dinal studies are needed to examine whether students who participate in \nbusiness-integrated STEM education experience different outcomes from those who d o not. \nSuch studies could examine employability, venture creation, innovation activity, patenting, \nleadership roles, and contributions to local economies. \nMore empirical studies are needed in Nigeria and similar emerging innovation ecosystems. \nMuch of the literature on university commercialisation and STEM entrepreneurship is based on \nhigh-income contexts. Nigerian studies should examine how entrepreneurship  education is"
+    },
+    {
+      "id": "p023-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 23,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "23 \n \ndelivered in STEM departments, how students experience it, and which institutional conditions \naffect its outcomes. \nComparative research should also examine entrepreneurial STEM education across educational \nlevels. While higher education receives substantial attention, early exposure at primary and \nsecondary levels may influence creativity, confidence, problem-solving, and career orientation. \nHowever, business principles must be developmentally appropriate. Younger learners may \nengage with simple value creation, teamwork, and community problem -solving, while \nuniversity students may engage with intellectual property, fina nce, market validation, and \ncommercialisation. \nInclusion should be treated as a central research issue. Women, rural learners, low -income \nstudents, persons with disabilities, and underrepresented groups may face unequal access to \nSTEM and entrepreneurship opportunities. Entrepreneurial STEM education m ay reproduce \nexisting inequalities if access to "
+    },
+    {
+      "id": "p023-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 23,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "ay face unequal access to \nSTEM and entrepreneurship opportunities. Entrepreneurial STEM education m ay reproduce \nexisting inequalities if access to mentors, funding, laboratories, networks, and competitions is \nuneven. \nFuture studies should also examine the role of artificial intelligence and digital tools in \nentrepreneurial STEM education. These tools may support prototyping, simulation, coding, \nmarket research, and personalised learning. At the same time, they raise qu estions about \nacademic integrity, intellectual property, data privacy, labour market change, and equitable \naccess. \nFinally, stronger measurement tools are needed. Entrepreneurial mindset, opportunity \nrecognition, innovation competence, and commercialisation readiness are difficult to assess \nthrough conventional examinations. Mixed -method approaches that combine surveys , \ninterviews, behavioural tasks, portfolios, project outputs, and post -graduation tracking may \nprovide stronger evidence. \n12. Conclusion "
+    },
+    {
+      "id": "p023-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 23,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": " surveys , \ninterviews, behavioural tasks, portfolios, project outputs, and post -graduation tracking may \nprovide stronger evidence. \n12. Conclusion \nThis comparative integrative review examined the integration of business principles into STEM \neducation, with attention to entrepreneurial STEM education and innovation ecosystems in the \nUnited States and Nigeria. The review indicates that STEM education i ncreasingly requires \nengagement with value creation, user needs, market conditions, intellectual property, finance, \nregulation, communication, and organisational development. These dimensions do not replace \ntechnical competence. Rather, they extend the cap acity of learners to apply scientific and \ntechnological knowledge in contexts where implementation, adoption, sustainability, and social \nrelevance matter. \nThe synthesis suggests that entrepreneurial STEM education is best understood as a curriculum, \npedagogy, institutional, and ecosystem issue. Curriculum integration is need"
+    },
+    {
+      "id": "p023-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 23,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 3109,
+      "text": " that entrepreneurial STEM education is best understood as a curriculum, \npedagogy, institutional, and ecosystem issue. Curriculum integration is needed so that business \nprinciples are not treated as detached general knowledge but are connected to technical projects \nand disciplinary learning. Experiential pedagogy is required because entrepreneurial capability \ndevelops through problem identification, user engagement, prototyping, testing, reflection, and \niteration. Institutional support is also necessary because students and educators require access"
+    },
+    {
+      "id": "p024-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 24,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "24 \n \nto mentors, laboratories, intellectual property guidance, incubation, funding pathways, and \nexternal partnerships. \nThe comparison between the United States and Nigeria shows that entrepreneurial STEM \neducation is shaped by ecosystem conditions. The United States has more established \nuniversity-based innovation infrastructure, technology transfer systems, federal innova tion \nprogrammes, and venture support mechanisms, although access remains uneven across \ninstitutions and student populations. Nigeria has an emerging innovation ecosystem marked by \ndigital entrepreneurship, policy interest, youth enterprise, and local devel opment needs, but \nimplementation is constrained by infrastructure, funding, university-industry linkage gaps, and \nuneven commercialisation capacity. \nThe six -dimensional framework proposed in this article provides a basis for curriculum \ndevelopment, institutional planning, and future research. It suggests that business principles can \nbe integrated int"
+    },
+    {
+      "id": "p024-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 24,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "provides a basis for curriculum \ndevelopment, institutional planning, and future research. It suggests that business principles can \nbe integrated into STEM education through curriculum integration, expe riential learning, \necosystem partnerships, commercialisation infrastructure, faculty development, and policy \nsupport. Such an approach can assist educational institutions in preparing learners to participate \nin innovation, enterprise development, and social problem-solving in ways that are responsive \nto local and national conditions. \nFurther empirical research is needed to examine how business -integrated STEM education \naffects learner outcomes, entrepreneurial intention, graduate employability, venture creation, \nresearch commercialisation, and inclusive participation. Future studies may also examine how \nsuch education can be adapted across primary, secondary, vocational, and higher education \nsettings. A subsequent systematic or scoping review could build on this article by ap"
+    },
+    {
+      "id": "p024-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 24,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "ted across primary, secondary, vocational, and higher education \nsettings. A subsequent systematic or scoping review could build on this article by applying \nPRISMA procedures, duplicate screening, quality apprais al, and bibliometric mapping. For \nnow, the integrative review provides a conceptual and comparative foundation for \nunderstanding how business principles may be embedded in STEM education in both mature \nand emerging innovation ecosystems. \n \n \nReferences \nAcs, Z. J., & Szerb, L. (2007). Entrepreneurship, economic growth and public policy. Small \nBusiness Economics, 28, 109–122. https://doi.org/10.1007/s11187-006-9012-3 \nAudretsch, D. B. (2014). From the entrepreneurial university to the university for the \nentrepreneurial society. The Journal of Technology Transfer, 39, 313 –321. \nhttps://doi.org/10.1007/s10961-012-9288-1 \nAudretsch, D. B., Cunningham, J. A., Kuratko, D. F., Lehmann, E. E., & Menter, M. (2019). \nEntrepreneurial ecosystems: Economic, technological, and socie"
+    },
+    {
+      "id": "p024-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 24,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 2807,
+      "text": "retsch, D. B., Cunningham, J. A., Kuratko, D. F., Lehmann, E. E., & Menter, M. (2019). \nEntrepreneurial ecosystems: Economic, technological, and societal impacts. The Journal of \nTechnology Transfer, 44(2), 313–325. https://doi.org/10.1007/s10961-018-9690-4"
+    },
+    {
+      "id": "p025-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 25,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "25 \n \nBecker, G. S. (1964). Human capital: A theoretical and empirical analysis, with special \nreference to education. University of Chicago Press. \nBéchard, J.-P., & Grégoire, D. (2005). Entrepreneurship education research revisited: The case \nof higher education. Academy of Management Learning & Education, 4(1), 22 –43. \nhttps://doi.org/10.5465/amle.2005.16132536 \nBreiner, J. M., Harkness, S. S., Johnson, C. C., & Koehler, C. M. (2012). What is STEM? A \ndiscussion about conceptions of STEM in education and partnerships. School Science and \nMathematics, 112(1), 3–11. https://doi.org/10.1111/j.1949-8594.2011.00109.x \nBruton, G. D., Ketchen, D. J., Jr., & Ireland, R. D. (2013). Entrepreneurship as a solution to \npoverty. Journal of Business Venturing, 28(6), 683 –689. \nhttps://doi.org/10.1016/j.jbusvent.2013.05.002 \nEtzkowitz, H. (2008). The triple helix: University -industry-government innovation in action. \nRoutledge. \nEtzkowitz, H., & Leydesdorff, L. (2000). The dynamics of innovatio"
+    },
+    {
+      "id": "p025-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 25,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "he triple helix: University -industry-government innovation in action. \nRoutledge. \nEtzkowitz, H., & Leydesdorff, L. (2000). The dynamics of innovation: From national systems \nand “Mode 2” to a Triple Helix of university -industry-government relations. Research Policy, \n29(2), 109–123. https://doi.org/10.1016/S0048-7333(99)00055-4 \nFayolle, A. (2013). Personal views on the future of entrepreneurship education. \nEntrepreneurship & Regional Development, 25(7 –8), 692 –701. \nhttps://doi.org/10.1080/08985626.2013.821318 \nFayolle, A., & Gailly, B. (2015). The impact of entrepreneurship education on entrepreneurial \nattitudes and intention: Hysteresis and persistence. Journal of Small Business Management, \n53(1), 75–93. https://doi.org/10.1111/jsbm.12065 \nHaynie, J. M., Shepherd, D., Mosakowski, E., & Earley, P. C. (2010). A situated metacognitive \nmodel of the entrepreneurial mindset. Journal of Business Venturing, 25(2), 217 –229. \nhttps://doi.org/10.1016/j.jbusvent.2008.10.001 \nLackéus, M"
+    },
+    {
+      "id": "p025-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 25,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2700,
+      "text": "ive \nmodel of the entrepreneurial mindset. Journal of Business Venturing, 25(2), 217 –229. \nhttps://doi.org/10.1016/j.jbusvent.2008.10.001 \nLackéus, M. (2015). Entrepreneurship in education: What, why, when, how. OECD Publishing. \nMcGrath, R. G., & MacMillan, I. C. (2000). The entrepreneurial mindset: Strategies for \ncontinuously creating opportunity in an age of uncertainty. Harvard Business School Press. \nNabi, G., Liñán , F., Fayolle, A., Krueger, N. F., & Walmsley, A. (2017). The impact of \nentrepreneurship education in higher education: A systematic review and research agenda. \nAcademy of Management Learning & Education, 16(2), 277 –299. \nhttps://doi.org/10.5465/amle.2015.0026 \nNational Academies of Sciences, Engineering, and Medicine. (2018). Indicators for monitoring \nundergraduate STEM education. National Academies Press. https://doi.org/10.17226/24943 \nNational Research Council. (2011). Successful K –12 STEM education: Identifying effective \napproaches in science, technology, "
+    },
+    {
+      "id": "p025-c004",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 25,
+      "chunk_number": 4,
+      "start_char": 2550,
+      "end_char": 2787,
+      "text": "doi.org/10.17226/24943 \nNational Research Council. (2011). Successful K –12 STEM education: Identifying effective \napproaches in science, technology, engineering, and mathematics. National Academies Press. \nhttps://doi.org/10.17226/13158"
+    },
+    {
+      "id": "p026-c001",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 26,
+      "chunk_number": 1,
+      "start_char": 0,
+      "end_char": 1000,
+      "text": "26 \n \nNational Science Foundation. (n.d.). Innovation Corps. \nhttps://new.nsf.gov/funding/initiatives/i-corps \nNeck, H. M., & Corbett, A. C. (2018). The scholarship of teaching and learning \nentrepreneurship. Entrepreneurship Education and Pedagogy, 1(1), 8 –41. \nhttps://doi.org/10.1177/2515127417737286 \nNeck, H. M., & Greene, P. G. (2011). Entrepreneurship education: Known worlds and new \nfrontiers. Journal of Small Business Management, 49(1), 55–70. https://doi.org/10.1111/j.1540-\n627X.2010.00314.x \nNnakwe, C. C., Cooch, N., & Huang -Saad, A. (2018). Investing in academic technology \ninnovation and entrepreneurship: Moving beyond research funding through the NSF I -\nCORPS™ program. Technology & Innovation, 19(4), 773 –786. \nhttps://doi.org/10.21300/19.4.2018.773 \nOECD. (2019). OECD skills strategy 2019: Skills to shape a better future. OECD Publishing. \nhttps://doi.org/10.1787/9789264313835-en \nOECD. (2021). The state of higher education: One year into the COVID -19 pandemic. OECD \nP"
+    },
+    {
+      "id": "p026-c002",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 26,
+      "chunk_number": 2,
+      "start_char": 850,
+      "end_char": 1850,
+      "text": "OECD Publishing. \nhttps://doi.org/10.1787/9789264313835-en \nOECD. (2021). The state of higher education: One year into the COVID -19 pandemic. OECD \nPublishing. \nRae, D. (2010). Universities and enterprise education: Responding to the challenges of the new \nera. Journal of Small Business and Enterprise Development, 17(4), 591 –606. \nhttps://doi.org/10.1108/14626001011088741 \nRideout, E. C., & Gray, D. O. (2013). Does entrepreneurship education really work? A review \nand methodological critique of the empirical literature on the effects of university -based \nentrepreneurship education. Journal of Small Business Management, 51(3), 329–351. \nhttps://doi.org/10.1111/jsbm.12021 \nSpigel, B. (2017). The relational organization of entrepreneurial ecosystems. Entrepreneurship \nTheory and Practice, 41(1), 49–72. https://doi.org/10.1111/etap.12167 \nStam, E. (2015). Entrepreneurial ecosystems and regional policy: A sympathetic critique. \nEuropean Planning Studies, 23(9), 1759 –1769. \nhttps://doi.o"
+    },
+    {
+      "id": "p026-c003",
+      "source": "Entrepreneurial STEM Education and Innovation Ecosystems.pdf",
+      "page_number": 26,
+      "chunk_number": 3,
+      "start_char": 1700,
+      "end_char": 2378,
+      "text": "Stam, E. (2015). Entrepreneurial ecosystems and regional policy: A sympathetic critique. \nEuropean Planning Studies, 23(9), 1759 –1769. \nhttps://doi.org/10.1080/09654313.2015.1061484 \nUNESCO. (2021). UNESCO science report: The race against time for smarter development. \nUNESCO Publishing. \nWorld Bank. (2019). Nigeria digital economy diagnostic report. World Bank. \nWorld Economic Forum. (2023). The future of jobs report 2023. World Economic Forum. \nhttps://www.weforum.org/reports/the-future-of-jobs-report-2023/ \nWorld Intellectual Property Organization. (2023). Global innovation index 2023: Innovation in \nthe face of uncertainty. WIPO. https://doi.org/10.34667/tind.48220"
+    }
+  ]
+}
