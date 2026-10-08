@@ -19,6 +19,7 @@ class SentenceTransformerEmbedder:
         self,
         model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
         *,
+        revision: str | None = None,
         device: str | None = None,
         batch_size: int = 32,
     ) -> None:
@@ -26,6 +27,12 @@ class SentenceTransformerEmbedder:
             raise TypeError("model_name must be a string.")
         if not model_name.strip():
             raise ValueError("model_name must not be blank.")
+
+        if revision is not None:
+            if not isinstance(revision, str):
+                raise TypeError("revision must be a string or None.")
+            if not revision.strip():
+                raise ValueError("revision must not be blank.")
 
         if isinstance(batch_size, bool) or not isinstance(batch_size, int):
             raise TypeError("batch_size must be an integer.")
@@ -42,12 +49,21 @@ class SentenceTransformerEmbedder:
                 'Install it with: python -m pip install -e ".[dense]"'
             ) from exc
 
-        self._model = SentenceTransformer(model_name, device=device)
+        if revision is None:
+            self._model = SentenceTransformer(model_name, device=device)
+        else:
+            self._model = SentenceTransformer(
+                model_name,
+                device=device,
+                revision=revision,
+            )
 
         # Prefer the current API while supporting older dependency versions.
         get_dimension = getattr(self._model, "get_embedding_dimension", None)
         if get_dimension is None:
-            get_dimension = getattr(self._model, "get_sentence_embedding_dimension", None)
+            get_dimension = getattr(
+                self._model, "get_sentence_embedding_dimension", None
+            )
         if get_dimension is None:
             raise AttributeError(
                 "SentenceTransformer model does not expose an embedding dimension."

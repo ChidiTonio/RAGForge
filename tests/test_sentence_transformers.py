@@ -449,3 +449,63 @@ def test_float32_conversion_to_zero_vector_is_rejected(
 
     with pytest.raises(ValueError, match="nonzero"):
         embedder.embed(["document"])
+
+
+def test_passes_revision_to_model_loader(
+    fake_backend: tuple[Mock, Mock],
+) -> None:
+    factory, _ = fake_backend
+    # Synthetic commit ID: this test does not access Hugging Face.
+    revision = "0123456789abcdef0123456789abcdef01234567"
+
+    embedder = SentenceTransformerEmbedder(
+        "test-model",
+        device="cpu",
+        revision=revision,
+    )
+
+    factory.assert_called_once_with(
+        "test-model",
+        device="cpu",
+        revision=revision,
+    )
+    assert embedder.dimension == 3
+
+
+def test_explicit_none_revision_preserves_default_loader_call(
+    fake_backend: tuple[Mock, Mock],
+) -> None:
+    factory, _ = fake_backend
+
+    SentenceTransformerEmbedder(revision=None)
+
+    factory.assert_called_once_with(
+        "sentence-transformers/all-MiniLM-L6-v2",
+        device=None,
+    )
+
+
+@pytest.mark.parametrize("revision", ["", " \n\t "])
+def test_blank_revision_is_rejected_before_loading(
+    fake_backend: tuple[Mock, Mock],
+    revision: str,
+) -> None:
+    factory, _ = fake_backend
+
+    with pytest.raises(ValueError, match="revision"):
+        SentenceTransformerEmbedder(revision=revision)
+
+    factory.assert_not_called()
+
+
+@pytest.mark.parametrize("revision", [123, True, 1.5, []])
+def test_nonstring_revision_is_rejected_before_loading(
+    fake_backend: tuple[Mock, Mock],
+    revision: object,
+) -> None:
+    factory, _ = fake_backend
+
+    with pytest.raises(TypeError, match="revision"):
+        SentenceTransformerEmbedder(revision=revision)  # type: ignore[arg-type]
+
+    factory.assert_not_called()
