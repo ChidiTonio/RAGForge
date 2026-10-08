@@ -27,3 +27,6 @@ htmlcov/
 # Local datasets and generated indexes
 data/
 *.egg-info/
+
+# Private unpublished research and derived evaluation artifacts
+/evaluation/equity_research/
