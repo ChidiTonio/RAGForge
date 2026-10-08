@@ -2,6 +2,7 @@
 
 Run from the repository root. Model construction may download model files.
 This is a development-set retrieval diagnostic, not an answer evaluation.
+The embedding model revision is pinned; the reranker revision is not.
 """
 
 import argparse
@@ -24,6 +25,7 @@ BACKEND_CANDIDATE_K = 20
 FINAL_POOL_K = 20
 RRF_K = 60
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 BATCH_SIZE = 8
 MAX_LENGTH = 512
@@ -117,7 +119,10 @@ def main():
     print("Loading models and building the hybrid index on CPU...", flush=True)
     started = perf_counter()
     embedder = SentenceTransformerEmbedder(
-        EMBEDDING_MODEL, device="cpu", batch_size=BATCH_SIZE
+        EMBEDDING_MODEL,
+        revision=EMBEDDING_REVISION,
+        device="cpu",
+        batch_size=BATCH_SIZE,
     )
     embedder_load_ms = (perf_counter() - started) * 1000
 
@@ -231,7 +236,11 @@ def main():
             "final_pool_k": FINAL_POOL_K,
             "rrf_k": RRF_K,
             "embedding_model": EMBEDDING_MODEL,
+            "embedding_revision": EMBEDDING_REVISION,
+            "embedding_revision_pinned": True,
             "reranker_model": RERANKER_MODEL,
+            "reranker_revision": None,
+            "reranker_revision_pinned": False,
             "device": "cpu",
             "embedding_batch_size": BATCH_SIZE,
             "reranking_batch_size": BATCH_SIZE,
@@ -288,7 +297,10 @@ def main():
             + "\n"
         )
     print(f"Saved report: {args.output}")
-    print("Development diagnostic only; model revisions are not pinned.")
+    print(
+        "Development diagnostic only; embedding revision is pinned, "
+        "reranker revision is not pinned."
+    )
 
 
 if __name__ == "__main__":

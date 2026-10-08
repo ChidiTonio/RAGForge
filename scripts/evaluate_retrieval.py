@@ -24,6 +24,8 @@ from ragforge.retrieval.hybrid import HybridRetriever
 TOP_K = 5
 CANDIDATE_K = 20
 RRF_K = 60
+MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+MODEL_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 
 
 def load_json(path: Path) -> tuple[dict, str]:
@@ -229,8 +231,13 @@ def main() -> None:
         f"Validated: {len(chunks)} chunks | {len(questions)} questions",
         flush=True,
     )
-    print("Loading the smoke-test embedder configuration on CPU...", flush=True)
-    embedder = SentenceTransformerEmbedder(device="cpu", batch_size=8)
+    print("Loading pinned all-MiniLM-L6-v2 on CPU...", flush=True)
+    embedder = SentenceTransformerEmbedder(
+        MODEL_NAME,
+        revision=MODEL_REVISION,
+        device="cpu",
+        batch_size=8,
+    )
 
     # Use public constructors, including the actual hybrid implementation.
     # Dense and hybrid each build their own dense index.
@@ -267,7 +274,8 @@ def main() -> None:
             "candidate_k": CANDIDATE_K,
             "rrf_k": RRF_K,
             "embedder_class": "SentenceTransformerEmbedder",
-            "model_selection": "Embedder implementation default",
+            "model_selection": MODEL_NAME,
+            "model_revision": MODEL_REVISION,
             "device": "cpu",
             "batch_size": 8,
         },

@@ -32,7 +32,12 @@ def main() -> None:
     ]
 
     print("Loading all-MiniLM-L6-v2 on CPU...", flush=True)
-    embedder = SentenceTransformerEmbedder(device="cpu", batch_size=8)
+    embedder = SentenceTransformerEmbedder(
+        "sentence-transformers/all-MiniLM-L6-v2",
+        revision="1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        device="cpu",
+        batch_size=8,
+    )
 
     vectors = embedder.embed(texts)
     assert embedder.dimension == 384, "Unexpected dimension for this model."
