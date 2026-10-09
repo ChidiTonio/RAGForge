@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 from pypdf import PdfWriter
+
 from ragforge.ingestion.pdf import PDFPage, parse_pdf
 
 
