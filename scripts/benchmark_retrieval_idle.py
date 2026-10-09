@@ -18,6 +18,7 @@ from pathlib import Path
 from time import perf_counter, sleep
 
 import benchmark_retrieval_e2e as baseline
+from benchmark_prediction_timing import prediction_timing
 from evaluate_retrieval import load_json
 
 from ragforge.ingestion.chunking import TextChunk
@@ -103,7 +104,32 @@ def main():
         "--stage-timing", action="store_true",
         help="Add a host timestamp after CPU retrieval; no intermediate CUDA sync.",
     )
+    parser.add_argument(
+        "--prediction-timing", action="store_true",
+        help="Time backend predict/to/preprocess; requires --stage-timing.",
+    )
+    parser.add_argument(
+        "--prediction-detail-timing", action="store_true",
+        help="Also time input transfer and forward; requires --prediction-timing.",
+    )
+    parser.add_argument(
+        "--cuda-pre-transfer-probe", action="store_true",
+        help="Time tiny GPU work and sync before input transfer; CUDA/detail only.",
+    )
     args = parser.parse_args()
+    if args.cuda_pre_transfer_probe and (
+        not args.prediction_detail_timing or args.reranker_device != "cuda"
+    ):
+        parser.error(
+            "--cuda-pre-transfer-probe requires "
+            "--prediction-detail-timing and --reranker-device cuda."
+        )
+
+    if args.prediction_detail_timing and not args.prediction_timing:
+        parser.error("--prediction-detail-timing requires --prediction-timing.")
+
+    if args.prediction_timing and not args.stage_timing:
+        parser.error("--prediction-timing requires --stage-timing.")
 
     if args.output.exists():
         parser.error("Output exists. Choose a new --output path.")
@@ -154,7 +180,17 @@ def main():
     dtypes = sorted({str(parameter.dtype) for parameter in model.parameters()})
     devices = sorted({str(parameter.device) for parameter in model.parameters()})
 
-    def request():
+    # Allocate outside request timings, before warmup or idle trials.
+    probe_tensor = None
+    if args.cuda_pre_transfer_probe:
+        probe_tensor = torch.zeros(1, device=scorer._model.device)
+        synchronize()
+
+    def cuda_probe():
+        probe_tensor.add_(1)
+        synchronize()
+
+    def measured_request():
         # Deliberately no CUDA call before the start clock.
         started = perf_counter()
         pool = hybrid.search(args.query, top_k=baseline.FINAL_POOL_K)
@@ -181,6 +217,21 @@ def main():
                 "retrieval_ms": (retrieval_end - started) * 1000,
                 "reranking_ms": (ended - retrieval_end) * 1000,
             })
+        return measurement, started, ended
+
+    def request():
+        if not args.prediction_timing:
+            return measured_request()
+        # Install host-only wrappers before the E2E start clock.
+        with prediction_timing(
+            scorer._model, clock=perf_counter,
+            detailed=args.prediction_detail_timing,
+            before_input_transfer=(
+                cuda_probe if args.cuda_pre_transfer_probe else None
+            ),
+        ) as totals:
+            measurement, started, ended = measured_request()
+        measurement["prediction"] = dict(totals)
         return measurement, started, ended
 
     first, _, _ = request()
@@ -213,6 +264,8 @@ def main():
                 "conditioning_retrieval_ms": conditioning["retrieval_ms"],
                 "conditioning_reranking_ms": conditioning["reranking_ms"],
             })
+        if args.prediction_timing:
+            sample["conditioning_prediction"] = conditioning["prediction"]
         samples.append(sample)
         print(
             f"{sequence}/{len(schedule)} | gap {gap:g}s | "
@@ -248,10 +301,42 @@ def main():
                     [s[f"{stage}_ms"] for s in rows]
                 )
 
+    if args.prediction_timing:
+        for summary in summaries:
+            rows = [
+                s for s in samples
+                if s["requested_idle_seconds"] == summary["requested_idle_seconds"]
+            ]
+            summary["prediction"] = {
+                key: baseline.latency_summary(
+                    [s["prediction"][key] for s in rows]
+                )
+                for key in (
+                    "predict_ms", "device_placement_ms",
+                    "preprocess_ms", "predict_other_ms",
+                ) + (
+                    ("input_transfer_ms", "forward_ms")
+                    if args.prediction_detail_timing else ()
+                ) + (
+                    ("cuda_probe_ms",) if args.cuda_pre_transfer_probe else ()
+                )
+            }
+
     report = {
-        "report_schema_version": 2 if args.stage_timing else 1,
+        "report_schema_version": (
+            5 if args.cuda_pre_transfer_probe
+            else 4 if args.prediction_detail_timing
+            else 3 if args.prediction_timing
+            else 2 if args.stage_timing else 1
+        ),
         "experiment": (
-            "controlled_application_idle_hybrid_reranking_stage_timing"
+            "controlled_application_idle_hybrid_reranking_cuda_pre_transfer_probe"
+            if args.cuda_pre_transfer_probe
+            else "controlled_application_idle_hybrid_reranking_prediction_detail_timing"
+            if args.prediction_detail_timing
+            else "controlled_application_idle_hybrid_reranking_prediction_timing"
+            if args.prediction_timing
+            else "controlled_application_idle_hybrid_reranking_stage_timing"
             if args.stage_timing
             else "controlled_application_idle_hybrid_reranking"
         ),
@@ -269,6 +354,7 @@ def main():
             path.name: hashlib.sha256(path.read_bytes()).hexdigest()
             for path in (
                 Path(__file__), Path(baseline.__file__),
+                Path(__file__).with_name("benchmark_prediction_timing.py"),
                 Path(__file__).with_name("evaluate_retrieval.py"),
                 Path(__file__).with_name("evaluate_reranking.py"),
             )
@@ -297,7 +383,33 @@ def main():
             "matmul_allow_tf32": False,
             "cudnn_allow_tf32": False,
             "stage_timing": args.stage_timing,
-            "timing": "No pre-request sync; post-request sync before end clock.",
+            "prediction_timing": args.prediction_timing,
+            "prediction_detail_timing": args.prediction_detail_timing,
+            "cuda_pre_transfer_probe": args.cuda_pre_transfer_probe,
+            "cuda_probe_definition": (
+                "Once per predict, before first batch_to_device: increment "
+                "one preallocated CUDA value and synchronize. Host elapsed "
+                "time is included in predict and E2E, reported separately "
+                "as cuda_probe_ms, and excluded from predict_other_ms."
+                if args.cuda_pre_transfer_probe else None
+            ),
+            "prediction_detail_timing_definition": (
+                "Host elapsed batch_to_device and forward calls; no added CUDA "
+                "synchronization. predict_other_ms excludes these intervals "
+                "and includes output conversion and any pending GPU waits."
+                if args.prediction_detail_timing else None
+            ),
+            "prediction_timing_definition": (
+                "Host elapsed predict time; nested to and preprocess totals; "
+                "predict_other_ms is the remainder, not GPU execution time."
+                if args.prediction_timing else None
+            ),
+            "timing": (
+                "No pre-request sync; timed CUDA probe and intermediate sync "
+                "before first input transfer; post-request sync before end clock."
+                if args.cuda_pre_transfer_probe else
+                "No pre-request sync; post-request sync before end clock."
+            ),
             "stage_timing_definition": (
                 "Host timestamp after CPU hybrid search; reranking includes "
                 "host overhead, transfers, and final synchronization; "
@@ -337,6 +449,39 @@ def main():
         report["limitations"].append(
             "Stage timing adds a host timestamp; reranking_ms is not "
             "GPU-only execution time."
+        )
+    if args.prediction_timing:
+        report["limitations"].extend([
+            "Prediction wrappers add host-clock and Python overhead.",
+            (
+                "Wrappers are installed before the E2E start clock and restored "
+                "after validation; surrounding application-idle timing includes "
+                "this host overhead."
+            ),
+            (
+                "Nested stage intervals may include asynchronous GPU waiting; "
+                "predict_other_ms is not GPU-only execution time."
+            ),
+        ])
+    if args.prediction_detail_timing:
+        report["limitations"].extend([
+            "Detailed timing temporarily wraps a module-level transfer "
+            "reference; concurrent prediction in this process is unsupported.",
+            "Forward host time is not completed GPU execution time; "
+            "the remainder is not isolated output-transfer time.",
+        ])
+    if args.cuda_pre_transfer_probe:
+        report["settings"]["stage_timing_definition"] = (
+            "Host timestamp after CPU retrieval; reranking includes a timed "
+            "pre-transfer GPU probe and intermediate synchronization."
+        )
+        report["settings"]["prediction_detail_timing_definition"] = (
+            "Host elapsed input-transfer and forward calls after a timed "
+            "GPU probe with synchronization. The remainder excludes the probe."
+        )
+        report["limitations"].append(
+            "The pre-transfer probe deliberately changes GPU scheduling "
+            "and synchronization; this is an intervention, not baseline latency."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8") as handle:

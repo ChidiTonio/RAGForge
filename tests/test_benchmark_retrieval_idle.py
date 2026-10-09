@@ -309,3 +309,89 @@ def test_default_report_has_no_stage_measurements(idle):
     for summary in data["per_gap"]:
         assert "retrieval" not in summary
         assert "reranking" not in summary
+
+
+def test_prediction_timing_requires_stage_timing(idle, monkeypatch):
+    monkeypatch.setattr(sys, "argv", [*sys.argv, "--prediction-timing"])
+    with pytest.raises(SystemExit) as caught:
+        idle.module.main()
+    assert caught.value.code == 2
+    for factory in idle.base.factories:
+        factory.assert_not_called()
+
+
+@pytest.mark.parametrize("device,reranking_ms", [("cuda", 40.0), ("cpu", 30.0)])
+def test_prediction_timing_report_and_restoration(
+    idle, monkeypatch, device, reranking_ms,
+):
+    monkeypatch.setattr(sys, "argv", [
+        *sys.argv, "--stage-timing", "--prediction-timing",
+        "--reranker-device", device,
+    ])
+    backend = idle.base.scorer._model
+    original_score = idle.base.scorer.score.side_effect
+
+    def placement(device):
+        return backend
+
+    def preprocess(passages):
+        return passages
+
+    def predict(query, passages):
+        backend.to(device)
+        backend.preprocess(passages)
+        return original_score(query, passages)
+
+    monkeypatch.setattr(backend, "to", placement, raising=False)
+    monkeypatch.setattr(backend, "preprocess", preprocess, raising=False)
+    monkeypatch.setattr(backend, "predict", predict, raising=False)
+    idle.base.scorer.score.side_effect = (
+        lambda query, passages: backend.predict(query, passages)
+    )
+    idle.module.main()
+    data = report(idle)
+    assert data["report_schema_version"] == 3
+    assert data["experiment"].endswith("_prediction_timing")
+    assert data["settings"]["prediction_timing"] is True
+    assert "benchmark_prediction_timing.py" in data["source_sha256"]
+    assert backend.to is placement
+    assert backend.preprocess is preprocess
+    assert backend.predict is predict
+
+    for measurement in [
+        data["first_query_after_setup"], data["warm_reference"], *data["samples"],
+    ]:
+        assert measurement["retrieval_ms"] == pytest.approx(20.0)
+        assert measurement["reranking_ms"] == pytest.approx(reranking_ms)
+        timing = measurement["prediction"]
+        assert timing["predict_ms"] == pytest.approx(30.0)
+        assert timing["device_placement_ms"] == pytest.approx(0.0)
+        assert timing["preprocess_ms"] == pytest.approx(0.0)
+        assert timing["predict_other_ms"] == pytest.approx(30.0)
+        assert timing["predict_calls"] == 1
+        assert timing["device_placement_calls"] == 1
+        assert timing["preprocess_calls"] == 1
+    for sample in data["samples"]:
+        assert sample["conditioning_prediction"]["predict_ms"] == pytest.approx(30)
+        gap = sample["requested_idle_seconds"]
+        assert sample["application_idle_seconds"] == pytest.approx(
+            0.4 + gap + (0.005 if gap else 0.0)
+        )
+        assert sample["matches_warm_reference"] is True
+    for summary in data["per_gap"]:
+        assert summary["prediction"]["predict_ms"]["mean_ms"] == pytest.approx(30)
+        assert summary["prediction"]["predict_other_ms"]["mean_ms"] == pytest.approx(30)
+
+
+def test_default_report_has_no_prediction_measurements(idle):
+    idle.module.main()
+    data = report(idle)
+    assert data["report_schema_version"] == 1
+    assert data["settings"]["prediction_timing"] is False
+    for measurement in [
+        data["first_query_after_setup"], data["warm_reference"], *data["samples"],
+    ]:
+        assert "prediction" not in measurement
+        assert "conditioning_prediction" not in measurement
+    for summary in data["per_gap"]:
+        assert "prediction" not in summary
