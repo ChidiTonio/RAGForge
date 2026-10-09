@@ -1,0 +1,6532 @@
+{
+  "created_at_utc": "2026-10-09T07:57:45.021114+00:00",
+  "scope": "Fixed-candidate reranking; held-out validation, not tuning.",
+  "git_commit": "b2d20983fcc4e79a4daa86c512862c54d37862c4",
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python": "3.11.17",
+  "packages": {
+    "torch": "2.14.1+cu130",
+    "sentence-transformers": "5.7.0",
+    "transformers": "5.19.0",
+    "numpy": "2.4.6"
+  },
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "torch_cuda_runtime": "13.0",
+  "cpu_threads": 6,
+  "cpu_interop_threads": 12,
+  "corpus_sha256": "f5e13652f27d0b59513be654074d71381fb02e4c99a3debe59008a22fabaf200",
+  "questions_sha256": "5b52b4f41cb6b47bf77538fc24299f5b722f616510413dac6a9f3dec5a2a5c9c",
+  "candidate_pools_sha256": "6250b5c53651f4ad0ad4d5da09129b76a67ae90447105d2972df1f07ffd7cd38",
+  "settings": {
+    "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "reranker_revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "batch_size": 8,
+    "max_length": 512,
+    "backend_candidate_k": 20,
+    "final_pool_k": 20,
+    "rrf_k": 60,
+    "warmup_full_passes_per_device": 2,
+    "timing_passes": 5,
+    "precision": "FP32; TF32 disabled"
+  },
+  "setup": {
+    "embedding_cached_load_ms": 5837.654078000014,
+    "cpu_index_build_ms": 1991.2441400001626,
+    "rerankers": {
+      "cpu": {
+        "cached_model_load_ms": 188.74021800002083,
+        "first_query_ms": 673.8051030006318,
+        "parameter_dtype": "torch.float32"
+      },
+      "cuda": {
+        "cached_model_load_ms": 173.09533600018767,
+        "first_query_ms": 820.6647369997881,
+        "parameter_dtype": "torch.float32"
+      }
+    }
+  },
+  "latency": {
+    "cpu": {
+      "total_ms": 51837.571847004256,
+      "mean_ms": 414.70057477603405,
+      "median_ms": 412.59425099997316,
+      "p95_ms": 550.8674455993969,
+      "min_ms": 237.7438670000629,
+      "max_ms": 631.8188770001143,
+      "sequential_queries_per_second": 2.4113783795454506,
+      "sequential_pairs_per_second": 48.22756759090902,
+      "pass_mean_ms": [
+        470.05841471996973,
+        412.25261119994684,
+        399.33358648009744,
+        404.6580416401048,
+        387.20021984005143
+      ]
+    },
+    "cuda": {
+      "total_ms": 4625.568948002183,
+      "mean_ms": 37.00455158401746,
+      "median_ms": 37.32971199951862,
+      "p95_ms": 45.691424600590835,
+      "min_ms": 24.061486000391596,
+      "max_ms": 47.90691299967875,
+      "sequential_queries_per_second": 27.02370268504773,
+      "sequential_pairs_per_second": 540.4740537009546,
+      "pass_mean_ms": [
+        37.268600199931825,
+        37.24222763994476,
+        36.932642920037324,
+        36.835553080054524,
+        36.743734080118884
+      ]
+    }
+  },
+  "mean_latency_speedup": 11.206745036065948,
+  "full_ranking_agreement_fraction": 1.0,
+  "quality_first_measured_pass": {
+    "cpu": {
+      "hit_rate_at_k": 1.0,
+      "mrr_at_k": 0.98,
+      "per_question": [
+        {
+          "question_id": "q001",
+          "question": "Why does the author consider an integrative literature review appropriate for this topic?",
+          "relevant_chunk_ids": [
+            "p005-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p005-c001",
+              "score": 6.258387088775635,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p006-c002",
+              "score": -0.18546491861343384,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c003",
+              "score": -1.0242347717285156,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p022-c002",
+              "score": -1.4622271060943604,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c001",
+              "score": -2.6532399654388428,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q002",
+          "question": "According to the PRISMA reporting template, has a live database search been completed, and how should numerical values be handled?",
+          "relevant_chunk_ids": [
+            "p008-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p008-c001",
+              "score": 4.59480094909668,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p008-c002",
+              "score": -2.3866350650787354,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p022-c003",
+              "score": -5.307979106903076,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p022-c002",
+              "score": -5.515927314758301,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p024-c003",
+              "score": -7.196907043457031,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q003",
+          "question": "Which three theoretical perspectives inform the review?",
+          "relevant_chunk_ids": [
+            "p004-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p004-c002",
+              "score": 5.759947299957275,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p005-c004",
+              "score": -3.567122459411621,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p005-c001",
+              "score": -4.1806640625,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p005-c002",
+              "score": -4.555105686187744,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p003-c001",
+              "score": -5.044544219970703,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q004",
+          "question": "Which publication years did the review prioritise, and when were earlier works retained?",
+          "relevant_chunk_ids": [
+            "p005-c004",
+            "p006-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p005-c004",
+              "score": 5.535725116729736,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p006-c003",
+              "score": 2.906318187713623,
+              "is_relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c003",
+              "score": -10.054121971130371,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p026-c003",
+              "score": -10.263364791870117,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p025-c003",
+              "score": -10.369871139526367,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q005",
+          "question": "What five concept clusters organised the review's search terms?",
+          "relevant_chunk_ids": [
+            "p005-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p005-c003",
+              "score": 5.165882587432861,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p005-c002",
+              "score": -2.8029332160949707,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p006-c002",
+              "score": -6.696613311767578,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p006-c001",
+              "score": -7.082867622375488,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c002",
+              "score": -8.148781776428223,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q006",
+          "question": "What curriculum activities does the business-principles table suggest for customer discovery and user research?",
+          "relevant_chunk_ids": [
+            "p007-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p007-c002",
+              "score": 4.840417385101318,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p004-c001",
+              "score": 4.584527969360352,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p012-c003",
+              "score": 4.138830661773682,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p011-c001",
+              "score": 3.6167356967926025,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p010-c001",
+              "score": 3.514430522918701,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q007",
+          "question": "What financial-literacy assignments does the business-principles table suggest?",
+          "relevant_chunk_ids": [
+            "p007-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 2,
+          "reciprocal_rank_at_k": 0.5,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p004-c001",
+              "score": -0.39539772272109985,
+              "is_relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p007-c003",
+              "score": -0.7390581369400024,
+              "is_relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p007-c002",
+              "score": -2.5165367126464844,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p020-c004",
+              "score": -3.070321798324585,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p019-c003",
+              "score": -3.3467955589294434,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q008",
+          "question": "In university settings, what should intellectual property education be connected to?",
+          "relevant_chunk_ids": [
+            "p013-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p013-c002",
+              "score": 8.211557388305664,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c002",
+              "score": 1.7203456163406372,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p020-c003",
+              "score": 0.4112478196620941,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p021-c004",
+              "score": -0.08433402329683304,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p023-c001",
+              "score": -0.15390878915786743,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q009",
+          "question": "Which responsible-innovation concerns does the regulatory and ethical discussion identify?",
+          "relevant_chunk_ids": [
+            "p013-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p013-c003",
+              "score": 1.2013710737228394,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p004-c002",
+              "score": -0.2982667088508606,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p007-c003",
+              "score": -1.9498752355575562,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p004-c001",
+              "score": -2.2583701610565186,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c001",
+              "score": -4.94590950012207,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q010",
+          "question": "Why might a technically functioning innovation still fail, according to the document?",
+          "relevant_chunk_ids": [
+            "p012-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p012-c002",
+              "score": 5.547170639038086,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p012-c001",
+              "score": 1.967578649520874,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p013-c003",
+              "score": -8.23691177368164,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p011-c003",
+              "score": -8.892228126525879,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p026-c003",
+              "score": -9.562186241149902,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q011",
+          "question": "Which alternative pathways can business model thinking help STEM students compare?",
+          "relevant_chunk_ids": [
+            "p013-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p013-c001",
+              "score": 6.794482707977295,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c001",
+              "score": 0.2459268867969513,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p010-c001",
+              "score": -0.0033183135092258453,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p004-c001",
+              "score": -0.5885082483291626,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p018-c003",
+              "score": -0.6955893039703369,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q012",
+          "question": "What support and coordination do interdisciplinary capstone projects require?",
+          "relevant_chunk_ids": [
+            "p014-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p014-c003",
+              "score": 7.845441818237305,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p010-c002",
+              "score": 3.5427732467651367,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p014-c002",
+              "score": -1.3114688396453857,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p011-c001",
+              "score": -3.3762753009796143,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p008-c001",
+              "score": -3.844494581222534,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q013",
+          "question": "What follow-up does the document recommend so a short innovation event can produce deeper learning?",
+          "relevant_chunk_ids": [
+            "p014-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p014-c004",
+              "score": 3.5951342582702637,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p014-c003",
+              "score": 0.9609098434448242,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p013-c004",
+              "score": -6.27840518951416,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p014-c001",
+              "score": -7.01359748840332,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p010-c002",
+              "score": -7.994949817657471,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q014",
+          "question": "How does the document suggest integrating business principles when STEM curricula are already overloaded?",
+          "relevant_chunk_ids": [
+            "p015-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p015-c004",
+              "score": 2.943269729614258,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p020-c004",
+              "score": 2.3761258125305176,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c002",
+              "score": 2.0274271965026855,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p012-c003",
+              "score": 1.5903465747833252,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c001",
+              "score": 1.208653450012207,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q015",
+          "question": "Why are faculty incentives important for interdisciplinary teaching and entrepreneurship mentoring?",
+          "relevant_chunk_ids": [
+            "p015-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p015-c001",
+              "score": 9.1836576461792,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p011-c002",
+              "score": 3.4714536666870117,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p020-c002",
+              "score": 1.4176464080810547,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p014-c004",
+              "score": 1.0676031112670898,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p016-c004",
+              "score": 0.8187235593795776,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q016",
+          "question": "What determines whether policy frameworks translate into institutional change?",
+          "relevant_chunk_ids": [
+            "p015-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p015-c003",
+              "score": 7.354752540588379,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p020-c003",
+              "score": -0.5761805176734924,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p005-c002",
+              "score": -3.4188575744628906,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p003-c002",
+              "score": -5.432092666625977,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p006-c001",
+              "score": -5.596149444580078,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q017",
+          "question": "What alternative does the proposed framework suggest when a full technology transfer office is not feasible?",
+          "relevant_chunk_ids": [
+            "p020-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p020-c002",
+              "score": 1.7801374197006226,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c003",
+              "score": -4.04415225982666,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p012-c003",
+              "score": -4.820756435394287,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p024-c001",
+              "score": -5.429776191711426,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p008-c003",
+              "score": -6.150350093841553,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q018",
+          "question": "According to the document, how does NSF I-Corps help researchers and students examine the commercial potential of research?",
+          "relevant_chunk_ids": [
+            "p016-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p016-c003",
+              "score": 5.914376735687256,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p012-c004",
+              "score": 4.90315055847168,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p002-c003",
+              "score": 2.4706053733825684,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p009-c001",
+              "score": -0.492307186126709,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p018-c002",
+              "score": -1.839192509651184,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q019",
+          "question": "Which provisions of the Nigerian Startup Act 2022 does the document highlight?",
+          "relevant_chunk_ids": [
+            "p017-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p017-c003",
+              "score": 5.995538711547852,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p001-c003",
+              "score": 2.0802221298217773,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p019-c001",
+              "score": 0.7443674206733704,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p020-c003",
+              "score": -3.1652467250823975,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p017-c002",
+              "score": -4.121020793914795,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q020",
+          "question": "Which two infrastructure problems does the Nigeria discussion specifically link to constrained experimentation and prototyping?",
+          "relevant_chunk_ids": [
+            "p017-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p017-c004",
+              "score": 3.917663097381592,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p002-c004",
+              "score": 0.45041266083717346,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c001",
+              "score": -0.772609531879425,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p019-c001",
+              "score": -1.7531392574310303,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p016-c002",
+              "score": -2.0526719093322754,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q021",
+          "question": "What does the document caution against presenting entrepreneurship education as a simple solution to?",
+          "relevant_chunk_ids": [
+            "p016-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p016-c002",
+              "score": 4.744093418121338,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c001",
+              "score": 3.916710376739502,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p012-c003",
+              "score": -2.4280738830566406,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p003-c003",
+              "score": -2.818263053894043,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p011-c003",
+              "score": -3.0999350547790527,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q022",
+          "question": "Which social and geographic inequalities does the document identify as affecting participation in entrepreneurial STEM opportunities in the United States?",
+          "relevant_chunk_ids": [
+            "p017-c001",
+            "p019-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p017-c001",
+              "score": 4.955670356750488,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p022-c003",
+              "score": 1.2279226779937744,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p022-c001",
+              "score": 0.3306114971637726,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p021-c002",
+              "score": 0.1343618482351303,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p023-c001",
+              "score": -0.021952420473098755,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q023",
+          "question": "What are the six dimensions of the framework proposed for integrating business principles into STEM education?",
+          "relevant_chunk_ids": [
+            "p001-c003",
+            "p019-c002",
+            "p024-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p019-c002",
+              "score": 6.617256164550781,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p011-c001",
+              "score": 5.472955703735352,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p010-c003",
+              "score": 5.317137718200684,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p003-c002",
+              "score": 5.164379596710205,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p024-c001",
+              "score": 4.608457088470459,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q024",
+          "question": "Which outcomes does the future-research discussion recommend examining in longitudinal studies of entrepreneurial STEM education?",
+          "relevant_chunk_ids": [
+            "p021-c003",
+            "p022-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p021-c003",
+              "score": 5.906059265136719,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p022-c003",
+              "score": 4.2696428298950195,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p023-c002",
+              "score": 3.8826472759246826,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p022-c001",
+              "score": 3.483705997467041,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p024-c002",
+              "score": 3.1664538383483887,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q025",
+          "question": "What potential uses and concerns does the document identify for AI and digital tools in entrepreneurial STEM education?",
+          "relevant_chunk_ids": [
+            "p022-c001",
+            "p023-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p023-c002",
+              "score": 4.701164245605469,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p022-c001",
+              "score": 4.232183933258057,
+              "is_relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p002-c001",
+              "score": 3.2772467136383057,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p002-c002",
+              "score": 3.1289055347442627,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p012-c001",
+              "score": 2.0262084007263184,
+              "is_relevant": false
+            }
+          ]
+        }
+      ]
+    },
+    "cuda": {
+      "hit_rate_at_k": 1.0,
+      "mrr_at_k": 0.98,
+      "per_question": [
+        {
+          "question_id": "q001",
+          "question": "Why does the author consider an integrative literature review appropriate for this topic?",
+          "relevant_chunk_ids": [
+            "p005-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p005-c001",
+              "score": 6.258384704589844,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p006-c002",
+              "score": -0.18546409904956818,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c003",
+              "score": -1.0242327451705933,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p022-c002",
+              "score": -1.4622254371643066,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c001",
+              "score": -2.653240919113159,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q002",
+          "question": "According to the PRISMA reporting template, has a live database search been completed, and how should numerical values be handled?",
+          "relevant_chunk_ids": [
+            "p008-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p008-c001",
+              "score": 4.594799995422363,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p008-c002",
+              "score": -2.3866374492645264,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p022-c003",
+              "score": -5.307980537414551,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p022-c002",
+              "score": -5.515924453735352,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p024-c003",
+              "score": -7.196902275085449,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q003",
+          "question": "Which three theoretical perspectives inform the review?",
+          "relevant_chunk_ids": [
+            "p004-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p004-c002",
+              "score": 5.759943962097168,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p005-c004",
+              "score": -3.567121744155884,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p005-c001",
+              "score": -4.180656433105469,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p005-c002",
+              "score": -4.555104732513428,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p003-c001",
+              "score": -5.044543266296387,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q004",
+          "question": "Which publication years did the review prioritise, and when were earlier works retained?",
+          "relevant_chunk_ids": [
+            "p005-c004",
+            "p006-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p005-c004",
+              "score": 5.535717964172363,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p006-c003",
+              "score": 2.9063169956207275,
+              "is_relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c003",
+              "score": -10.054117202758789,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p026-c003",
+              "score": -10.263361930847168,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p025-c003",
+              "score": -10.369866371154785,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q005",
+          "question": "What five concept clusters organised the review's search terms?",
+          "relevant_chunk_ids": [
+            "p005-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p005-c003",
+              "score": 5.165881156921387,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p005-c002",
+              "score": -2.8029308319091797,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p006-c002",
+              "score": -6.6966094970703125,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p006-c001",
+              "score": -7.082859992980957,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c002",
+              "score": -8.148777961730957,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q006",
+          "question": "What curriculum activities does the business-principles table suggest for customer discovery and user research?",
+          "relevant_chunk_ids": [
+            "p007-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p007-c002",
+              "score": 4.840413570404053,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p004-c001",
+              "score": 4.5845255851745605,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p012-c003",
+              "score": 4.138829708099365,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p011-c001",
+              "score": 3.616732597351074,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p010-c001",
+              "score": 3.5144290924072266,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q007",
+          "question": "What financial-literacy assignments does the business-principles table suggest?",
+          "relevant_chunk_ids": [
+            "p007-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 2,
+          "reciprocal_rank_at_k": 0.5,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p004-c001",
+              "score": -0.3953949213027954,
+              "is_relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p007-c003",
+              "score": -0.7390536069869995,
+              "is_relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p007-c002",
+              "score": -2.516536235809326,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p020-c004",
+              "score": -3.070321559906006,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p019-c003",
+              "score": -3.346792221069336,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q008",
+          "question": "In university settings, what should intellectual property education be connected to?",
+          "relevant_chunk_ids": [
+            "p013-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p013-c002",
+              "score": 8.211554527282715,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c002",
+              "score": 1.7203423976898193,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p020-c003",
+              "score": 0.41124606132507324,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p021-c004",
+              "score": -0.08432964235544205,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p023-c001",
+              "score": -0.1539059281349182,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q009",
+          "question": "Which responsible-innovation concerns does the regulatory and ethical discussion identify?",
+          "relevant_chunk_ids": [
+            "p013-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p013-c003",
+              "score": 1.201371669769287,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p004-c002",
+              "score": -0.29826563596725464,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p007-c003",
+              "score": -1.949876070022583,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p004-c001",
+              "score": -2.2583680152893066,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c001",
+              "score": -4.945905685424805,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q010",
+          "question": "Why might a technically functioning innovation still fail, according to the document?",
+          "relevant_chunk_ids": [
+            "p012-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p012-c002",
+              "score": 5.547170639038086,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p012-c001",
+              "score": 1.9675780534744263,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p013-c003",
+              "score": -8.236902236938477,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p011-c003",
+              "score": -8.892224311828613,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p026-c003",
+              "score": -9.56218147277832,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q011",
+          "question": "Which alternative pathways can business model thinking help STEM students compare?",
+          "relevant_chunk_ids": [
+            "p013-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p013-c001",
+              "score": 6.794480323791504,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c001",
+              "score": 0.24592740833759308,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p010-c001",
+              "score": -0.003317512571811676,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p004-c001",
+              "score": -0.5885082483291626,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p018-c003",
+              "score": -0.6955878138542175,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q012",
+          "question": "What support and coordination do interdisciplinary capstone projects require?",
+          "relevant_chunk_ids": [
+            "p014-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p014-c003",
+              "score": 7.8454389572143555,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p010-c002",
+              "score": 3.5427727699279785,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p014-c002",
+              "score": -1.3114638328552246,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p011-c001",
+              "score": -3.3762683868408203,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p008-c001",
+              "score": -3.8444902896881104,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q013",
+          "question": "What follow-up does the document recommend so a short innovation event can produce deeper learning?",
+          "relevant_chunk_ids": [
+            "p014-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p014-c004",
+              "score": 3.5951318740844727,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p014-c003",
+              "score": 0.9609127044677734,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p013-c004",
+              "score": -6.278402328491211,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p014-c001",
+              "score": -7.013592720031738,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p010-c002",
+              "score": -7.994945526123047,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q014",
+          "question": "How does the document suggest integrating business principles when STEM curricula are already overloaded?",
+          "relevant_chunk_ids": [
+            "p015-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p015-c004",
+              "score": 2.9432713985443115,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p020-c004",
+              "score": 2.376126766204834,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c002",
+              "score": 2.0274248123168945,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p012-c003",
+              "score": 1.5903483629226685,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p001-c001",
+              "score": 1.2086540460586548,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q015",
+          "question": "Why are faculty incentives important for interdisciplinary teaching and entrepreneurship mentoring?",
+          "relevant_chunk_ids": [
+            "p015-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p015-c001",
+              "score": 9.183652877807617,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p011-c002",
+              "score": 3.4714536666870117,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p020-c002",
+              "score": 1.4176467657089233,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p014-c004",
+              "score": 1.0676052570343018,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p016-c004",
+              "score": 0.8187237977981567,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q016",
+          "question": "What determines whether policy frameworks translate into institutional change?",
+          "relevant_chunk_ids": [
+            "p015-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p015-c003",
+              "score": 7.354750633239746,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p020-c003",
+              "score": -0.5761778950691223,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p005-c002",
+              "score": -3.418853282928467,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p003-c002",
+              "score": -5.432085990905762,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p006-c001",
+              "score": -5.5961408615112305,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q017",
+          "question": "What alternative does the proposed framework suggest when a full technology transfer office is not feasible?",
+          "relevant_chunk_ids": [
+            "p020-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p020-c002",
+              "score": 1.7801347970962524,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c003",
+              "score": -4.044151306152344,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p012-c003",
+              "score": -4.820755481719971,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p024-c001",
+              "score": -5.429773807525635,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p008-c003",
+              "score": -6.150350570678711,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q018",
+          "question": "According to the document, how does NSF I-Corps help researchers and students examine the commercial potential of research?",
+          "relevant_chunk_ids": [
+            "p016-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p016-c003",
+              "score": 5.914374828338623,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p012-c004",
+              "score": 4.9031476974487305,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p002-c003",
+              "score": 2.470606803894043,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p009-c001",
+              "score": -0.49230486154556274,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p018-c002",
+              "score": -1.8391900062561035,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q019",
+          "question": "Which provisions of the Nigerian Startup Act 2022 does the document highlight?",
+          "relevant_chunk_ids": [
+            "p017-c003"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p017-c003",
+              "score": 5.995536804199219,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p001-c003",
+              "score": 2.0802230834960938,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p019-c001",
+              "score": 0.7443671226501465,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p020-c003",
+              "score": -3.1652464866638184,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p017-c002",
+              "score": -4.1210198402404785,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q020",
+          "question": "Which two infrastructure problems does the Nigeria discussion specifically link to constrained experimentation and prototyping?",
+          "relevant_chunk_ids": [
+            "p017-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p017-c004",
+              "score": 3.917661190032959,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p002-c004",
+              "score": 0.4504125714302063,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p024-c001",
+              "score": -0.772610068321228,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p019-c001",
+              "score": -1.7531330585479736,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p016-c002",
+              "score": -2.0526702404022217,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q021",
+          "question": "What does the document caution against presenting entrepreneurship education as a simple solution to?",
+          "relevant_chunk_ids": [
+            "p016-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p016-c002",
+              "score": 4.7440924644470215,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p016-c001",
+              "score": 3.9167089462280273,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p012-c003",
+              "score": -2.4280741214752197,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p003-c003",
+              "score": -2.818260669708252,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p011-c003",
+              "score": -3.0999321937561035,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q022",
+          "question": "Which social and geographic inequalities does the document identify as affecting participation in entrepreneurial STEM opportunities in the United States?",
+          "relevant_chunk_ids": [
+            "p017-c001",
+            "p019-c001"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p017-c001",
+              "score": 4.9556684494018555,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p022-c003",
+              "score": 1.2279248237609863,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p022-c001",
+              "score": 0.33061477541923523,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p021-c002",
+              "score": 0.13436156511306763,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p023-c001",
+              "score": -0.021948881447315216,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q023",
+          "question": "What are the six dimensions of the framework proposed for integrating business principles into STEM education?",
+          "relevant_chunk_ids": [
+            "p001-c003",
+            "p019-c002",
+            "p024-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p019-c002",
+              "score": 6.61725378036499,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p011-c001",
+              "score": 5.472952842712402,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p010-c003",
+              "score": 5.317136764526367,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p003-c002",
+              "score": 5.164376258850098,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p024-c001",
+              "score": 4.608454704284668,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q024",
+          "question": "Which outcomes does the future-research discussion recommend examining in longitudinal studies of entrepreneurial STEM education?",
+          "relevant_chunk_ids": [
+            "p021-c003",
+            "p022-c004"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p021-c003",
+              "score": 5.9060564041137695,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p022-c003",
+              "score": 4.269640922546387,
+              "is_relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p023-c002",
+              "score": 3.8826467990875244,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p022-c001",
+              "score": 3.4837052822113037,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p024-c002",
+              "score": 3.166452407836914,
+              "is_relevant": false
+            }
+          ]
+        },
+        {
+          "question_id": "q025",
+          "question": "What potential uses and concerns does the document identify for AI and digital tools in entrepreneurial STEM education?",
+          "relevant_chunk_ids": [
+            "p022-c001",
+            "p023-c002"
+          ],
+          "hit_at_k": 1,
+          "first_relevant_rank": 1,
+          "reciprocal_rank_at_k": 1.0,
+          "ranking": [
+            {
+              "rank": 1,
+              "chunk_id": "p023-c002",
+              "score": 4.7011613845825195,
+              "is_relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "p022-c001",
+              "score": 4.232183456420898,
+              "is_relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "p002-c001",
+              "score": 3.2772464752197266,
+              "is_relevant": false
+            },
+            {
+              "rank": 4,
+              "chunk_id": "p002-c002",
+              "score": 3.128903865814209,
+              "is_relevant": false
+            },
+            {
+              "rank": 5,
+              "chunk_id": "p012-c001",
+              "score": 2.026207447052002,
+              "is_relevant": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "cuda_memory": {
+    "peak_allocated_bytes": 148867584,
+    "peak_reserved_bytes": 211812352,
+    "note": "PyTorch allocator only; excludes driver and other processes."
+  },
+  "candidate_pools": {
+    "q001": [
+      {
+        "rank": 1,
+        "chunk_id": "p005-c001",
+        "score": 0.03252247488101534,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p006-c002",
+        "score": 0.03149801587301587,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p022-c002",
+        "score": 0.03128054740957967,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p024-c003",
+        "score": 0.031099324975891997,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p011-c003",
+        "score": 0.028083267871170464,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p023-c003",
+        "score": 0.027745885954841176,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p026-c002",
+        "score": 0.02761904761904762,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p022-c003",
+        "score": 0.027598020555767037,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p001-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p011-c004",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p012-c003",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p013-c003",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p025-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p005-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p004-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p013-c004",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p026-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p008-c002",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p003-c001",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p025-c004",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      }
+    ],
+    "q002": [
+      {
+        "rank": 1,
+        "chunk_id": "p008-c001",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p008-c002",
+        "score": 0.03225806451612903,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p006-c002",
+        "score": 0.031746031746031744,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p022-c003",
+        "score": 0.03125,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p006-c001",
+        "score": 0.030536130536130537,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p022-c002",
+        "score": 0.030090497737556562,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p024-c003",
+        "score": 0.029437229437229435,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p001-c001",
+        "score": 0.02819138376017471,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p002-c002",
+        "score": 0.027031963470319637,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p003-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p026-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p017-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p006-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p023-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p016-c002",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p022-c001",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p002-c004",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p007-c001",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p017-c001",
+        "score": 0.013513513513513514,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p023-c003",
+        "score": 0.013513513513513514,
+        "is_relevant": false
+      }
+    ],
+    "q003": [
+      {
+        "rank": 1,
+        "chunk_id": "p004-c002",
+        "score": 0.031099324975891997,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p005-c001",
+        "score": 0.029877369007803793,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p005-c004",
+        "score": 0.029850746268656716,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p006-c002",
+        "score": 0.029513888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p022-c002",
+        "score": 0.029437229437229435,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p024-c003",
+        "score": 0.02886002886002886,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p022-c003",
+        "score": 0.0273972602739726,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p005-c002",
+        "score": 0.026742734890354787,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p025-c001",
+        "score": 0.02649122807017544,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p026-c003",
+        "score": 0.01639344262295082,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p003-c002",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p004-c003",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p003-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p006-c003",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p025-c002",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p004-c004",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p003-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p015-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p025-c004",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p001-c001",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      }
+    ],
+    "q004": [
+      {
+        "rank": 1,
+        "chunk_id": "p006-c003",
+        "score": 0.032266458495966696,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p005-c004",
+        "score": 0.02964254577157803,
+        "is_relevant": true
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p006-c002",
+        "score": 0.02964254577157803,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p022-c002",
+        "score": 0.029083245521601686,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p006-c001",
+        "score": 0.028125,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p022-c003",
+        "score": 0.027651515151515153,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p005-c001",
+        "score": 0.027031963470319637,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p024-c003",
+        "score": 0.01639344262295082,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p015-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p026-c003",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p003-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p014-c002",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p025-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p025-c004",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p005-c003",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p011-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p005-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p018-c001",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p003-c004",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p024-c004",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q005": [
+      {
+        "rank": 1,
+        "chunk_id": "p005-c003",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p006-c002",
+        "score": 0.03200204813108039,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p006-c001",
+        "score": 0.030017921146953404,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p008-c001",
+        "score": 0.029138513513513514,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p022-c002",
+        "score": 0.02862400327131466,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p012-c004",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p003-c001",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p006-c003",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p017-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p005-c002",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p010-c002",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p010-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p025-c001",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p025-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p001-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p024-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p016-c003",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p020-c003",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p002-c003",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p011-c003",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      }
+    ],
+    "q006": [
+      {
+        "rank": 1,
+        "chunk_id": "p012-c003",
+        "score": 0.03252247488101534,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p010-c001",
+        "score": 0.032018442622950824,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p007-c002",
+        "score": 0.0315136476426799,
+        "is_relevant": true
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p011-c001",
+        "score": 0.0293236301369863,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p004-c001",
+        "score": 0.029236022193768675,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p003-c001",
+        "score": 0.029030910609857977,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p001-c001",
+        "score": 0.02817460317460317,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p020-c004",
+        "score": 0.02817460317460317,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p012-c002",
+        "score": 0.027912386121341344,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p016-c003",
+        "score": 0.026171741361614778,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p023-c004",
+        "score": 0.025807525807525808,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p006-c002",
+        "score": 0.02532051282051282,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p008-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p013-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p014-c001",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p012-c004",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p004-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p014-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p006-c001",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p010-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      }
+    ],
+    "q007": [
+      {
+        "rank": 1,
+        "chunk_id": "p007-c003",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p013-c001",
+        "score": 0.03225806451612903,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p012-c003",
+        "score": 0.03055037313432836,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p020-c004",
+        "score": 0.030090497737556562,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p001-c001",
+        "score": 0.029957522915269395,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p004-c001",
+        "score": 0.029910714285714284,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p007-c002",
+        "score": 0.02976190476190476,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p010-c001",
+        "score": 0.02904040404040404,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p019-c003",
+        "score": 0.02862400327131466,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p003-c001",
+        "score": 0.027479766610201392,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p007-c001",
+        "score": 0.02684684684684685,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p006-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p024-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p008-c001",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p014-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p026-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p006-c002",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p004-c004",
+        "score": 0.0136986301369863,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p021-c004",
+        "score": 0.013513513513513514,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p002-c004",
+        "score": 0.013333333333333334,
+        "is_relevant": false
+      }
+    ],
+    "q008": [
+      {
+        "rank": 1,
+        "chunk_id": "p013-c002",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p016-c002",
+        "score": 0.031054405392392875,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p020-c003",
+        "score": 0.02886002886002886,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p013-c003",
+        "score": 0.02804284323271665,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p021-c004",
+        "score": 0.02797339593114241,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p020-c002",
+        "score": 0.027692895339954164,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p002-c001",
+        "score": 0.027212143650499815,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p024-c001",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p026-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p003-c002",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p004-c001",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p018-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p006-c001",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p007-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p023-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p003-c001",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p015-c001",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p024-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p016-c004",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p025-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q009": [
+      {
+        "rank": 1,
+        "chunk_id": "p007-c003",
+        "score": 0.03252247488101534,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p013-c003",
+        "score": 0.03252247488101534,
+        "is_relevant": true
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p013-c002",
+        "score": 0.03149801587301587,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p004-c001",
+        "score": 0.03125763125763126,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p004-c002",
+        "score": 0.031009615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p005-c001",
+        "score": 0.028814262023217248,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p002-c002",
+        "score": 0.026875901875901876,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p005-c002",
+        "score": 0.025478740668614087,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p003-c002",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p024-c004",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p011-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p003-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p024-c003",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p002-c004",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p026-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p015-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p022-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p001-c001",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p012-c004",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p004-c003",
+        "score": 0.0136986301369863,
+        "is_relevant": false
+      }
+    ],
+    "q010": [
+      {
+        "rank": 1,
+        "chunk_id": "p012-c001",
+        "score": 0.03278688524590164,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p012-c002",
+        "score": 0.031754032258064516,
+        "is_relevant": true
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p016-c002",
+        "score": 0.02967032967032967,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p001-c001",
+        "score": 0.028404512489927477,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p002-c003",
+        "score": 0.02782608695652174,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p005-c001",
+        "score": 0.027745885954841176,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p002-c002",
+        "score": 0.02651914295749912,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p026-c001",
+        "score": 0.02638888888888889,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p013-c003",
+        "score": 0.02632034632034632,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p025-c002",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p011-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p024-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p012-c003",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p025-c003",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p002-c004",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p026-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p024-c004",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p003-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p017-c004",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p015-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q011": [
+      {
+        "rank": 1,
+        "chunk_id": "p013-c001",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p004-c001",
+        "score": 0.030303030303030304,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p021-c004",
+        "score": 0.029957522915269395,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p007-c002",
+        "score": 0.02946236559139785,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p010-c001",
+        "score": 0.0293236301369863,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p014-c001",
+        "score": 0.028949545078577336,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p023-c001",
+        "score": 0.02821939586645469,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p003-c001",
+        "score": 0.02817460317460317,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p011-c001",
+        "score": 0.025657894736842105,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p003-c004",
+        "score": 0.025478740668614087,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p016-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p013-c002",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p015-c002",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p020-c004",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p009-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p024-c002",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p018-c003",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p015-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p024-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p021-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q012": [
+      {
+        "rank": 1,
+        "chunk_id": "p014-c003",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p010-c002",
+        "score": 0.03225806451612903,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p011-c001",
+        "score": 0.02871794871794872,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p008-c001",
+        "score": 0.028612012987012988,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p015-c003",
+        "score": 0.028006267136701922,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p004-c004",
+        "score": 0.02782608695652174,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p011-c002",
+        "score": 0.027443609022556388,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p018-c002",
+        "score": 0.0261986301369863,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p014-c004",
+        "score": 0.025478740668614087,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p013-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p014-c002",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p003-c002",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p017-c003",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p010-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p015-c001",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p010-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p015-c004",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p020-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p023-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p004-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q013": [
+      {
+        "rank": 1,
+        "chunk_id": "p014-c003",
+        "score": 0.03252247488101534,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p012-c003",
+        "score": 0.031024531024531024,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p014-c004",
+        "score": 0.03047794966520434,
+        "is_relevant": true
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p014-c001",
+        "score": 0.026547116736990152,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p012-c001",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p020-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p002-c004",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p026-c001",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p006-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p013-c004",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p010-c002",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p003-c002",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p026-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p019-c003",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p023-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p013-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p024-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p003-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p013-c003",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p020-c004",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      }
+    ],
+    "q014": [
+      {
+        "rank": 1,
+        "chunk_id": "p020-c004",
+        "score": 0.03252247488101534,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p003-c001",
+        "score": 0.03057889822595705,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p001-c001",
+        "score": 0.030536130536130537,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p012-c003",
+        "score": 0.029726775956284153,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p003-c002",
+        "score": 0.029709507042253523,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p019-c002",
+        "score": 0.02862400327131466,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p007-c001",
+        "score": 0.028438886647841874,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p005-c002",
+        "score": 0.027364110201042444,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p010-c003",
+        "score": 0.02658450704225352,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p024-c003",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p007-c002",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p024-c002",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p015-c004",
+        "score": 0.015384615384615385,
+        "is_relevant": true
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p002-c004",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p003-c004",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p008-c001",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p023-c004",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p025-c003",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p004-c004",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p015-c003",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      }
+    ],
+    "q015": [
+      {
+        "rank": 1,
+        "chunk_id": "p015-c001",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p011-c002",
+        "score": 0.031754032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p020-c002",
+        "score": 0.03125763125763126,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p014-c004",
+        "score": 0.030776515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p016-c004",
+        "score": 0.030309988518943745,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p004-c004",
+        "score": 0.029827662395050816,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p018-c003",
+        "score": 0.02976190476190476,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p014-c003",
+        "score": 0.02813852813852814,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p001-c002",
+        "score": 0.027984344422700584,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p009-c001",
+        "score": 0.027364110201042444,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p025-c003",
+        "score": 0.02667140825035562,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p017-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p012-c003",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p014-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p026-c001",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p021-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p010-c002",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p023-c004",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p018-c002",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p021-c004",
+        "score": 0.013513513513513514,
+        "is_relevant": false
+      }
+    ],
+    "q016": [
+      {
+        "rank": 1,
+        "chunk_id": "p015-c003",
+        "score": 0.032018442622950824,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p020-c003",
+        "score": 0.031746031746031744,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p015-c002",
+        "score": 0.02964426877470356,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p005-c001",
+        "score": 0.029236022193768675,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p002-c004",
+        "score": 0.026013513513513515,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p025-c002",
+        "score": 0.01639344262295082,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p009-c002",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p012-c003",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p006-c001",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p003-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p019-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p003-c002",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p005-c002",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p006-c003",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p010-c001",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p018-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p010-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p024-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p022-c003",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p004-c003",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      }
+    ],
+    "q017": [
+      {
+        "rank": 1,
+        "chunk_id": "p020-c002",
+        "score": 0.031054405392392875,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p012-c003",
+        "score": 0.030679156908665108,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p013-c001",
+        "score": 0.028370221327967807,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p024-c004",
+        "score": 0.01639344262295082,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p016-c003",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p015-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p019-c002",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p017-c004",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p024-c001",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p006-c002",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p012-c004",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p008-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p017-c001",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p006-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p003-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p015-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p024-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p025-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p020-c003",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p016-c001",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      }
+    ],
+    "q018": [
+      {
+        "rank": 1,
+        "chunk_id": "p016-c003",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p002-c003",
+        "score": 0.03225806451612903,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p012-c004",
+        "score": 0.031746031746031744,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p026-c001",
+        "score": 0.03125,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p018-c002",
+        "score": 0.02854251012145749,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p009-c001",
+        "score": 0.027912386121341344,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p016-c004",
+        "score": 0.02758751902587519,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p013-c003",
+        "score": 0.02649122807017544,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p022-c002",
+        "score": 0.02638888888888889,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p016-c002",
+        "score": 0.026013513513513515,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p013-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p012-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p020-c001",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p013-c002",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p002-c004",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p010-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p007-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p017-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p020-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p022-c004",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q019": [
+      {
+        "rank": 1,
+        "chunk_id": "p017-c003",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p002-c004",
+        "score": 0.031024531024531024,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p001-c003",
+        "score": 0.030834914611005692,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p019-c001",
+        "score": 0.029910714285714284,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p002-c003",
+        "score": 0.029437229437229435,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p020-c003",
+        "score": 0.029273504273504274,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p022-c002",
+        "score": 0.028404512489927477,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p017-c002",
+        "score": 0.02715098147128967,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p006-c003",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p021-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p026-c002",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p016-c003",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p016-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p021-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p009-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p001-c002",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p012-c003",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p005-c003",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p003-c004",
+        "score": 0.0136986301369863,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p001-c001",
+        "score": 0.013513513513513514,
+        "is_relevant": false
+      }
+    ],
+    "q020": [
+      {
+        "rank": 1,
+        "chunk_id": "p017-c004",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p002-c004",
+        "score": 0.031054405392392875,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p024-c001",
+        "score": 0.029571646010002173,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p015-c002",
+        "score": 0.0288981288981289,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p001-c004",
+        "score": 0.028612012987012988,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p022-c002",
+        "score": 0.02666666666666667,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p006-c003",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p017-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p010-c001",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p003-c004",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p002-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p003-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p010-c002",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p003-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p021-c001",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p008-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p014-c001",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p016-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p019-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p012-c001",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      }
+    ],
+    "q021": [
+      {
+        "rank": 1,
+        "chunk_id": "p016-c001",
+        "score": 0.0315136476426799,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p025-c001",
+        "score": 0.03055037313432836,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p026-c002",
+        "score": 0.03036576949620428,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p025-c003",
+        "score": 0.02964254577157803,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p020-c003",
+        "score": 0.02786377708978328,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p003-c002",
+        "score": 0.027583600982429624,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p011-c003",
+        "score": 0.01639344262295082,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p016-c002",
+        "score": 0.01639344262295082,
+        "is_relevant": true
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p012-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p013-c004",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p006-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p002-c004",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p007-c001",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p003-c003",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p003-c004",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p003-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p004-c004",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p010-c001",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p011-c004",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p022-c002",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      }
+    ],
+    "q022": [
+      {
+        "rank": 1,
+        "chunk_id": "p017-c001",
+        "score": 0.03252247488101534,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p023-c001",
+        "score": 0.03047794966520434,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p022-c001",
+        "score": 0.029513888888888888,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p021-c002",
+        "score": 0.029138513513513514,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p005-c002",
+        "score": 0.02786377708978328,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p019-c002",
+        "score": 0.027651515151515153,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p022-c003",
+        "score": 0.026856524873828405,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p001-c004",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p002-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p003-c001",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p003-c004",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p025-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p020-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p001-c001",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p021-c004",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p007-c001",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p023-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p024-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p001-c002",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p006-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q023": [
+      {
+        "rank": 1,
+        "chunk_id": "p003-c002",
+        "score": 0.03252247488101534,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p019-c002",
+        "score": 0.03252247488101534,
+        "is_relevant": true
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p003-c001",
+        "score": 0.031009615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p001-c001",
+        "score": 0.029709507042253523,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p010-c003",
+        "score": 0.028693528693528692,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p024-c001",
+        "score": 0.028594771241830064,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p023-c003",
+        "score": 0.028006267136701922,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p005-c002",
+        "score": 0.02666666666666667,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p005-c001",
+        "score": 0.026547116736990152,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p025-c001",
+        "score": 0.025657894736842105,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p024-c002",
+        "score": 0.015873015873015872,
+        "is_relevant": true
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p006-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p012-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p020-c004",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p006-c002",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p024-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p007-c001",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p012-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p011-c001",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p020-c003",
+        "score": 0.014285714285714285,
+        "is_relevant": false
+      }
+    ],
+    "q024": [
+      {
+        "rank": 1,
+        "chunk_id": "p022-c003",
+        "score": 0.03200204813108039,
+        "is_relevant": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p003-c001",
+        "score": 0.031009615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p021-c004",
+        "score": 0.030679156908665108,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p024-c002",
+        "score": 0.030303030303030304,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p021-c003",
+        "score": 0.03009207275993712,
+        "is_relevant": true
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p023-c002",
+        "score": 0.029083245521601686,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p023-c001",
+        "score": 0.028258706467661692,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p011-c003",
+        "score": 0.027526395173453996,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p025-c001",
+        "score": 0.027272727272727275,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p022-c001",
+        "score": 0.02667140825035562,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p025-c003",
+        "score": 0.016129032258064516,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p002-c004",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p003-c002",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p022-c004",
+        "score": 0.014925373134328358,
+        "is_relevant": true
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p022-c002",
+        "score": 0.014705882352941176,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p002-c002",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p005-c004",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p002-c001",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p006-c001",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p003-c004",
+        "score": 0.013888888888888888,
+        "is_relevant": false
+      }
+    ],
+    "q025": [
+      {
+        "rank": 1,
+        "chunk_id": "p023-c002",
+        "score": 0.03278688524590164,
+        "is_relevant": true
+      },
+      {
+        "rank": 2,
+        "chunk_id": "p022-c001",
+        "score": 0.03225806451612903,
+        "is_relevant": true
+      },
+      {
+        "rank": 3,
+        "chunk_id": "p012-c001",
+        "score": 0.02976190476190476,
+        "is_relevant": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "p002-c001",
+        "score": 0.028991596638655463,
+        "is_relevant": false
+      },
+      {
+        "rank": 5,
+        "chunk_id": "p003-c002",
+        "score": 0.02803921568627451,
+        "is_relevant": false
+      },
+      {
+        "rank": 6,
+        "chunk_id": "p005-c002",
+        "score": 0.02761904761904762,
+        "is_relevant": false
+      },
+      {
+        "rank": 7,
+        "chunk_id": "p003-c001",
+        "score": 0.027479766610201392,
+        "is_relevant": false
+      },
+      {
+        "rank": 8,
+        "chunk_id": "p001-c002",
+        "score": 0.02564102564102564,
+        "is_relevant": false
+      },
+      {
+        "rank": 9,
+        "chunk_id": "p012-c003",
+        "score": 0.015873015873015872,
+        "is_relevant": false
+      },
+      {
+        "rank": 10,
+        "chunk_id": "p011-c003",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 11,
+        "chunk_id": "p019-c002",
+        "score": 0.015625,
+        "is_relevant": false
+      },
+      {
+        "rank": 12,
+        "chunk_id": "p012-c002",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 13,
+        "chunk_id": "p014-c001",
+        "score": 0.015384615384615385,
+        "is_relevant": false
+      },
+      {
+        "rank": 14,
+        "chunk_id": "p002-c002",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 15,
+        "chunk_id": "p009-c003",
+        "score": 0.015151515151515152,
+        "is_relevant": false
+      },
+      {
+        "rank": 16,
+        "chunk_id": "p020-c003",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 17,
+        "chunk_id": "p023-c004",
+        "score": 0.014925373134328358,
+        "is_relevant": false
+      },
+      {
+        "rank": 18,
+        "chunk_id": "p013-c003",
+        "score": 0.014492753623188406,
+        "is_relevant": false
+      },
+      {
+        "rank": 19,
+        "chunk_id": "p002-c004",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      },
+      {
+        "rank": 20,
+        "chunk_id": "p023-c003",
+        "score": 0.014084507042253521,
+        "is_relevant": false
+      }
+    ]
+  },
+  "samples": {
+    "cpu": [
+      {
+        "pass": 1,
+        "question_id": "q001",
+        "ms": 629.3433010005174
+      },
+      {
+        "pass": 1,
+        "question_id": "q002",
+        "ms": 477.73598000003403
+      },
+      {
+        "pass": 1,
+        "question_id": "q003",
+        "ms": 631.8188770001143
+      },
+      {
+        "pass": 1,
+        "question_id": "q004",
+        "ms": 533.7149999995745
+      },
+      {
+        "pass": 1,
+        "question_id": "q005",
+        "ms": 525.7766249997076
+      },
+      {
+        "pass": 1,
+        "question_id": "q006",
+        "ms": 370.1837790003992
+      },
+      {
+        "pass": 1,
+        "question_id": "q007",
+        "ms": 613.4824030004893
+      },
+      {
+        "pass": 1,
+        "question_id": "q008",
+        "ms": 559.4324579997192
+      },
+      {
+        "pass": 1,
+        "question_id": "q009",
+        "ms": 554.1341219995957
+      },
+      {
+        "pass": 1,
+        "question_id": "q010",
+        "ms": 616.8486839997058
+      },
+      {
+        "pass": 1,
+        "question_id": "q011",
+        "ms": 403.2130410005266
+      },
+      {
+        "pass": 1,
+        "question_id": "q012",
+        "ms": 313.607434000005
+      },
+      {
+        "pass": 1,
+        "question_id": "q013",
+        "ms": 550.9297229991716
+      },
+      {
+        "pass": 1,
+        "question_id": "q014",
+        "ms": 457.71701600006054
+      },
+      {
+        "pass": 1,
+        "question_id": "q015",
+        "ms": 466.43427300023177
+      },
+      {
+        "pass": 1,
+        "question_id": "q016",
+        "ms": 412.37780200026464
+      },
+      {
+        "pass": 1,
+        "question_id": "q017",
+        "ms": 364.34371899940743
+      },
+      {
+        "pass": 1,
+        "question_id": "q018",
+        "ms": 413.1452729998273
+      },
+      {
+        "pass": 1,
+        "question_id": "q019",
+        "ms": 367.2276609995606
+      },
+      {
+        "pass": 1,
+        "question_id": "q020",
+        "ms": 313.27925999994477
+      },
+      {
+        "pass": 1,
+        "question_id": "q021",
+        "ms": 437.99540199961484
+      },
+      {
+        "pass": 1,
+        "question_id": "q022",
+        "ms": 471.81469299994205
+      },
+      {
+        "pass": 1,
+        "question_id": "q023",
+        "ms": 458.21100600005593
+      },
+      {
+        "pass": 1,
+        "question_id": "q024",
+        "ms": 518.2662470006107
+      },
+      {
+        "pass": 1,
+        "question_id": "q025",
+        "ms": 290.4265890001625
+      },
+      {
+        "pass": 2,
+        "question_id": "q001",
+        "ms": 519.2746989996522
+      },
+      {
+        "pass": 2,
+        "question_id": "q002",
+        "ms": 405.19841800050926
+      },
+      {
+        "pass": 2,
+        "question_id": "q003",
+        "ms": 537.4064670004373
+      },
+      {
+        "pass": 2,
+        "question_id": "q004",
+        "ms": 443.23818900011247
+      },
+      {
+        "pass": 2,
+        "question_id": "q005",
+        "ms": 440.52994399953604
+      },
+      {
+        "pass": 2,
+        "question_id": "q006",
+        "ms": 300.8063549996223
+      },
+      {
+        "pass": 2,
+        "question_id": "q007",
+        "ms": 421.2657770003716
+      },
+      {
+        "pass": 2,
+        "question_id": "q008",
+        "ms": 477.84001099989837
+      },
+      {
+        "pass": 2,
+        "question_id": "q009",
+        "ms": 377.4139760007529
+      },
+      {
+        "pass": 2,
+        "question_id": "q010",
+        "ms": 550.6183360002979
+      },
+      {
+        "pass": 2,
+        "question_id": "q011",
+        "ms": 357.71284900056344
+      },
+      {
+        "pass": 2,
+        "question_id": "q012",
+        "ms": 237.7438670000629
+      },
+      {
+        "pass": 2,
+        "question_id": "q013",
+        "ms": 498.38560200078064
+      },
+      {
+        "pass": 2,
+        "question_id": "q014",
+        "ms": 427.6473249992705
+      },
+      {
+        "pass": 2,
+        "question_id": "q015",
+        "ms": 447.6732749999428
+      },
+      {
+        "pass": 2,
+        "question_id": "q016",
+        "ms": 416.4976759993806
+      },
+      {
+        "pass": 2,
+        "question_id": "q017",
+        "ms": 372.3262049998084
+      },
+      {
+        "pass": 2,
+        "question_id": "q018",
+        "ms": 400.28399899983924
+      },
+      {
+        "pass": 2,
+        "question_id": "q019",
+        "ms": 353.434398999525
+      },
+      {
+        "pass": 2,
+        "question_id": "q020",
+        "ms": 285.92467599992233
+      },
+      {
+        "pass": 2,
+        "question_id": "q021",
+        "ms": 412.59425099997316
+      },
+      {
+        "pass": 2,
+        "question_id": "q022",
+        "ms": 421.8210529998032
+      },
+      {
+        "pass": 2,
+        "question_id": "q023",
+        "ms": 391.2379899993539
+      },
+      {
+        "pass": 2,
+        "question_id": "q024",
+        "ms": 506.7225929997221
+      },
+      {
+        "pass": 2,
+        "question_id": "q025",
+        "ms": 302.71734799953265
+      },
+      {
+        "pass": 3,
+        "question_id": "q001",
+        "ms": 504.9050600000555
+      },
+      {
+        "pass": 3,
+        "question_id": "q002",
+        "ms": 384.23387900002126
+      },
+      {
+        "pass": 3,
+        "question_id": "q003",
+        "ms": 526.1078940002335
+      },
+      {
+        "pass": 3,
+        "question_id": "q004",
+        "ms": 472.12854600002174
+      },
+      {
+        "pass": 3,
+        "question_id": "q005",
+        "ms": 403.91659300075844
+      },
+      {
+        "pass": 3,
+        "question_id": "q006",
+        "ms": 284.1157659995588
+      },
+      {
+        "pass": 3,
+        "question_id": "q007",
+        "ms": 411.7152360004184
+      },
+      {
+        "pass": 3,
+        "question_id": "q008",
+        "ms": 405.36455400069826
+      },
+      {
+        "pass": 3,
+        "question_id": "q009",
+        "ms": 332.98913600083324
+      },
+      {
+        "pass": 3,
+        "question_id": "q010",
+        "ms": 547.6949849999073
+      },
+      {
+        "pass": 3,
+        "question_id": "q011",
+        "ms": 348.21888899932674
+      },
+      {
+        "pass": 3,
+        "question_id": "q012",
+        "ms": 238.34714599979634
+      },
+      {
+        "pass": 3,
+        "question_id": "q013",
+        "ms": 492.7918050007065
+      },
+      {
+        "pass": 3,
+        "question_id": "q014",
+        "ms": 416.70962399985
+      },
+      {
+        "pass": 3,
+        "question_id": "q015",
+        "ms": 436.60793300023215
+      },
+      {
+        "pass": 3,
+        "question_id": "q016",
+        "ms": 373.53896500007977
+      },
+      {
+        "pass": 3,
+        "question_id": "q017",
+        "ms": 344.8337290001291
+      },
+      {
+        "pass": 3,
+        "question_id": "q018",
+        "ms": 418.6202200007756
+      },
+      {
+        "pass": 3,
+        "question_id": "q019",
+        "ms": 360.2570190005281
+      },
+      {
+        "pass": 3,
+        "question_id": "q020",
+        "ms": 279.3278099998133
+      },
+      {
+        "pass": 3,
+        "question_id": "q021",
+        "ms": 409.57003999938024
+      },
+      {
+        "pass": 3,
+        "question_id": "q022",
+        "ms": 436.8346589999419
+      },
+      {
+        "pass": 3,
+        "question_id": "q023",
+        "ms": 363.170165000156
+      },
+      {
+        "pass": 3,
+        "question_id": "q024",
+        "ms": 492.68653899980563
+      },
+      {
+        "pass": 3,
+        "question_id": "q025",
+        "ms": 298.6534699994081
+      },
+      {
+        "pass": 4,
+        "question_id": "q001",
+        "ms": 486.8570220005495
+      },
+      {
+        "pass": 4,
+        "question_id": "q002",
+        "ms": 380.4826300001878
+      },
+      {
+        "pass": 4,
+        "question_id": "q003",
+        "ms": 489.081583999905
+      },
+      {
+        "pass": 4,
+        "question_id": "q004",
+        "ms": 447.6514460002363
+      },
+      {
+        "pass": 4,
+        "question_id": "q005",
+        "ms": 444.7260639999513
+      },
+      {
+        "pass": 4,
+        "question_id": "q006",
+        "ms": 303.47395000080724
+      },
+      {
+        "pass": 4,
+        "question_id": "q007",
+        "ms": 398.54270900013944
+      },
+      {
+        "pass": 4,
+        "question_id": "q008",
+        "ms": 468.54904900010297
+      },
+      {
+        "pass": 4,
+        "question_id": "q009",
+        "ms": 378.75995000013063
+      },
+      {
+        "pass": 4,
+        "question_id": "q010",
+        "ms": 530.6497780002246
+      },
+      {
+        "pass": 4,
+        "question_id": "q011",
+        "ms": 367.4908389994016
+      },
+      {
+        "pass": 4,
+        "question_id": "q012",
+        "ms": 255.84622000042145
+      },
+      {
+        "pass": 4,
+        "question_id": "q013",
+        "ms": 480.9134110000741
+      },
+      {
+        "pass": 4,
+        "question_id": "q014",
+        "ms": 433.6922249995041
+      },
+      {
+        "pass": 4,
+        "question_id": "q015",
+        "ms": 473.2362690001537
+      },
+      {
+        "pass": 4,
+        "question_id": "q016",
+        "ms": 382.9400579998037
+      },
+      {
+        "pass": 4,
+        "question_id": "q017",
+        "ms": 341.7438710002898
+      },
+      {
+        "pass": 4,
+        "question_id": "q018",
+        "ms": 402.73293200061744
+      },
+      {
+        "pass": 4,
+        "question_id": "q019",
+        "ms": 381.0005449995515
+      },
+      {
+        "pass": 4,
+        "question_id": "q020",
+        "ms": 297.4502119996032
+      },
+      {
+        "pass": 4,
+        "question_id": "q021",
+        "ms": 419.45803399994475
+      },
+      {
+        "pass": 4,
+        "question_id": "q022",
+        "ms": 414.51457800030767
+      },
+      {
+        "pass": 4,
+        "question_id": "q023",
+        "ms": 415.8156270004838
+      },
+      {
+        "pass": 4,
+        "question_id": "q024",
+        "ms": 451.75911000023916
+      },
+      {
+        "pass": 4,
+        "question_id": "q025",
+        "ms": 269.0829279999889
+      },
+      {
+        "pass": 5,
+        "question_id": "q001",
+        "ms": 516.5763290005998
+      },
+      {
+        "pass": 5,
+        "question_id": "q002",
+        "ms": 344.5423809998829
+      },
+      {
+        "pass": 5,
+        "question_id": "q003",
+        "ms": 471.44810000008874
+      },
+      {
+        "pass": 5,
+        "question_id": "q004",
+        "ms": 419.61746899960417
+      },
+      {
+        "pass": 5,
+        "question_id": "q005",
+        "ms": 402.8622069999983
+      },
+      {
+        "pass": 5,
+        "question_id": "q006",
+        "ms": 282.5706089997766
+      },
+      {
+        "pass": 5,
+        "question_id": "q007",
+        "ms": 335.460184999647
+      },
+      {
+        "pass": 5,
+        "question_id": "q008",
+        "ms": 479.111541999373
+      },
+      {
+        "pass": 5,
+        "question_id": "q009",
+        "ms": 377.8813690005336
+      },
+      {
+        "pass": 5,
+        "question_id": "q010",
+        "ms": 477.70444200068596
+      },
+      {
+        "pass": 5,
+        "question_id": "q011",
+        "ms": 312.50851599997986
+      },
+      {
+        "pass": 5,
+        "question_id": "q012",
+        "ms": 269.8039550004978
+      },
+      {
+        "pass": 5,
+        "question_id": "q013",
+        "ms": 453.0008239999006
+      },
+      {
+        "pass": 5,
+        "question_id": "q014",
+        "ms": 394.9484799995844
+      },
+      {
+        "pass": 5,
+        "question_id": "q015",
+        "ms": 418.0888289993163
+      },
+      {
+        "pass": 5,
+        "question_id": "q016",
+        "ms": 329.97934200011514
+      },
+      {
+        "pass": 5,
+        "question_id": "q017",
+        "ms": 368.8567690005584
+      },
+      {
+        "pass": 5,
+        "question_id": "q018",
+        "ms": 392.59206499991706
+      },
+      {
+        "pass": 5,
+        "question_id": "q019",
+        "ms": 344.94495499984623
+      },
+      {
+        "pass": 5,
+        "question_id": "q020",
+        "ms": 282.78141700047854
+      },
+      {
+        "pass": 5,
+        "question_id": "q021",
+        "ms": 419.1717490002702
+      },
+      {
+        "pass": 5,
+        "question_id": "q022",
+        "ms": 399.94662800017977
+      },
+      {
+        "pass": 5,
+        "question_id": "q023",
+        "ms": 398.03244800077664
+      },
+      {
+        "pass": 5,
+        "question_id": "q024",
+        "ms": 496.0509499996988
+      },
+      {
+        "pass": 5,
+        "question_id": "q025",
+        "ms": 291.52393599997595
+      }
+    ],
+    "cuda": [
+      {
+        "pass": 1,
+        "question_id": "q001",
+        "ms": 44.79805600021791
+      },
+      {
+        "pass": 1,
+        "question_id": "q002",
+        "ms": 36.417409999558004
+      },
+      {
+        "pass": 1,
+        "question_id": "q003",
+        "ms": 47.90691299967875
+      },
+      {
+        "pass": 1,
+        "question_id": "q004",
+        "ms": 39.676364999650104
+      },
+      {
+        "pass": 1,
+        "question_id": "q005",
+        "ms": 37.5863079998453
+      },
+      {
+        "pass": 1,
+        "question_id": "q006",
+        "ms": 29.948759000035352
+      },
+      {
+        "pass": 1,
+        "question_id": "q007",
+        "ms": 35.02672000013263
+      },
+      {
+        "pass": 1,
+        "question_id": "q008",
+        "ms": 39.90176199931739
+      },
+      {
+        "pass": 1,
+        "question_id": "q009",
+        "ms": 32.43424099946424
+      },
+      {
+        "pass": 1,
+        "question_id": "q010",
+        "ms": 46.534918999896036
+      },
+      {
+        "pass": 1,
+        "question_id": "q011",
+        "ms": 30.968230000326002
+      },
+      {
+        "pass": 1,
+        "question_id": "q012",
+        "ms": 26.109407000149076
+      },
+      {
+        "pass": 1,
+        "question_id": "q013",
+        "ms": 46.69415399985155
+      },
+      {
+        "pass": 1,
+        "question_id": "q014",
+        "ms": 37.92199100007565
+      },
+      {
+        "pass": 1,
+        "question_id": "q015",
+        "ms": 40.41001499990671
+      },
+      {
+        "pass": 1,
+        "question_id": "q016",
+        "ms": 36.89444299925526
+      },
+      {
+        "pass": 1,
+        "question_id": "q017",
+        "ms": 33.6270620000505
+      },
+      {
+        "pass": 1,
+        "question_id": "q018",
+        "ms": 39.706341000055545
+      },
+      {
+        "pass": 1,
+        "question_id": "q019",
+        "ms": 34.182524000243575
+      },
+      {
+        "pass": 1,
+        "question_id": "q020",
+        "ms": 26.440720000209694
+      },
+      {
+        "pass": 1,
+        "question_id": "q021",
+        "ms": 36.778980000235606
+      },
+      {
+        "pass": 1,
+        "question_id": "q022",
+        "ms": 39.71802199976082
+      },
+      {
+        "pass": 1,
+        "question_id": "q023",
+        "ms": 38.50622400022985
+      },
+      {
+        "pass": 1,
+        "question_id": "q024",
+        "ms": 43.186125999454816
+      },
+      {
+        "pass": 1,
+        "question_id": "q025",
+        "ms": 30.339313000695256
+      },
+      {
+        "pass": 2,
+        "question_id": "q001",
+        "ms": 46.13556699951005
+      },
+      {
+        "pass": 2,
+        "question_id": "q002",
+        "ms": 35.99987400048121
+      },
+      {
+        "pass": 2,
+        "question_id": "q003",
+        "ms": 47.43880600017292
+      },
+      {
+        "pass": 2,
+        "question_id": "q004",
+        "ms": 38.807191000159946
+      },
+      {
+        "pass": 2,
+        "question_id": "q005",
+        "ms": 40.194956999584974
+      },
+      {
+        "pass": 2,
+        "question_id": "q006",
+        "ms": 28.767196999979205
+      },
+      {
+        "pass": 2,
+        "question_id": "q007",
+        "ms": 36.236513999938325
+      },
+      {
+        "pass": 2,
+        "question_id": "q008",
+        "ms": 40.5205709994334
+      },
+      {
+        "pass": 2,
+        "question_id": "q009",
+        "ms": 33.065220000025874
+      },
+      {
+        "pass": 2,
+        "question_id": "q010",
+        "ms": 45.09577899989381
+      },
+      {
+        "pass": 2,
+        "question_id": "q011",
+        "ms": 32.504920000064885
+      },
+      {
+        "pass": 2,
+        "question_id": "q012",
+        "ms": 27.128397000524274
+      },
+      {
+        "pass": 2,
+        "question_id": "q013",
+        "ms": 43.90970999975252
+      },
+      {
+        "pass": 2,
+        "question_id": "q014",
+        "ms": 38.6859979998917
+      },
+      {
+        "pass": 2,
+        "question_id": "q015",
+        "ms": 40.750166999714565
+      },
+      {
+        "pass": 2,
+        "question_id": "q016",
+        "ms": 35.97213299963187
+      },
+      {
+        "pass": 2,
+        "question_id": "q017",
+        "ms": 33.89163400061079
+      },
+      {
+        "pass": 2,
+        "question_id": "q018",
+        "ms": 39.66051499992318
+      },
+      {
+        "pass": 2,
+        "question_id": "q019",
+        "ms": 33.615721000387566
+      },
+      {
+        "pass": 2,
+        "question_id": "q020",
+        "ms": 26.65594100017188
+      },
+      {
+        "pass": 2,
+        "question_id": "q021",
+        "ms": 35.75058299975353
+      },
+      {
+        "pass": 2,
+        "question_id": "q022",
+        "ms": 39.80457099987689
+      },
+      {
+        "pass": 2,
+        "question_id": "q023",
+        "ms": 37.756262999209866
+      },
+      {
+        "pass": 2,
+        "question_id": "q024",
+        "ms": 42.43864899945038
+      },
+      {
+        "pass": 2,
+        "question_id": "q025",
+        "ms": 30.268813000475348
+      },
+      {
+        "pass": 3,
+        "question_id": "q001",
+        "ms": 44.28564699992421
+      },
+      {
+        "pass": 3,
+        "question_id": "q002",
+        "ms": 35.43078900020191
+      },
+      {
+        "pass": 3,
+        "question_id": "q003",
+        "ms": 45.618587000717525
+      },
+      {
+        "pass": 3,
+        "question_id": "q004",
+        "ms": 39.2320920000202
+      },
+      {
+        "pass": 3,
+        "question_id": "q005",
+        "ms": 38.258884999777365
+      },
+      {
+        "pass": 3,
+        "question_id": "q006",
+        "ms": 28.762058000211255
+      },
+      {
+        "pass": 3,
+        "question_id": "q007",
+        "ms": 33.1702450002922
+      },
+      {
+        "pass": 3,
+        "question_id": "q008",
+        "ms": 42.269166000551195
+      },
+      {
+        "pass": 3,
+        "question_id": "q009",
+        "ms": 33.7237619996813
+      },
+      {
+        "pass": 3,
+        "question_id": "q010",
+        "ms": 45.51685899969016
+      },
+      {
+        "pass": 3,
+        "question_id": "q011",
+        "ms": 31.1439960005373
+      },
+      {
+        "pass": 3,
+        "question_id": "q012",
+        "ms": 25.305355000455165
+      },
+      {
+        "pass": 3,
+        "question_id": "q013",
+        "ms": 43.53988200000458
+      },
+      {
+        "pass": 3,
+        "question_id": "q014",
+        "ms": 37.32971199951862
+      },
+      {
+        "pass": 3,
+        "question_id": "q015",
+        "ms": 41.92887299996073
+      },
+      {
+        "pass": 3,
+        "question_id": "q016",
+        "ms": 37.167280000176106
+      },
+      {
+        "pass": 3,
+        "question_id": "q017",
+        "ms": 37.25151599974197
+      },
+      {
+        "pass": 3,
+        "question_id": "q018",
+        "ms": 39.89525199995114
+      },
+      {
+        "pass": 3,
+        "question_id": "q019",
+        "ms": 33.757252999748744
+      },
+      {
+        "pass": 3,
+        "question_id": "q020",
+        "ms": 25.451286000134132
+      },
+      {
+        "pass": 3,
+        "question_id": "q021",
+        "ms": 36.423880999791436
+      },
+      {
+        "pass": 3,
+        "question_id": "q022",
+        "ms": 39.232340999660664
+      },
+      {
+        "pass": 3,
+        "question_id": "q023",
+        "ms": 36.15379999973811
+      },
+      {
+        "pass": 3,
+        "question_id": "q024",
+        "ms": 42.677170999922964
+      },
+      {
+        "pass": 3,
+        "question_id": "q025",
+        "ms": 29.79038500052411
+      },
+      {
+        "pass": 4,
+        "question_id": "q001",
+        "ms": 45.49945700000535
+      },
+      {
+        "pass": 4,
+        "question_id": "q002",
+        "ms": 37.70891399926768
+      },
+      {
+        "pass": 4,
+        "question_id": "q003",
+        "ms": 45.88323999996646
+      },
+      {
+        "pass": 4,
+        "question_id": "q004",
+        "ms": 39.09599899998284
+      },
+      {
+        "pass": 4,
+        "question_id": "q005",
+        "ms": 37.507250999624375
+      },
+      {
+        "pass": 4,
+        "question_id": "q006",
+        "ms": 28.717465000227094
+      },
+      {
+        "pass": 4,
+        "question_id": "q007",
+        "ms": 35.00756200082833
+      },
+      {
+        "pass": 4,
+        "question_id": "q008",
+        "ms": 41.729535000740725
+      },
+      {
+        "pass": 4,
+        "question_id": "q009",
+        "ms": 33.07947600023908
+      },
+      {
+        "pass": 4,
+        "question_id": "q010",
+        "ms": 44.64954899958684
+      },
+      {
+        "pass": 4,
+        "question_id": "q011",
+        "ms": 31.341932000032102
+      },
+      {
+        "pass": 4,
+        "question_id": "q012",
+        "ms": 24.061486000391596
+      },
+      {
+        "pass": 4,
+        "question_id": "q013",
+        "ms": 42.90943200066977
+      },
+      {
+        "pass": 4,
+        "question_id": "q014",
+        "ms": 37.91231900049752
+      },
+      {
+        "pass": 4,
+        "question_id": "q015",
+        "ms": 39.53768599967589
+      },
+      {
+        "pass": 4,
+        "question_id": "q016",
+        "ms": 35.73229599987826
+      },
+      {
+        "pass": 4,
+        "question_id": "q017",
+        "ms": 34.64215399981185
+      },
+      {
+        "pass": 4,
+        "question_id": "q018",
+        "ms": 40.17193099934957
+      },
+      {
+        "pass": 4,
+        "question_id": "q019",
+        "ms": 33.81691300000966
+      },
+      {
+        "pass": 4,
+        "question_id": "q020",
+        "ms": 26.455015999999887
+      },
+      {
+        "pass": 4,
+        "question_id": "q021",
+        "ms": 35.603788000116765
+      },
+      {
+        "pass": 4,
+        "question_id": "q022",
+        "ms": 40.54482299943629
+      },
+      {
+        "pass": 4,
+        "question_id": "q023",
+        "ms": 37.222460000521096
+      },
+      {
+        "pass": 4,
+        "question_id": "q024",
+        "ms": 42.283839999981865
+      },
+      {
+        "pass": 4,
+        "question_id": "q025",
+        "ms": 29.774303000522195
+      },
+      {
+        "pass": 5,
+        "question_id": "q001",
+        "ms": 44.84555199996976
+      },
+      {
+        "pass": 5,
+        "question_id": "q002",
+        "ms": 35.529291000784724
+      },
+      {
+        "pass": 5,
+        "question_id": "q003",
+        "ms": 45.70963400055916
+      },
+      {
+        "pass": 5,
+        "question_id": "q004",
+        "ms": 38.46141899975919
+      },
+      {
+        "pass": 5,
+        "question_id": "q005",
+        "ms": 38.64149400033057
+      },
+      {
+        "pass": 5,
+        "question_id": "q006",
+        "ms": 27.96547800062399
+      },
+      {
+        "pass": 5,
+        "question_id": "q007",
+        "ms": 33.64911100015888
+      },
+      {
+        "pass": 5,
+        "question_id": "q008",
+        "ms": 41.538126999512315
+      },
+      {
+        "pass": 5,
+        "question_id": "q009",
+        "ms": 33.05100299985497
+      },
+      {
+        "pass": 5,
+        "question_id": "q010",
+        "ms": 45.19385700041312
+      },
+      {
+        "pass": 5,
+        "question_id": "q011",
+        "ms": 31.911037000099896
+      },
+      {
+        "pass": 5,
+        "question_id": "q012",
+        "ms": 25.779403000342427
+      },
+      {
+        "pass": 5,
+        "question_id": "q013",
+        "ms": 42.784058000506775
+      },
+      {
+        "pass": 5,
+        "question_id": "q014",
+        "ms": 38.728974999685306
+      },
+      {
+        "pass": 5,
+        "question_id": "q015",
+        "ms": 40.83443099989381
+      },
+      {
+        "pass": 5,
+        "question_id": "q016",
+        "ms": 36.37651000008191
+      },
+      {
+        "pass": 5,
+        "question_id": "q017",
+        "ms": 34.66198099977191
+      },
+      {
+        "pass": 5,
+        "question_id": "q018",
+        "ms": 39.22945399972377
+      },
+      {
+        "pass": 5,
+        "question_id": "q019",
+        "ms": 33.26477900009195
+      },
+      {
+        "pass": 5,
+        "question_id": "q020",
+        "ms": 25.878917000227375
+      },
+      {
+        "pass": 5,
+        "question_id": "q021",
+        "ms": 34.90545300064696
+      },
+      {
+        "pass": 5,
+        "question_id": "q022",
+        "ms": 41.081768999902124
+      },
+      {
+        "pass": 5,
+        "question_id": "q023",
+        "ms": 36.624993000259565
+      },
+      {
+        "pass": 5,
+        "question_id": "q024",
+        "ms": 42.37568099961209
+      },
+      {
+        "pass": 5,
+        "question_id": "q025",
+        "ms": 29.570945000159554
+      }
+    ]
+  },
+  "notes": [
+    "Timers include tokenization, scoring, CPU score transfer, and sorting.",
+    "Throughput is sequential service throughput, not concurrent capacity.",
+    "Pooled p95 is descriptive; repeated questions are not independent.",
+    "Cached loading is not a fresh-process cold-start measurement.",
+    "Both rerankers remain resident; CPU passes precede GPU passes, with an additional full warm-up immediately before each device block."
+  ]
+}
