@@ -99,6 +99,10 @@ def main():
     parser.add_argument("--warmup-queries", type=baseline.positive_int, default=10)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--torch-threads", type=baseline.positive_int)
+    parser.add_argument(
+        "--stage-timing", action="store_true",
+        help="Add a host timestamp after CPU retrieval; no intermediate CUDA sync.",
+    )
     args = parser.parse_args()
 
     if args.output.exists():
@@ -154,6 +158,7 @@ def main():
         # Deliberately no CUDA call before the start clock.
         started = perf_counter()
         pool = hybrid.search(args.query, top_k=baseline.FINAL_POOL_K)
+        retrieval_end = perf_counter() if args.stage_timing else None
         results = reranker.rerank(args.query, pool, top_k=baseline.TOP_K)
         synchronize()
         ended = perf_counter()
@@ -166,11 +171,17 @@ def main():
         if not {result.chunk for result in results} <= {item.chunk for item in pool}:
             raise ValueError("Reranking introduced a new chunk.")
         ranking = baseline.candidate_ranking(results, chunk_to_id, set())
-        return {
+        measurement = {
             "end_to_end_ms": (ended - started) * 1000,
             "candidate_count": len(pool),
             "top_k_chunk_ids": [item["chunk_id"] for item in ranking],
-        }, started, ended
+        }
+        if args.stage_timing:
+            measurement.update({
+                "retrieval_ms": (retrieval_end - started) * 1000,
+                "reranking_ms": (ended - retrieval_end) * 1000,
+            })
+        return measurement, started, ended
 
     first, _, _ = request()
     for _ in range(args.warmup_queries):
@@ -197,6 +208,11 @@ def main():
                 sample["top_k_chunk_ids"] == reference["top_k_chunk_ids"]
             ),
         })
+        if args.stage_timing:
+            sample.update({
+                "conditioning_retrieval_ms": conditioning["retrieval_ms"],
+                "conditioning_reranking_ms": conditioning["reranking_ms"],
+            })
         samples.append(sample)
         print(
             f"{sequence}/{len(schedule)} | gap {gap:g}s | "
@@ -221,9 +237,24 @@ def main():
             ) / len(rows),
         })
 
+    if args.stage_timing:
+        for summary in summaries:
+            rows = [
+                s for s in samples
+                if s["requested_idle_seconds"] == summary["requested_idle_seconds"]
+            ]
+            for stage in ("retrieval", "reranking"):
+                summary[stage] = baseline.latency_summary(
+                    [s[f"{stage}_ms"] for s in rows]
+                )
+
     report = {
-        "report_schema_version": 1,
-        "experiment": "controlled_application_idle_hybrid_reranking",
+        "report_schema_version": 2 if args.stage_timing else 1,
+        "experiment": (
+            "controlled_application_idle_hybrid_reranking_stage_timing"
+            if args.stage_timing
+            else "controlled_application_idle_hybrid_reranking"
+        ),
         "created_at_utc": datetime.now(UTC).isoformat(),
         "corpus_path": str(args.corpus),
         "corpus_sha256": corpus_hash,
@@ -265,7 +296,14 @@ def main():
             "torch_interop_threads": torch.get_num_interop_threads(),
             "matmul_allow_tf32": False,
             "cudnn_allow_tf32": False,
+            "stage_timing": args.stage_timing,
             "timing": "No pre-request sync; post-request sync before end clock.",
+            "stage_timing_definition": (
+                "Host timestamp after CPU hybrid search; reranking includes "
+                "host overhead, transfers, and final synchronization; "
+                "no intermediate CUDA synchronization."
+                if args.stage_timing else None
+            ),
         },
         "environment": {
             "platform": platform.platform(),
@@ -295,6 +333,11 @@ def main():
             "Sleep-window timing includes host scheduling and request-call overhead.",
         ],
     }
+    if args.stage_timing:
+        report["limitations"].append(
+            "Stage timing adds a host timestamp; reranking_ms is not "
+            "GPU-only execution time."
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8") as handle:
         handle.write(

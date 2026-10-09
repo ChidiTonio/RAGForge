@@ -249,3 +249,63 @@ def test_unavailable_cuda_prevents_loading(idle):
     assert not idle.base.output.exists()
     for factory in idle.base.factories:
         factory.assert_not_called()
+
+
+@pytest.mark.parametrize("device,reranking_ms", [("cuda", 40.0), ("cpu", 30.0)])
+def test_stage_timing_intervals(idle, monkeypatch, device, reranking_ms):
+    monkeypatch.setattr(sys, "argv", [
+        *sys.argv, "--stage-timing", "--reranker-device", device,
+    ])
+    idle.module.main()
+    data = report(idle)
+    assert data["report_schema_version"] == 2
+    assert data["experiment"].endswith("_stage_timing")
+    assert data["settings"]["stage_timing"] is True
+
+    measurements = [
+        data["first_query_after_setup"], data["warm_reference"], *data["samples"],
+    ]
+    for measurement in measurements:
+        assert measurement["retrieval_ms"] == pytest.approx(20.0)
+        assert measurement["reranking_ms"] == pytest.approx(reranking_ms)
+        assert measurement["end_to_end_ms"] == pytest.approx(
+            measurement["retrieval_ms"] + measurement["reranking_ms"]
+        )
+    for sample in data["samples"]:
+        assert sample["conditioning_retrieval_ms"] == pytest.approx(20.0)
+        assert sample["conditioning_reranking_ms"] == pytest.approx(reranking_ms)
+        gap = sample["requested_idle_seconds"]
+        assert sample["application_idle_seconds"] == pytest.approx(
+            0.4 + gap + (0.005 if gap else 0.0)
+        )
+    for summary in data["per_gap"]:
+        assert summary["retrieval"]["mean_ms"] == pytest.approx(20.0)
+        assert summary["reranking"]["mean_ms"] == pytest.approx(reranking_ms)
+
+    query = idle.module.DEFAULT_QUERY
+    searches = [
+        i for i, event in enumerate(idle.events)
+        if isinstance(event, tuple) and event[0] == "search"
+    ]
+    expected = ["clock", ("search", query), "clock", ("score", query)]
+    if device == "cuda":
+        expected.append("sync")
+    expected.extend(["clock", "validate", "validate"])
+    for index in searches:
+        assert idle.events[index - 1:index - 1 + len(expected)] == expected
+
+
+def test_default_report_has_no_stage_measurements(idle):
+    idle.module.main()
+    data = report(idle)
+    assert data["report_schema_version"] == 1
+    assert data["experiment"] == "controlled_application_idle_hybrid_reranking"
+    assert data["settings"]["stage_timing"] is False
+    for measurement in [
+        data["first_query_after_setup"], data["warm_reference"], *data["samples"],
+    ]:
+        assert "retrieval_ms" not in measurement
+        assert "reranking_ms" not in measurement
+    for summary in data["per_gap"]:
+        assert "retrieval" not in summary
+        assert "reranking" not in summary
