@@ -3,7 +3,7 @@
 Run from the repository root. Model construction may download model files.
 This evaluates passage retrieval, not generated answers or factual truth.
 Use --evaluation-role heldout for a frozen held-out evaluation.
-The embedding model revision is pinned; the reranker revision is not.
+Both model revisions are pinned. Embedding and retrieval remain on CPU.
 """
 
 import argparse
@@ -28,6 +28,7 @@ RRF_K = 60
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 EMBEDDING_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+RERANKER_REVISION = "233902d25c440f23af6f7d6e94d2946bac0bee0a"
 BATCH_SIZE = 8
 MAX_LENGTH = 512
 
@@ -77,6 +78,20 @@ def candidate_ranking(pool, chunk_to_id, relevant_ids):
     return ranking
 
 
+def device_synchronizer(device):
+    """Avoid importing torch on CPU; reject unavailable explicit CUDA."""
+    if device == "cpu":
+        return lambda: None
+
+    import torch
+
+    if not torch.cuda.is_available():
+        raise RuntimeError(
+            "CUDA was requested but is unavailable. Use --reranker-device cpu."
+        )
+    return torch.cuda.synchronize
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -100,6 +115,12 @@ def main():
             "Use heldout for a frozen held-out dataset."
         ),
     )
+    parser.add_argument(
+        "--reranker-device",
+        choices=("cpu", "cuda"),
+        default="cpu",
+        help="Reranker device only; embedding and retrieval stay on CPU.",
+    )
     args = parser.parse_args()
 
     if args.output.exists():
@@ -121,6 +142,11 @@ def main():
     query_texts = [question["question"] for question in questions]
     if len(set(query_texts)) != len(query_texts):
         parser.error("This experiment requires unique question texts.")
+
+    try:
+        synchronize = device_synchronizer(args.reranker_device)
+    except (ImportError, RuntimeError) as exc:
+        parser.error(str(exc))
 
     evaluation_scope = (
         "held-out passage retrieval evaluation; not answer evaluation"
@@ -150,17 +176,24 @@ def main():
     )
     index_build_ms = (perf_counter() - started) * 1000
 
+    print(f"Loading reranker on {args.reranker_device}...", flush=True)
+    synchronize()
     started = perf_counter()
     scorer = CrossEncoderScorer(
-        RERANKER_MODEL, device="cpu",
+        RERANKER_MODEL,
+        revision=RERANKER_REVISION,
+        device=args.reranker_device,
         batch_size=BATCH_SIZE, max_length=MAX_LENGTH,
     )
     reranker = Reranker(scorer=scorer)
+    synchronize()
     reranker_load_ms = (perf_counter() - started) * 1000
 
     print("Running one unmeasured warm-up query...", flush=True)
     warm_pool = hybrid.search(query_texts[0], top_k=FINAL_POOL_K)
+    synchronize()
     reranker.rerank(query_texts[0], warm_pool, top_k=TOP_K)
+    synchronize()
 
     pools = {}
     retrieval_ms = {}
@@ -180,9 +213,11 @@ def main():
     print("Reranking the frozen pools...", flush=True)
     for question in questions:
         query = question["question"]
+        synchronize()
         started = perf_counter()
         # Keep the complete reordered pool for diagnostics, then evaluate top five.
         results = reranker.rerank(query, pools[query], top_k=FINAL_POOL_K)
+        synchronize()
         reranking_ms[question["id"]] = (perf_counter() - started) * 1000
         if (
             len(results) != len(pools[query])
@@ -259,16 +294,19 @@ def main():
             "embedding_revision": EMBEDDING_REVISION,
             "embedding_revision_pinned": True,
             "reranker_model": RERANKER_MODEL,
-            "reranker_revision": None,
-            "reranker_revision_pinned": False,
-            "device": "cpu",
+            "reranker_revision": RERANKER_REVISION,
+            "reranker_revision_pinned": True,
+            "device": args.reranker_device,
+            "embedding_device": "cpu",
+            "reranker_device": args.reranker_device,
+            "cuda_synchronized": args.reranker_device == "cuda",
             "embedding_batch_size": BATCH_SIZE,
             "reranking_batch_size": BATCH_SIZE,
             "reranker_max_length": MAX_LENGTH,
             "reranker_activation": "identity",
             "warmup_queries": 1,
             "timing_passes": 1,
-            "model_revision_pinned": False,
+            "model_revision_pinned": True,
         },
         "package_versions": {
             name: version(name)
@@ -280,7 +318,11 @@ def main():
             "reranker_load_ms": reranker_load_ms,
         },
         "latency": {
-            "note": "Single warmed-up pass; descriptive, not a rigorous benchmark.",
+            "note": (
+                "Single pass after one warm-up query; descriptive, not a rigorous "
+                "benchmark. Combined latency sums separately measured stages; "
+                "it is not directly measured end-to-end request latency."
+            ),
             "retrieval": latency_summary(list(retrieval_ms.values())),
             "reranking": latency_summary(list(reranking_ms.values())),
             "combined": latency_summary([
@@ -318,8 +360,7 @@ def main():
         )
     print(f"Saved report: {args.output}")
     print(
-        "Passage retrieval evaluation only; embedding revision is pinned, "
-        "reranker revision is not pinned."
+        "Passage retrieval evaluation only; both model revisions are pinned."
     )
 
 

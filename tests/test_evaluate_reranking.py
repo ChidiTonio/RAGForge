@@ -182,7 +182,19 @@ def test_fixed_pools_metrics_and_report(experiment):
     assert report["questions_sha256"] == hashlib.sha256(original_inputs[1]).hexdigest()
     assert report["settings"]["backend_candidate_k"] == 20
     assert report["settings"]["final_pool_k"] == 20
-    assert report["settings"]["model_revision_pinned"] is False
+    assert report["settings"]["model_revision_pinned"] is True
+    assert report["settings"]["reranker_revision_pinned"] is True
+    assert report["settings"]["reranker_revision"] == experiment["module"].RERANKER_REVISION
+    assert report["settings"]["reranker_device"] == "cpu"
+    assert report["settings"]["embedding_device"] == "cpu"
+    assert report["settings"]["cuda_synchronized"] is False
+    experiment["factories"][2].assert_called_once_with(
+        experiment["module"].RERANKER_MODEL,
+        revision=experiment["module"].RERANKER_REVISION,
+        device="cpu",
+        batch_size=8,
+        max_length=512,
+    )
     assert report["latency"]["combined"]["mean_ms"] == pytest.approx(
         report["latency"]["retrieval"]["mean_ms"]
         + report["latency"]["reranking"]["mean_ms"]
@@ -245,3 +257,53 @@ def test_latency_summary(experiment):
     assert summary["p95_ms"] == pytest.approx(2.9)
     assert summary["min_ms"] == 1.0
     assert summary["max_ms"] == 3.0
+
+
+def test_cpu_synchronizer_does_not_require_torch(experiment, monkeypatch):
+    monkeypatch.setitem(sys.modules, "torch", None)
+    synchronize = experiment["module"].device_synchronizer("cpu")
+    assert synchronize() is None
+
+
+def test_cuda_configuration_and_timing_boundaries(experiment, monkeypatch):
+    from types import SimpleNamespace
+
+    sync = Mock(side_effect=lambda: experiment["events"].append(("sync",)))
+    cuda = SimpleNamespace(is_available=lambda: True, synchronize=sync)
+    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(cuda=cuda))
+    monkeypatch.setattr(sys, "argv", [*sys.argv, "--reranker-device", "cuda"])
+
+    experiment["module"].main()
+
+    report = json.loads(experiment["output"].read_text())
+    assert report["settings"]["reranker_device"] == "cuda"
+    assert report["settings"]["embedding_device"] == "cpu"
+    assert report["settings"]["cuda_synchronized"] is True
+    assert experiment["factories"][0].call_args.kwargs["device"] == "cpu"
+    assert experiment["factories"][2].call_args.kwargs["device"] == "cuda"
+    assert experiment["events"] == [
+        ("sync",), ("sync",),
+        ("search", "query one"),
+        ("sync",), ("score", "query one"), ("sync",),
+        ("search", "query one"), ("search", "query two"),
+        ("sync",), ("score", "query one"), ("sync",),
+        ("sync",), ("score", "query two"), ("sync",),
+    ]
+
+
+def test_unavailable_cuda_prevents_model_loading(experiment, monkeypatch):
+    from types import SimpleNamespace
+
+    sync = Mock()
+    cuda = SimpleNamespace(is_available=lambda: False, synchronize=sync)
+    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(cuda=cuda))
+    monkeypatch.setattr(sys, "argv", [*sys.argv, "--reranker-device", "cuda"])
+
+    with pytest.raises(SystemExit) as caught:
+        experiment["module"].main()
+
+    assert caught.value.code == 2
+    sync.assert_not_called()
+    assert not experiment["output"].exists()
+    for factory in experiment["factories"]:
+        factory.assert_not_called()

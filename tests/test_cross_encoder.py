@@ -79,6 +79,10 @@ def test_empty_passages_skip_prediction(fake_backend):
     [
         ({"model_name": None}, TypeError),
         ({"model_name": " "}, ValueError),
+        ({"revision": 123}, TypeError),
+        ({"revision": False}, TypeError),
+        ({"revision": ""}, ValueError),
+        ({"revision": " "}, ValueError),
         ({"device": None}, TypeError),
         ({"device": ""}, ValueError),
         ({"batch_size": True}, TypeError),
@@ -203,3 +207,19 @@ def test_missing_dependency_has_install_guidance(monkeypatch):
 
     with pytest.raises(ImportError, match="pip install"):
         CrossEncoderScorer()
+
+
+def test_constructor_forwards_revision(fake_backend):
+    constructor, _, _ = fake_backend
+    CrossEncoderScorer("synthetic-model", revision="synthetic-sha", device="cuda")
+    constructor.assert_called_once_with(
+        "synthetic-model", revision="synthetic-sha", device="cuda", max_length=512
+    )
+
+
+def test_none_revision_preserves_backend_default(fake_backend):
+    constructor, _, _ = fake_backend
+    CrossEncoderScorer("synthetic-model", revision=None)
+    constructor.assert_called_once_with(
+        "synthetic-model", device="cpu", max_length=512
+    )

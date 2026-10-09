@@ -17,6 +17,7 @@ class CrossEncoderScorer:
         self,
         model_name: str = "cross-encoder/ms-marco-MiniLM-L-6-v2",
         *,
+        revision: str | None = None,
         device: str = "cpu",
         batch_size: int = 8,
         max_length: int = 512,
@@ -25,6 +26,12 @@ class CrossEncoderScorer:
             raise TypeError("model_name must be a string.")
         if not model_name.strip():
             raise ValueError("model_name must not be blank.")
+
+        if revision is not None:
+            if not isinstance(revision, str):
+                raise TypeError("revision must be a string or None.")
+            if not revision.strip():
+                raise ValueError("revision must not be blank.")
 
         if not isinstance(device, str):
             raise TypeError("device must be a string.")
@@ -52,10 +59,12 @@ class CrossEncoderScorer:
 
         from torch.nn import Identity
 
+        revision_kwargs = {} if revision is None else {"revision": revision}
         self._model = CrossEncoder(
             model_name,
             device=device,
             max_length=max_length,
+            **revision_kwargs,
         )
         self._activation = Identity()
         self._batch_size = batch_size
