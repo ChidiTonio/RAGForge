@@ -130,11 +130,11 @@ def test_evidence_is_serialized_as_data():
         "answer": "A", "citations": ["S1"], "abstain": False, "extra": 1,
     }),
 ])
-def test_invalid_responses_are_rejected_without_retry(raw):
+def test_invalid_responses_are_rejected_after_bounded_retry(raw):
     llm = FakeLLM(raw)
     with pytest.raises(InvalidLLMResponse):
         AnswerGenerator(llm).generate("Q?", [hit()])
-    assert len(llm.calls) == 1
+    assert len(llm.calls) == 2
 
 
 @pytest.mark.parametrize("question", ["", " ", "\n\t", None, 42])
