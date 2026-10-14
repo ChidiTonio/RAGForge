@@ -43,3 +43,25 @@ Activate: source ~/venvs/ragforge-gpu/bin/activate
 Stage only intended files.
 Do not stage benchmarks/runs/ or .bak files.
 Update this handoff at each checkpoint.
+
+## Live smoke-test results — 2026-10-14
+Checkpoint tested: 0b47d08, using qwen2.5:7b.
+- Structured answers and rendered citations worked.
+- Abstract answer: cited passages supported the displayed points,
+  but a request for one point returned three.
+- Discussion answer: three points correctly covered a strength,
+  limitation, and future direction with corresponding citations.
+- Future-direction point was a supported fragment rather than a
+  complete explanatory sentence; no missing continuation was invented.
+- Bank-account question: correctly abstained without citations and
+  limited its explanation to the supplied evidence.
+- No validation-failure debug messages appeared in the supplied output.
+- These results supersede the earlier "live validation pending" note.
+- The interactive application has been exited.
+
+Next task:
+Design explicit point-count validation and regression tests so count
+mismatches can trigger the existing bounded retry. Define how the
+requested count reaches the generator; do not assume arbitrary natural
+language can be reliably parsed with a simple regex.
+No repeat smoke test or offline baseline rerun is needed before that work.
