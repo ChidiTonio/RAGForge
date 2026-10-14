@@ -2,6 +2,9 @@
 
 from collections.abc import Iterable
 
+import numpy as np
+from numpy.typing import NDArray
+
 from ragforge.embeddings.base import Embedder
 from ragforge.ingestion.chunking import TextChunk
 from ragforge.retrieval.bm25 import BM25Retriever
@@ -27,6 +30,9 @@ class HybridRetriever:
     depth is fixed at construction and does not grow with search top_k.
     Fusion uses one-based ranks, not the backends' raw scores.
 
+    Optional document_embeddings are forwarded to the dense backend.
+    They must follow corpus order and match the query vector space.
+
     Input corpus order breaks fused-score ties. Scores are positive
     ranking values, not probabilities or cosine similarities.
     """
@@ -38,6 +44,7 @@ class HybridRetriever:
         embedder: Embedder,
         candidate_k: int = 20,
         rrf_k: int = 60,
+        document_embeddings: NDArray[np.float32] | None = None,
     ) -> None:
         _validate_positive_integer(candidate_k, name="candidate_k")
         _validate_positive_integer(rrf_k, name="rrf_k")
@@ -60,7 +67,14 @@ class HybridRetriever:
 
         # Validate the lexical corpus before invoking document embedding.
         self._bm25 = BM25Retriever(self._chunks)
-        self._dense = DenseRetriever(self._chunks, embedder=embedder)
+        if document_embeddings is None:
+            self._dense = DenseRetriever(self._chunks, embedder=embedder)
+        else:
+            self._dense = DenseRetriever(
+                self._chunks,
+                embedder=embedder,
+                document_embeddings=document_embeddings,
+            )
 
     def search(self, query: str, *, top_k: int = 5) -> list[SearchResult]:
         """Return up to top_k candidates ordered by descending RRF score.

@@ -58,6 +58,10 @@ class DenseRetriever:
     Every nonblank query ranks all indexed chunks. No lexical overlap
     or positive score is required. Input order breaks score ties.
 
+    Optional document_embeddings must follow corpus order and use
+    the query embedder's vector space. They are validated and copied
+    during normalization; supplying them skips document embedding.
+
     The embedder must remain configured for the same vector space
     throughout the lifetime of the index.
     """
@@ -67,6 +71,7 @@ class DenseRetriever:
         chunks: Iterable[TextChunk],
         *,
         embedder: Embedder,
+        document_embeddings: NDArray[np.float32] | None = None,
     ) -> None:
         self._chunks = tuple(chunks)
 
@@ -77,7 +82,11 @@ class DenseRetriever:
             raise ValueError("Every chunk must contain nonblank text.")
 
         self._embedder = embedder
-        vectors = self._embedder.embed([chunk.text for chunk in self._chunks])
+        vectors = document_embeddings
+        if vectors is None:
+            vectors = self._embedder.embed(
+                [chunk.text for chunk in self._chunks]
+            )
         self._vectors = _normalize_embeddings(
             vectors,
             expected_rows=len(self._chunks),

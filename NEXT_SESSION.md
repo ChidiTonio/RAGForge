@@ -126,3 +126,18 @@ Next:
 
 Next: decide MVP deployment target, then scope persistent indexing.
 Quotation fidelity and factual-support validation remain separate work.
+
+## Persistence foundation — 2026-10-14
+
+- DenseRetriever accepts optional precomputed document_embeddings.
+- HybridRetriever forwards supplied document embeddings to its dense backend.
+- Existing construction behavior is unchanged when embeddings are omitted.
+- Supplied vectors use existing validation and independent normalization.
+- Added 16 regression cases for fresh/precomputed equivalence, skipped document
+  embedding, invalid vectors, and independent vector ownership.
+- Focused retrieval suite: 111 passed.
+- Full suite: 488 passed.
+- Disk persistence and CLI cache integration are not implemented yet.
+
+Next: implement versioned storage for chunks, raw float32 embeddings, and
+compatibility metadata, then integrate cache reuse into the local PDF CLI.
