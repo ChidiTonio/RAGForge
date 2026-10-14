@@ -1,38 +1,45 @@
 # RAGForge — Session Handoff
 
-## Verified checkpoint
+## Current state
 - Branch: master
-- Implementation checkpoint: 480b7a0
-- Previous handoff commit: 188cf9b
-- Python: 3.11.17
 - Environment: ~/venvs/ragforge-gpu
-- Model baseline: qwen2.5:7b
-- Generation tests: 44 passed.
-- Full suite: 423 passed on 2026-10-14.
+- Python: 3.11.17
+- Previous checkpoint: c159666 (bounded retry regression coverage)
+- Current work: point-level citation contract implemented.
+- Focused generation + Ollama tests: 89 passed.
+- Full suite: 448 passed on 2026-10-14.
+- Live model validation of the new contract is still pending.
 
-## Completed
-- Added seven retry regression cases; no production-code changes.
-- Verified first-call success for answers and abstentions.
-- Verified invalid-first/valid-second recovery for both outcomes.
-- Verified corrective feedback and unchanged question/evidence.
-- Verified malformed output is not copied into retry prompts.
-- Verified backend errors during retry propagate without extra calls.
-- Existing tests cover exhaustion across 13 invalid-response cases.
+## Completed in this checkpoint
+- Added immutable AnswerPoint and default-empty Answer.points.
+- New model JSON contract: points, abstain, reason.
+- Each answered point requires text and valid, distinct citation labels.
+- Citation labels may be reused across different points.
+- Python renders numbered points and citation markers.
+- Global citations are deduplicated in first-use order.
+- Existing script-facing Answer fields remain available.
+- Manual abstentions remain compatible.
+- Existing bounded retry behavior is preserved.
+- Added 25 tests.
+- No retrieval, PDF script, or Ollama adapter changes.
+
+## Limitations
+- Citation membership does not prove factual support.
+- Requested point count is instructed, not parser-enforced.
+- Numbering and citation markers inside model point text are discouraged
+  by the prompt, not rejected by the parser.
+- Quotation fidelity is not yet validated.
 
 ## Next task
-Inspect the current Answer schema, parser, renderer, and their consumers.
-Design answer points paired with supporting citations.
-Agree on compatibility and validation before changing production code.
-Citation membership alone does not prove factual support.
+Validate the new contract with the existing PDF workflow and qwen2.5:7b.
+Explicitly pass --model qwen2.5:7b; script default remains qwen2.5:3b.
+Check a supported answer, a multi-point summary, and an abstention.
+Inspect point/citation placement and contract failures.
+Do not repeat completed offline baseline checks without a code change.
 
-## Start next session
-- cd ~/RAGForge
-- source ~/venvs/ragforge-gpu/bin/activate
-- git status
-- git log -3 --oneline
-- python -m pytest -q
-
-## Working rule
+## Working rules
+Use the Ubuntu terminal.
+Activate: source ~/venvs/ragforge-gpu/bin/activate
 Stage only intended files.
-Leave backups and benchmarks/runs/ untracked.
+Do not stage benchmarks/runs/ or .bak files.
 Update this handoff at each checkpoint.

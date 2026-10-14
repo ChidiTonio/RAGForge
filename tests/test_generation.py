@@ -26,14 +26,23 @@ class FakeLLM:
         return self.response
 
 
+def structured_response(points, abstain=False, reason=None):
+    return json.dumps({
+        "points": points,
+        "abstain": abstain,
+        "reason": reason,
+    })
+
+
 def response(answer="Revenue grew.", citations=None, abstain=False):
+    """Build the new contract while retaining existing test call sites."""
     if citations is None:
         citations = ["S1"]
-    return json.dumps({
-        "answer": answer,
-        "citations": citations,
-        "abstain": abstain,
-    })
+    point = {"text": answer, "citations": citations}
+    if abstain is True:
+        # Preserve malformed cited-abstention fixtures as invalid responses.
+        return structured_response([point] if citations else [], True, answer)
+    return structured_response([point], abstain, None)
 
 
 def hit(text="Revenue grew.", page=1):
@@ -53,7 +62,9 @@ def test_answer_preserves_exact_evidence_and_metadata():
     llm = FakeLLM(response())
     answer = AnswerGenerator(llm).generate("  What changed?  ", [result])
     assert answer.status == "answered"
-    assert answer.text == "Revenue grew."
+    assert answer.text == "1. Revenue grew. [S1]"
+    assert answer.points[0].text == "Revenue grew."
+    assert answer.points[0].citations == answer.citations
     assert answer.citations == answer.evidence
     assert answer.citations[0].label == "S1"
     assert answer.citations[0].chunk is result.chunk
@@ -270,3 +281,120 @@ def test_backend_failure_on_retry_propagates_without_extra_calls(error_type):
 
     assert caught.value is error
     assert llm.complete.call_count == 2
+
+
+
+def test_points_preserve_mapping_and_render_in_order():
+    raw = structured_response([
+        {"text": " Revenue grew. ", "citations": ["S2", "S1"]},
+        {"text": "Costs fell.", "citations": ["S1"]},
+    ])
+    first = hit("Revenue grew.", page=1)
+    second = hit("Costs fell.", page=2)
+    answer = AnswerGenerator(FakeLLM(raw)).generate("Q?", [first, second])
+
+    assert answer.text == (
+        "1. Revenue grew. [S2] [S1]\n"
+        "2. Costs fell. [S1]"
+    )
+    assert tuple(p.text for p in answer.points) == ("Revenue grew.", "Costs fell.")
+    assert answer.points[0].citations == (answer.evidence[1], answer.evidence[0])
+    assert answer.points[1].citations == (answer.evidence[0],)
+    assert answer.points[1].citations[0] is answer.evidence[0]
+    # Global citations are deduplicated in first-use order.
+    assert answer.citations == (answer.evidence[1], answer.evidence[0])
+
+
+def test_abstention_renders_reason_without_points():
+    llm = FakeLLM(structured_response([], True, "  Insufficient evidence.  "))
+    answer = AnswerGenerator(llm).generate("Q?", [hit()])
+    assert answer.text == "Insufficient evidence."
+    assert answer.points == ()
+    assert answer.citations == ()
+    assert len(answer.evidence) == 1
+
+
+def test_manual_abstention_remains_compatible():
+    from ragforge.generation.core import Answer
+
+    answer = Answer(
+        text="Please ask about the Discussion.",
+        status="abstained",
+        citations=(),
+        evidence=(),
+    )
+    assert answer.points == ()
+
+
+def test_no_evidence_has_no_points():
+    llm = FakeLLM(response())
+    answer = AnswerGenerator(llm).generate("Q?", [])
+    assert answer.points == ()
+    assert llm.calls == []
+
+
+@pytest.mark.parametrize("raw", [
+    structured_response(None),
+    structured_response({}),
+    structured_response([]),
+    structured_response([None]),
+    structured_response(["Revenue grew."]),
+    structured_response([{"text": "Revenue grew."}]),
+    structured_response([
+        {"text": "Revenue grew.", "citations": ["S1"], "extra": 1}
+    ]),
+    structured_response([{"text": 1, "citations": ["S1"]}]),
+    structured_response([{"text": "Revenue grew.", "citations": None}]),
+    structured_response([
+        {"text": "Supported.", "citations": ["S1"]},
+        {"text": "Unsupported.", "citations": []},
+    ]),
+    structured_response([
+        {"text": "Supported.", "citations": ["S1"]},
+        {"text": "Unknown source.", "citations": ["S999"]},
+    ]),
+    structured_response(
+        [{"text": "Revenue grew.", "citations": ["S1"]}],
+        reason="An answer cannot also have an abstention reason.",
+    ),
+    structured_response([], True, None),
+    structured_response([], True, ""),
+    structured_response([], True, "  "),
+    structured_response([], True, 42),
+    structured_response([], True, "N/A"),
+    structured_response([], True, "abstain"),
+    json.dumps({
+        "answer": "Revenue grew.", "citations": ["S1"], "abstain": False,
+    }),
+])
+def test_invalid_point_contract_retries_then_rejects(raw):
+    llm = FakeLLM(raw)
+    with pytest.raises(InvalidLLMResponse):
+        AnswerGenerator(llm).generate("Q?", [hit()])
+    assert len(llm.calls) == 2
+
+
+def test_point_validation_failure_recovers_on_second_attempt():
+    invalid = structured_response([
+        {"text": "Revenue grew.", "citations": []},
+    ])
+    llm = Mock()
+    llm.complete.side_effect = [invalid, response()]
+
+    answer = AnswerGenerator(llm).generate("Q?", [hit()])
+
+    assert answer.text == "1. Revenue grew. [S1]"
+    assert len(answer.points) == 1
+    assert llm.complete.call_count == 2
+    first, second = [call.kwargs for call in llm.complete.call_args_list]
+    assert first["user_prompt"] == second["user_prompt"]
+    assert "Every point must cite supplied evidence." in second["system_prompt"]
+    assert "Return exactly points, abstain, and reason." in second["system_prompt"]
+
+
+def test_answer_points_are_immutable():
+    from dataclasses import FrozenInstanceError
+
+    answer = AnswerGenerator(FakeLLM(response())).generate("Q?", [hit()])
+    with pytest.raises(FrozenInstanceError):
+        answer.points[0].text = "Changed."
