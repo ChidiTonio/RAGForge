@@ -141,3 +141,20 @@ Quotation fidelity and factual-support validation remain separate work.
 
 Next: implement versioned storage for chunks, raw float32 embeddings, and
 compatibility metadata, then integrate cache reuse into the local PDF CLI.
+
+## Persistent index storage — 2026-10-14
+
+- Added ragforge.storage with versioned single-file NPZ storage.
+- Preserves ordered TextChunk metadata and raw float32 document embeddings.
+- Compatibility metadata is caller-supplied and compared exactly.
+- Loading uses allow_pickle=False and validates chunks and vectors.
+- Saves use a same-directory temporary file and atomic replacement.
+- Added 26 storage tests, including retrieval equivalence, compatibility
+  rejection, malformed archives, hashing, and failed-write cleanup.
+- Ruff checks for the new module and tests: passed.
+- Full suite: 514 passed.
+- CLI remains unchanged; cache integration is the next step.
+
+Confirmed CLI ingestion settings: chunk_size=800, overlap=120, followed
+by word-token filtering. Embedding adapter currently uses its default
+sentence-transformers/all-MiniLM-L6-v2 model.
