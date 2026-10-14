@@ -202,3 +202,71 @@ def test_retrieval_failure_skips_backend():
     with pytest.raises(RuntimeError, match="Retrieval unavailable"):
         pipeline.answer("Q?")
     assert llm.calls == []
+
+
+@pytest.mark.parametrize("abstain", [False, True])
+def test_valid_first_response_uses_one_backend_call(abstain):
+    raw = (
+        response("Insufficient evidence.", [], True)
+        if abstain
+        else response()
+    )
+    llm = Mock()
+    llm.complete.return_value = raw
+
+    answer = AnswerGenerator(llm).generate("What changed?", [hit()])
+
+    assert answer.status == ("abstained" if abstain else "answered")
+    llm.complete.assert_called_once()
+
+
+@pytest.mark.parametrize("abstain", [False, True])
+def test_retry_recovers_with_feedback_and_unchanged_evidence(abstain):
+    malformed = "MALFORMED_OUTPUT_DO_NOT_COPY"
+    valid = (
+        response("Insufficient evidence.", [], True)
+        if abstain
+        else response()
+    )
+    llm = Mock()
+    llm.complete.side_effect = [malformed, valid]
+    result = hit()
+
+    answer = AnswerGenerator(llm).generate("  What changed?  ", [result])
+
+    assert answer.status == ("abstained" if abstain else "answered")
+    assert answer.evidence[0].chunk is result.chunk
+    assert answer.citations == (() if abstain else answer.evidence)
+    assert llm.complete.call_count == 2
+
+    first = llm.complete.call_args_list[0].kwargs
+    second = llm.complete.call_args_list[1].kwargs
+
+    # Preserve the complete serialized request, including all metadata.
+    assert second["user_prompt"] == first["user_prompt"]
+    payload = json.loads(second["user_prompt"])
+    assert payload["question"] == "What changed?"
+    assert payload["evidence"][0]["text"] == result.chunk.text
+
+    # Add trusted parser feedback, not the malformed model output.
+    assert second["system_prompt"].startswith(first["system_prompt"])
+    assert "\nCORRECTION:" in second["system_prompt"]
+    assert "LLM response must be valid JSON." in second["system_prompt"]
+    assert malformed not in second["system_prompt"]
+    assert malformed not in second["user_prompt"]
+
+
+@pytest.mark.parametrize(
+    "error_type",
+    [RuntimeError, TimeoutError, ConnectionError],
+)
+def test_backend_failure_on_retry_propagates_without_extra_calls(error_type):
+    error = error_type("Backend failed during retry")
+    llm = Mock()
+    llm.complete.side_effect = ["not JSON", error]
+
+    with pytest.raises(error_type, match="Backend failed during retry") as caught:
+        AnswerGenerator(llm).generate("Q?", [hit()])
+
+    assert caught.value is error
+    assert llm.complete.call_count == 2

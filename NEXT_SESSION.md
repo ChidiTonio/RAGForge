@@ -1,46 +1,38 @@
 # RAGForge — Session Handoff
 
-## Checkpoint
+## Verified checkpoint
 - Branch: master
 - Implementation checkpoint: 480b7a0
-- Implementation checkpoint pushed to origin/master.
-- Full suite at that checkpoint: 416 passed.
-- Model baseline: qwen2.5:7b.
+- Previous handoff commit: 188cf9b
+- Python: 3.11.17
+- Environment: ~/venvs/ragforge-gpu
+- Model baseline: qwen2.5:7b
+- Generation tests: 44 passed.
+- Full suite: 423 passed on 2026-10-14.
 
-## Completed on 2026-10-10
-- Committed Ollama/PDF QA work and bounded generation retry.
-- Updated 13 invalid-response cases to expect two attempts.
-- Backups and benchmarks/runs/ remain untracked; do not stage them.
+## Completed
+- Added seven retry regression cases; no production-code changes.
+- Verified first-call success for answers and abstentions.
+- Verified invalid-first/valid-second recovery for both outcomes.
+- Verified corrective feedback and unchanged question/evidence.
+- Verified malformed output is not copied into retry prompts.
+- Verified backend errors during retry propagate without extra calls.
+- Existing tests cover exhaustion across 13 invalid-response cases.
 
 ## Next task
-Inspect generation code and tests; add only missing retry regression coverage:
-- First-call success.
-- Invalid-first/valid-second recovery.
-- Corrective feedback with original question and evidence retained.
-- Retry exhaustion.
-- Backend-error propagation.
-
-Run the full test suite and commit this checkpoint before changing the schema.
-
-## After that
+Inspect the current Answer schema, parser, renderer, and their consumers.
 Design answer points paired with supporting citations.
-Do not change the schema before the retry checkpoint is complete.
+Agree on compatibility and validation before changing production code.
+Citation membership alone does not prove factual support.
 
-## Start-of-session commands
-```bash
-cd ~/RAGForge
-git status
-git log -3 --oneline
-cat NEXT_SESSION.md
-python -m pytest -q
-```
-
-## Files to inspect first
-- src/ragforge/generation/core.py
-- tests/test_generation.py
-- src/ragforge/generation/ollama.py
-- tests/test_ollama.py
+## Start next session
+- cd ~/RAGForge
+- source ~/venvs/ragforge-gpu/bin/activate
+- git status
+- git log -3 --oneline
+- python -m pytest -q
 
 ## Working rule
-Update this note at the end of each session with the checkpoint,
-test results, outstanding issues, and the next concrete task.
+Stage only intended files.
+Leave backups and benchmarks/runs/ untracked.
+Update this handoff at each checkpoint.
