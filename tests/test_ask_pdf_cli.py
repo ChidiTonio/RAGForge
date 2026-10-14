@@ -6,6 +6,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock
 
+import numpy as np
 import pytest
 
 
@@ -142,3 +143,163 @@ def test_help_exits_without_loading(cli, monkeypatch, capsys):
     assert "Reading:" not in output.out
     for replacement in cli.replacements.values():
         replacement.assert_not_called()
+
+
+@pytest.fixture
+def cached_cli(cli, monkeypatch):
+    vectors = np.array([[3, 4]], dtype=np.float32)
+    chunk = cli.module.chunk_pages.return_value[0]
+    stored = SimpleNamespace(chunks=(chunk,), document_embeddings=vectors)
+    embedder = cli.module.SentenceTransformerEmbedder.return_value
+    embedder.dimension = 2
+    embedder.embed.return_value = vectors
+    replacements = {
+        "_cache_compatibility": Mock(return_value={"source": "generic.pdf"}),
+        "hash_file": Mock(),
+        "load_index": Mock(return_value=stored),
+        "save_index": Mock(),
+    }
+    for name, replacement in replacements.items():
+        monkeypatch.setattr(cli.module, name, replacement)
+    return SimpleNamespace(
+        cli=cli, vectors=vectors, stored=stored,
+        embedder=embedder, replacements=replacements,
+    )
+
+
+def cache_arguments(monkeypatch, *extra):
+    set_arguments(
+        monkeypatch,
+        "generic.pdf",
+        "Summarize this document.",
+        "--cache-dir", "data/indexes",
+        "--embedding-revision", "test-commit",
+        *extra,
+    )
+
+
+def test_cache_hit_skips_parsing_and_document_embedding(cached_cli, monkeypatch):
+    cache_arguments(monkeypatch)
+    cli = cached_cli.cli
+    cli.module.main()
+
+    cli.module.parse_pdf.assert_not_called()
+    cli.module.chunk_pages.assert_not_called()
+    cached_cli.embedder.embed.assert_not_called()
+    cli.module.save_index.assert_not_called()
+    call = cli.module.HybridRetriever.call_args
+    assert call.args == (cached_cli.stored.chunks,)
+    assert call.kwargs["document_embeddings"] is cached_cli.vectors
+    cli.module.SentenceTransformerEmbedder.assert_called_once_with(
+        device="cpu", revision="test-commit"
+    )
+    cli.pipeline.answer.assert_called_once()
+
+
+@pytest.mark.parametrize("failure", [
+    FileNotFoundError("missing"),
+    ValueError("placeholder"),
+    PermissionError("unreadable"),
+])
+def test_cache_miss_or_invalid_rebuilds(cached_cli, monkeypatch, failure):
+    cli = cached_cli.cli
+    if type(failure) is ValueError:
+        failure = cli.module.InvalidIndexCache("malformed cache")
+    cli.module.load_index.side_effect = failure
+    cache_arguments(monkeypatch)
+    cli.module.main()
+
+    cli.module.parse_pdf.assert_called_once()
+    cached_cli.embedder.embed.assert_called_once_with(["Usable document text."])
+    cli.module.save_index.assert_called_once()
+    assert (
+        cli.module.HybridRetriever.call_args.kwargs["document_embeddings"]
+        is cached_cli.vectors
+    )
+
+
+def test_explicit_rebuild_bypasses_loading(cached_cli, monkeypatch):
+    cache_arguments(monkeypatch, "--rebuild-index")
+    cli = cached_cli.cli
+    cli.module.main()
+    cli.module.load_index.assert_not_called()
+    cached_cli.embedder.embed.assert_called_once()
+    cli.module.save_index.assert_called_once()
+
+
+def test_cache_dimension_mismatch_rebuilds(cached_cli, monkeypatch):
+    cached_cli.embedder.dimension = 3
+    cache_arguments(monkeypatch)
+    cli = cached_cli.cli
+    cli.module.main()
+    cli.module.parse_pdf.assert_called_once()
+    cli.module.SentenceTransformerEmbedder.assert_called_once()
+    cli.module.save_index.assert_called_once()
+
+
+def test_cache_write_failure_still_answers(cached_cli, monkeypatch, capsys):
+    cli = cached_cli.cli
+    cli.module.load_index.side_effect = FileNotFoundError()
+    cli.module.save_index.side_effect = OSError("disk full")
+    cache_arguments(monkeypatch)
+    cli.module.main()
+    assert "could not save index cache" in capsys.readouterr().out
+    cli.pipeline.answer.assert_called_once()
+
+
+@pytest.mark.parametrize("arguments", [
+    ["--rebuild-index"],
+    ["--embedding-revision", "   "],
+    ["--cache-dir", "data/indexes", "--point-count", "0"],
+])
+def test_invalid_cache_arguments_exit_before_io(
+    cached_cli, monkeypatch, arguments
+):
+    set_arguments(monkeypatch, "generic.pdf", *arguments)
+    with pytest.raises(SystemExit) as exc:
+        cached_cli.cli.module.main()
+    assert exc.value.code == 2
+    for replacement in cached_cli.cli.replacements.values():
+        replacement.assert_not_called()
+    for replacement in cached_cli.replacements.values():
+        replacement.assert_not_called()
+
+
+def test_no_cache_does_not_hash_or_load(cached_cli, monkeypatch):
+    set_arguments(monkeypatch, "generic.pdf", "Question?")
+    cli = cached_cli.cli
+    cli.module.main()
+    for replacement in cached_cli.replacements.values():
+        replacement.assert_not_called()
+    cached_cli.embedder.embed.assert_not_called()
+    assert "document_embeddings" not in cli.module.HybridRetriever.call_args.kwargs
+
+
+def test_cache_without_revision_warns(cached_cli, monkeypatch, capsys):
+    set_arguments(
+        monkeypatch, "generic.pdf", "Question?",
+        "--cache-dir", "data/indexes",
+    )
+    cached_cli.cli.module.main()
+    assert "revision is unpinned" in capsys.readouterr().out
+
+
+def test_cache_identity_includes_content_source_and_configuration(
+    cli, monkeypatch, tmp_path
+):
+    monkeypatch.setattr(cli.module, "hash_file", Mock(return_value="first-hash"))
+    monkeypatch.setattr(cli.module, "version", Mock(return_value="test-version"))
+    first = cli.module._cache_compatibility(
+        Path("first.pdf"), revision="commit-a", device="cpu"
+    )
+    assert first["source"] == "first.pdf"
+    assert first["chunk_size"] == 800
+    assert first["overlap"] == 120
+    path = cli.module._cache_path(tmp_path, first)
+    assert path == cli.module._cache_path(tmp_path, dict(reversed(list(first.items()))))
+    for key in (
+        "source", "pdf_sha256", "embedding_revision",
+        "embedding_device", "ingestion_version", "dependencies",
+    ):
+        changed = dict(first, **{key: "changed"})
+        assert cli.module._cache_path(tmp_path, changed) != path

@@ -1,8 +1,11 @@
 """Ask questions about one PDF using hybrid retrieval and local Ollama."""
 
 import argparse
+import hashlib
+import json
 import re
 import time
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from ragforge.embeddings.sentence_transformers import SentenceTransformerEmbedder
@@ -15,9 +18,44 @@ from ragforge.generation.core import (
 from ragforge.generation.ollama import OllamaError, OllamaLLM
 from ragforge.ingestion.chunking import chunk_pages
 from ragforge.ingestion.pdf import parse_pdf
-from ragforge.retrieval.hybrid import HybridRetriever
 from ragforge.retrieval.cross_encoder import CrossEncoderScorer
+from ragforge.retrieval.hybrid import HybridRetriever
 from ragforge.retrieval.reranking import Reranker
+from ragforge.storage import InvalidIndexCache, hash_file, load_index, save_index
+
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+
+
+def _cache_compatibility(pdf, *, revision, device):
+    """Describe configured compatibility, not immutable upstream identity."""
+    dependencies = {}
+    for package in (
+        "pypdf", "numpy", "sentence-transformers", "transformers", "torch"
+    ):
+        try:
+            dependencies[package] = version(package)
+        except PackageNotFoundError:
+            dependencies[package] = "not-installed"
+    return {
+        "pdf_sha256": hash_file(pdf),
+        "source": pdf.name,
+        "ingestion_version": "pdf-strip-page-bound-chunks-word-filter-v1",
+        "chunk_size": 800,
+        "overlap": 120,
+        "embedding_model": EMBEDDING_MODEL,
+        "embedding_revision": revision,
+        "embedding_device": device,
+        "embedding_batch_size": 32,
+        "dependencies": dependencies,
+    }
+
+
+def _cache_path(directory, compatibility):
+    encoded = json.dumps(
+        compatibility, sort_keys=True, ensure_ascii=True, allow_nan=False
+    ).encode("utf-8")
+    key = hashlib.sha256(encoded).hexdigest()
+    return directory / f"{key}.npz"
 
 
 class RerankedRetriever:
@@ -41,6 +79,7 @@ class PaperSectionRetriever:
 
     def __init__(self, fallback, reranker, chunks):
         from dataclasses import replace
+
         from ragforge.retrieval.types import SearchResult
 
         self._fallback = fallback
@@ -71,7 +110,7 @@ class PaperSectionRetriever:
             )
 
         def marker(page, pattern):
-            match = re.search(pattern, page_text.get(page, ""), re.I | re.M)
+            match = re.search(pattern, page_text.get(page, ""), re.IGNORECASE | re.MULTILINE)
             if match is None:
                 raise ValueError(
                     f"Verified section marker missing on page {page}: {pattern}"
@@ -171,19 +210,19 @@ class PaperSectionRetriever:
         numbered = re.search(r"\b5\.([123])\b", query)
         if numbered:
             section = "5." + numbered.group(1)
-        elif re.search(r"\babstract\b", query, re.I):
+        elif re.search(r"\babstract\b", query, re.IGNORECASE):
             section = "abstract"
         elif re.search(
             r"\bfuture\s+(?:research\s+)?directions\b|"
             r"\bresearch\s+gaps\b",
-            query, re.I,
+            query, re.IGNORECASE,
         ):
             section = "5.3"
-        elif re.search(r"\blimitations\b", query, re.I):
+        elif re.search(r"\blimitations\b", query, re.IGNORECASE):
             section = "5.2"
-        elif re.search(r"\bstrengths\b", query, re.I):
+        elif re.search(r"\bstrengths\b", query, re.IGNORECASE):
             section = "5.1"
-        elif re.search(r"\bdiscussion\b", query, re.I):
+        elif re.search(r"\bdiscussion\b", query, re.IGNORECASE):
             section = "discussion"
         else:
             return self._fallback.search(query, top_k=top_k)
@@ -238,32 +277,133 @@ def main() -> None:
         default="cpu",
         help="Default: cpu, leaving GPU memory available for Ollama",
     )
+    parser.add_argument(
+        "--cache-dir",
+        type=Path,
+        help="Enable persistent document indexes in this directory",
+    )
+    parser.add_argument(
+        "--rebuild-index",
+        action="store_true",
+        help="Rebuild and replace the index; requires --cache-dir",
+    )
+    parser.add_argument(
+        "--embedding-revision",
+        default=None,
+        help="Embedding model revision; use a commit hash for reproducibility",
+    )
     args = parser.parse_args()
     if args.point_count is not None and args.point_count <= 0:
         parser.error("--point-count must be greater than zero")
+    if args.rebuild_index and args.cache_dir is None:
+        parser.error("--rebuild-index requires --cache-dir")
+    if (
+        args.embedding_revision is not None
+        and not args.embedding_revision.strip()
+    ):
+        parser.error("--embedding-revision must not be blank")
 
     started = time.perf_counter()
-    print(f"Reading: {args.pdf}", flush=True)
-    pages = parse_pdf(args.pdf)
-    chunks = chunk_pages(pages, chunk_size=800, overlap=120)
+    compatibility = None
+    cache_path = None
+    stored = None
+    if args.cache_dir is not None:
+        if args.embedding_revision is None:
+            print(
+                "Warning: embedding model revision is unpinned; cache metadata "
+                "cannot detect upstream model changes. Use an immutable "
+                "--embedding-revision or --rebuild-index.",
+                flush=True,
+            )
+        compatibility = _cache_compatibility(
+            args.pdf,
+            revision=args.embedding_revision,
+            device=args.embedding_device,
+        )
+        cache_path = _cache_path(args.cache_dir, compatibility)
+        if not args.rebuild_index:
+            try:
+                stored = load_index(cache_path, compatibility=compatibility)
+            except FileNotFoundError:
+                print("Index cache miss; rebuilding.", flush=True)
+            except (InvalidIndexCache, OSError) as exc:
+                print(f"Warning: cannot reuse index cache: {exc}", flush=True)
 
-    # BM25 requires at least one word token per indexed chunk.
-    usable = [chunk for chunk in chunks if re.search(r"\w+", chunk.text)]
-    print(
-        f"Pages: {len(pages)} | Pages with text: "
-        f"{sum(page.has_text for page in pages)} | "
-        f"Usable chunks: {len(usable)}",
-        flush=True,
-    )
-    if not usable:
-        parser.exit(
-            1,
-            "No usable text was extracted. This pipeline does not perform OCR.\n",
+    # Preserve the existing constructor call when no revision is supplied.
+    embedder = None
+    if stored is not None:
+        print("Loading embedding model for cached index...", flush=True)
+        if args.embedding_revision is None:
+            embedder = SentenceTransformerEmbedder(device=args.embedding_device)
+        else:
+            embedder = SentenceTransformerEmbedder(
+                device=args.embedding_device, revision=args.embedding_revision
+            )
+        if stored.document_embeddings.shape[1] != embedder.dimension:
+            print(
+                "Warning: cached embedding dimension differs from the model; "
+                "rebuilding.",
+                flush=True,
+            )
+            stored = None
+
+    if stored is None:
+        print(f"Reading: {args.pdf}", flush=True)
+        pages = parse_pdf(args.pdf)
+        chunks = chunk_pages(pages, chunk_size=800, overlap=120)
+
+        # BM25 requires at least one word token per indexed chunk.
+        usable = [chunk for chunk in chunks if re.search(r"\w+", chunk.text)]
+        print(
+            f"Pages: {len(pages)} | Pages with text: "
+            f"{sum(page.has_text for page in pages)} | "
+            f"Usable chunks: {len(usable)}",
+            flush=True,
+        )
+        if not usable:
+            parser.exit(
+                1,
+                "No usable text was extracted. This pipeline does not perform OCR.\n",
+            )
+    else:
+        usable = stored.chunks
+        print(
+            f"Index cache hit | Usable chunks: {len(usable)}",
+            flush=True,
         )
 
     print("Loading embedding model and building hybrid index...", flush=True)
-    embedder = SentenceTransformerEmbedder(device=args.embedding_device)
-    retriever = HybridRetriever(usable, embedder=embedder)
+    if embedder is None:
+        if args.embedding_revision is None:
+            embedder = SentenceTransformerEmbedder(device=args.embedding_device)
+        else:
+            embedder = SentenceTransformerEmbedder(
+                device=args.embedding_device, revision=args.embedding_revision
+            )
+
+    if cache_path is None:
+        retriever = HybridRetriever(usable, embedder=embedder)
+    else:
+        vectors = (
+            stored.document_embeddings
+            if stored is not None
+            else embedder.embed([chunk.text for chunk in usable])
+        )
+        retriever = HybridRetriever(
+            usable, embedder=embedder, document_embeddings=vectors
+        )
+        if stored is None:
+            try:
+                save_index(
+                    cache_path,
+                    chunks=usable,
+                    document_embeddings=vectors,
+                    compatibility=compatibility,
+                )
+            except (OSError, ValueError, TypeError) as exc:
+                print(f"Warning: could not save index cache: {exc}", flush=True)
+            else:
+                print(f"Saved index cache: {cache_path}", flush=True)
     generator = AnswerGenerator(
         OllamaLLM(model=args.model),
         max_evidence_chars=2400,
@@ -286,7 +426,7 @@ def main() -> None:
         started = time.perf_counter()
         try:
             if profiled_paper and re.search(
-                r"\bconclusions?\b", question, re.I
+                r"\bconclusions?\b", question, re.IGNORECASE
             ):
                 answer = Answer(
                     text=(
