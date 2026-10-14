@@ -80,6 +80,11 @@ SYSTEM_PROMPT = (
     "absent from the retrieved passages. "
     "For example, if asked for an account number and no evidence supplies "
     "that number, abstain rather than answer that it is not disclosed. "
+    "If the request contains requested_point_count, a supported answer "
+    "must contain exactly that many point objects. This explicit count "
+    "takes precedence over count wording in the question. Abstain instead "
+    "if the evidence cannot support the requested answer; do not fabricate "
+    "or pad points just to meet the count. "
     "Follow the requested number of points. When asked for N points, "
     "return exactly N point objects, each with a brief explanation. "
     "Do not add numbering or citation markers to point text; Python "
@@ -111,6 +116,11 @@ def _positive_integer(value: int, name: str) -> None:
         raise ValueError(f"{name} must be greater than zero.")
 
 
+def _point_count(value: int | None) -> None:
+    if value is not None:
+        _positive_integer(value, "point_count")
+
+
 def _question(value: str) -> str:
     if not isinstance(value, str):
         raise TypeError("question must be a string.")
@@ -128,8 +138,16 @@ class AnswerGenerator:
         self.llm = llm
         self.max_evidence_chars = max_evidence_chars
 
-    def generate(self, question: str, results: Iterable[SearchResult]) -> Answer:
+    def generate(
+        self,
+        question: str,
+        results: Iterable[SearchResult],
+        *,
+        point_count: int | None = None,
+    ) -> Answer:
+        """Generate an answer, optionally enforcing an explicit point count."""
         question = _question(question)
+        _point_count(point_count)
         selected: list[Evidence] = []
         seen: set[TextChunk] = set()
         used_chars = 0
@@ -175,6 +193,8 @@ class AnswerGenerator:
                 for item in evidence
             ],
         }
+        if point_count is not None:
+            payload["requested_point_count"] = point_count
         user_prompt = json.dumps(payload, ensure_ascii=False)
         system_prompt = SYSTEM_PROMPT
 
@@ -186,7 +206,7 @@ class AnswerGenerator:
                 user_prompt=user_prompt,
             )
             try:
-                return self._parse(raw, evidence)
+                return self._parse(raw, evidence, point_count=point_count)
             except InvalidLLMResponse as exc:
                 if os.environ.get("RAGFORGE_DEBUG_LLM") == "1":
                     print(
@@ -226,7 +246,12 @@ class AnswerGenerator:
         raise AssertionError("Unreachable retry state.")
 
     @staticmethod
-    def _parse(raw: str, evidence: tuple[Evidence, ...]) -> Answer:
+    def _parse(
+        raw: str,
+        evidence: tuple[Evidence, ...],
+        *,
+        point_count: int | None = None,
+    ) -> Answer:
         if not isinstance(raw, str):
             raise InvalidLLMResponse("LLM response must be a JSON string.")
         try:
@@ -271,6 +296,12 @@ class AnswerGenerator:
             raise InvalidLLMResponse("An answer must have reason=null.")
         if not raw_points:
             raise InvalidLLMResponse("An answer must contain at least one point.")
+
+        if point_count is not None and len(raw_points) != point_count:
+            raise InvalidLLMResponse(
+                f"An answer must contain exactly {point_count} points; "
+                f"received {len(raw_points)}."
+            )
 
         lookup = {item.label: item for item in evidence}
         points: list[AnswerPoint] = []
@@ -338,7 +369,17 @@ class RAGPipeline:
         self.generator = generator
         self.top_k = top_k
 
-    def answer(self, question: str) -> Answer:
+    def answer(
+        self,
+        question: str,
+        *,
+        point_count: int | None = None,
+    ) -> Answer:
         question = _question(question)
+        _point_count(point_count)
         results = self.retriever.search(question, top_k=self.top_k)
-        return self.generator.generate(question, results)
+        if point_count is None:
+            return self.generator.generate(question, results)
+        return self.generator.generate(
+            question, results, point_count=point_count
+        )

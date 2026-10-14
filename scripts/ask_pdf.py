@@ -223,11 +223,24 @@ def main() -> None:
     )
     parser.add_argument("--model", default="qwen2.5:3b")
     parser.add_argument(
+        "--point-count",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Require exactly N points in supported answers; "
+            "applies to every question in this session. "
+            "Abstentions remain allowed."
+        ),
+    )
+    parser.add_argument(
         "--embedding-device",
         default="cpu",
         help="Default: cpu, leaving GPU memory available for Ollama",
     )
     args = parser.parse_args()
+    if args.point_count is not None and args.point_count <= 0:
+        parser.error("--point-count must be greater than zero")
 
     started = time.perf_counter()
     print(f"Reading: {args.pdf}", flush=True)
@@ -287,7 +300,9 @@ def main() -> None:
                     evidence=(),
                 )
             else:
-                answer = pipeline.answer(question)
+                answer = pipeline.answer(
+                    question, point_count=args.point_count
+                )
         except (OllamaError, InvalidLLMResponse, ValueError) as exc:
             print(f"\nQuestion failed: {exc}", flush=True)
             return
@@ -319,6 +334,12 @@ def main() -> None:
         answer_question(args.question)
         return
 
+    if args.point_count is not None:
+        print(
+            f"Supported answers must contain exactly "
+            f"{args.point_count} point(s).",
+            flush=True,
+        )
     print("\nEnter a question, or type 'exit' to stop.")
     while True:
         try:

@@ -398,3 +398,102 @@ def test_answer_points_are_immutable():
     answer = AnswerGenerator(FakeLLM(response())).generate("Q?", [hit()])
     with pytest.raises(FrozenInstanceError):
         answer.points[0].text = "Changed."
+
+
+
+def counted_response(count):
+    return structured_response([
+        {"text": f"Point {number}.", "citations": ["S1"]}
+        for number in range(1, count + 1)
+    ])
+
+
+@pytest.mark.parametrize("count", [1, 3])
+def test_explicit_point_count_accepts_matching_answer(count):
+    llm = FakeLLM(counted_response(count))
+    answer = AnswerGenerator(llm).generate("Summarize.", [hit()], point_count=count)
+    assert len(answer.points) == count
+    assert len(llm.calls) == 1
+    payload = json.loads(llm.calls[0][1])
+    assert payload["requested_point_count"] == count
+
+
+@pytest.mark.parametrize("actual", [1, 3])
+def test_point_count_mismatch_recovers_with_same_request(actual):
+    llm = Mock()
+    llm.complete.side_effect = [counted_response(actual), counted_response(2)]
+    answer = AnswerGenerator(llm).generate("Summarize.", [hit()], point_count=2)
+    assert len(answer.points) == 2
+    assert llm.complete.call_count == 2
+    first, second = [call.kwargs for call in llm.complete.call_args_list]
+    assert first["user_prompt"] == second["user_prompt"]
+    assert json.loads(second["user_prompt"])["requested_point_count"] == 2
+    assert (
+        f"An answer must contain exactly 2 points; received {actual}."
+        in second["system_prompt"]
+    )
+
+
+def test_point_count_mismatch_is_rejected_after_two_attempts():
+    llm = FakeLLM(counted_response(3))
+    with pytest.raises(InvalidLLMResponse, match="after two attempts"):
+        AnswerGenerator(llm).generate("Summarize.", [hit()], point_count=1)
+    assert len(llm.calls) == 2
+
+
+def test_explicit_point_count_allows_valid_abstention():
+    llm = FakeLLM(response("The supplied evidence is insufficient.", [], True))
+    answer = AnswerGenerator(llm).generate("Summarize.", [hit()], point_count=3)
+    assert answer.status == "abstained"
+    assert answer.points == ()
+    assert len(llm.calls) == 1
+
+
+def test_count_mismatch_can_recover_to_abstention():
+    llm = Mock()
+    llm.complete.side_effect = [
+        counted_response(1),
+        response("The supplied evidence is insufficient.", [], True),
+    ]
+    answer = AnswerGenerator(llm).generate("Summarize.", [hit()], point_count=3)
+    assert answer.status == "abstained"
+    assert llm.complete.call_count == 2
+
+
+@pytest.mark.parametrize("count", [True, False, 0, -1, 1.5, "3"])
+def test_invalid_point_count_skips_retrieval_and_backend(count):
+    retriever = Mock()
+    llm = FakeLLM(response())
+    generator = AnswerGenerator(llm)
+    with pytest.raises((TypeError, ValueError)):
+        generator.generate("Q?", [hit()], point_count=count)
+    with pytest.raises((TypeError, ValueError)):
+        RAGPipeline(retriever, generator).answer("Q?", point_count=count)
+    retriever.search.assert_not_called()
+    assert llm.calls == []
+
+
+def test_no_evidence_with_count_skips_backend():
+    llm = FakeLLM(response())
+    answer = AnswerGenerator(llm).generate("Q?", [], point_count=3)
+    assert answer.status == "no_evidence"
+    assert answer.points == ()
+    assert llm.calls == []
+
+
+def test_pipeline_forwards_explicit_point_count():
+    retriever = Mock()
+    retriever.search.return_value = [hit()]
+    llm = FakeLLM(counted_response(2))
+    pipeline = RAGPipeline(retriever, AnswerGenerator(llm), top_k=3)
+    answer = pipeline.answer("  Summarize.  ", point_count=2)
+    retriever.search.assert_called_once_with("Summarize.", top_k=3)
+    assert len(answer.points) == 2
+    assert json.loads(llm.calls[0][1])["requested_point_count"] == 2
+
+
+def test_unspecified_count_keeps_existing_behavior():
+    llm = FakeLLM(counted_response(3))
+    answer = AnswerGenerator(llm).generate("Give one point.", [hit()])
+    assert len(answer.points) == 3
+    assert "requested_point_count" not in json.loads(llm.calls[0][1])

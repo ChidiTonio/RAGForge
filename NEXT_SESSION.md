@@ -65,3 +65,49 @@ mismatches can trigger the existing bounded retry. Define how the
 requested count reaches the generator; do not assume arbitrary natural
 language can be reliably parsed with a simple regex.
 No repeat smoke test or offline baseline rerun is needed before that work.
+
+## Explicit point-count enforcement — 2026-10-14
+
+Implemented:
+- Optional point_count on AnswerGenerator.generate and RAGPipeline.answer.
+- Explicit requested count included in the LLM request.
+- Supported answers with the wrong number of points trigger the existing
+  bounded two-attempt validation retry.
+- Valid abstention and no-evidence behavior remain allowed.
+- Invalid counts are rejected before retrieval/backend calls.
+- PDF CLI supports --point-count N and rejects nonpositive counts before
+  PDF/model loading. In interactive mode the count applies to all questions.
+- Natural-language count wording alone does not activate enforcement.
+
+Verification:
+- git diff --check passed before the CLI patch; rerun before committing.
+- Focused generation/Ollama suite: 105 passed.
+- Full suite after CLI integration: 464 passed (16 new generation cases).
+- CLI --point-count 0 rejected before PDF/model loading.
+- Live qwen2.5:7b Abstract check with --point-count 1:
+  exactly one supported point.
+- Live bank-account question with --point-count 1:
+  abstained without citations.
+- Live Discussion check with --point-count 3:
+  exactly three complete sentences covering a strength, limitation,
+  and future direction; each supported by its cited passage.
+- No validation-failure debug messages appeared in these live outputs.
+  Retry recovery is covered by automated tests, not demonstrated live.
+
+Remaining limitations:
+- Point-count validation does not enforce topic coverage, sentence quality,
+  quotation fidelity, or factual support.
+- The one-point Abstract answer included an unnecessary citation:
+  S3 directly supported the claim; S1 did not directly support the full claim.
+- CLI option behavior was manually checked; dedicated CLI regression tests
+  have not yet been added.
+- The PDF script rebuilds its in-memory hybrid index on each invocation.
+  Cached model weights are not a persisted document index.
+- Verified section routing is specific to the profiled paper, not a general
+  section parser.
+
+Next:
+- Add lightweight automated CLI regression coverage.
+- Decide MVP deployment target: local CLI, private web app, or public service.
+- Plan persistent indexing and quotation/factual-support validation against
+  that target. Do not treat count enforcement as full reliability certification.
