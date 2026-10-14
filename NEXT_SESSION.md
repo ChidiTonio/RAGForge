@@ -111,3 +111,18 @@ Next:
 - Decide MVP deployment target: local CLI, private web app, or public service.
 - Plan persistent indexing and quotation/factual-support validation against
   that target. Do not treat count enforcement as full reliability certification.
+
+## CLI regression coverage — 2026-10-14
+
+- Added tests/test_ask_pdf_cli.py with eight mocked CLI cases.
+- Covered zero, negative, and noninteger point counts rejected before loading.
+- Covered single-question and interactive count forwarding, with and without
+  an explicit count.
+- Covered --help exiting without PDF/model construction.
+- Focused CLI suite: 8 passed.
+- Full suite: 472 passed.
+- No live model run needed for this test-only change.
+- This supersedes the earlier note that dedicated CLI tests were absent.
+
+Next: decide MVP deployment target, then scope persistent indexing.
+Quotation fidelity and factual-support validation remain separate work.
