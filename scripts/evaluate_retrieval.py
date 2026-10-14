@@ -11,8 +11,11 @@ import argparse
 import hashlib
 import json
 import math
+import platform
+import subprocess
 from dataclasses import fields
 from datetime import UTC, datetime
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from ragforge.embeddings.sentence_transformers import SentenceTransformerEmbedder
@@ -26,6 +29,52 @@ CANDIDATE_K = 20
 RRF_K = 60
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 MODEL_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+
+
+def collect_run_metadata():
+    """Capture code/runtime identity without storing private status paths."""
+    script_path = Path(__file__).resolve()
+    provenance = {
+        "captured_at_utc": datetime.now(UTC).isoformat(),
+        "evaluator_sha256": hashlib.sha256(script_path.read_bytes()).hexdigest(),
+        "git_commit": None,
+        "git_working_tree_dirty": None,
+        "git_metadata_status": "unavailable",
+        "git_metadata_error": None,
+        "python_version": platform.python_version(),
+    }
+
+    def git(*arguments):
+        return subprocess.run(
+            ["git", *arguments],
+            cwd=script_path.parent,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        ).stdout.strip()
+
+    try:
+        commit = git("rev-parse", "HEAD")
+        status = git("status", "--porcelain=v1", "--untracked-files=normal")
+    except (OSError, subprocess.SubprocessError) as exc:
+        # Avoid storing stderr or potentially private paths.
+        provenance["git_metadata_error"] = type(exc).__name__
+    else:
+        provenance.update({
+            "git_commit": commit,
+            "git_working_tree_dirty": bool(status),
+            "git_metadata_status": "available",
+        })
+
+    package_versions = {}
+    for name in ("sentence-transformers", "transformers", "torch", "numpy"):
+        try:
+            package_versions[name] = version(name)
+        except PackageNotFoundError:
+            package_versions[name] = None
+
+    return provenance, package_versions
 
 
 def load_json(path: Path) -> tuple[dict, str]:
@@ -226,6 +275,7 @@ def main() -> None:
     except (OSError, TypeError, ValueError) as exc:
         parser.error(str(exc))
 
+    provenance, package_versions = collect_run_metadata()
     questions = dataset["questions"]
     print(
         f"Validated: {len(chunks)} chunks | {len(questions)} questions",
@@ -256,6 +306,8 @@ def main() -> None:
     report = {
         "report_schema_version": 1,
         "created_at_utc": datetime.now(UTC).isoformat(),
+        "provenance": provenance,
+        "package_versions": package_versions,
         "dataset_id": dataset.get("dataset_id"),
         "corpus_path": str(args.corpus),
         "corpus_sha256": corpus_hash,

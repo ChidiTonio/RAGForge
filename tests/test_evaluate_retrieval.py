@@ -201,3 +201,158 @@ def test_evaluate_rejects_invalid_results(synthetic_chunks, case, message):
 
     with pytest.raises(ValueError, match=message):
         evaluator.evaluate(retriever, questions, chunk_to_id)
+
+
+@pytest.mark.parametrize(
+    ("status_output", "expected_dirty"),
+    [("", False), (" M scripts/evaluate_retrieval.py\n", True)],
+)
+def test_run_metadata_records_git_runtime_and_script(
+    monkeypatch, status_output, expected_dirty
+):
+    runner = Mock(side_effect=[
+        SimpleNamespace(stdout="a" * 40 + "\n"),
+        SimpleNamespace(stdout=status_output),
+    ])
+    monkeypatch.setattr(evaluator.subprocess, "run", runner)
+    monkeypatch.setattr(evaluator.platform, "python_version", lambda: "3.11.test")
+    monkeypatch.setattr(evaluator, "version", lambda name: "test-version")
+
+    provenance, packages = evaluator.collect_run_metadata()
+
+    assert provenance["git_commit"] == "a" * 40
+    assert provenance["git_working_tree_dirty"] is expected_dirty
+    assert provenance["git_metadata_status"] == "available"
+    assert provenance["git_metadata_error"] is None
+    assert provenance["python_version"] == "3.11.test"
+    assert provenance["evaluator_sha256"] == hashlib.sha256(
+        SCRIPT_PATH.read_bytes()
+    ).hexdigest()
+    assert provenance["captured_at_utc"]
+    assert packages == {
+        name: "test-version"
+        for name in ("sentence-transformers", "transformers", "torch", "numpy")
+    }
+    assert runner.call_count == 2
+    assert runner.call_args_list[0].args[0] == ["git", "rev-parse", "HEAD"]
+    assert runner.call_args_list[1].args[0] == [
+        "git", "status", "--porcelain=v1", "--untracked-files=normal"
+    ]
+    for call in runner.call_args_list:
+        assert call.kwargs["cwd"] == SCRIPT_PATH.resolve().parent
+        assert call.kwargs["check"] is True
+        assert call.kwargs["capture_output"] is True
+        assert call.kwargs["timeout"] == 5
+
+
+@pytest.mark.parametrize("failure_at", [0, 1])
+@pytest.mark.parametrize("failure_kind", ["missing", "command", "timeout"])
+def test_run_metadata_handles_unavailable_git(
+    monkeypatch, failure_at, failure_kind
+):
+    failures = {
+        "missing": FileNotFoundError("git unavailable"),
+        "command": evaluator.subprocess.CalledProcessError(128, ["git"]),
+        "timeout": evaluator.subprocess.TimeoutExpired(["git"], 5),
+    }
+    failure = failures[failure_kind]
+    responses = [SimpleNamespace(stdout="a" * 40)] * failure_at
+    runner = Mock(side_effect=responses + [failure])
+    monkeypatch.setattr(evaluator.subprocess, "run", runner)
+    monkeypatch.setattr(evaluator, "version", lambda name: "test-version")
+
+    provenance, packages = evaluator.collect_run_metadata()
+
+    assert provenance["git_commit"] is None
+    assert provenance["git_working_tree_dirty"] is None
+    assert provenance["git_metadata_status"] == "unavailable"
+    assert provenance["git_metadata_error"] == type(failure).__name__
+    assert packages["torch"] == "test-version"
+
+
+def test_run_metadata_marks_missing_package_explicitly(monkeypatch):
+    monkeypatch.setattr(
+        evaluator.subprocess,
+        "run",
+        Mock(side_effect=[
+            SimpleNamespace(stdout="a" * 40),
+            SimpleNamespace(stdout=""),
+        ]),
+    )
+
+    def package_version(name):
+        if name == "torch":
+            raise evaluator.PackageNotFoundError(name)
+        return "test-version"
+
+    monkeypatch.setattr(evaluator, "version", package_version)
+
+    _, packages = evaluator.collect_run_metadata()
+
+    assert packages["torch"] is None
+    assert packages["numpy"] == "test-version"
+
+
+def test_main_serializes_metadata_before_model_construction(
+    monkeypatch, tmp_path, input_documents
+):
+    import sys
+
+    original_manifest, dataset = input_documents
+    manifest = dict(original_manifest)
+    manifest.update({
+        "pdf_sha256": "synthetic-pdf-hash",
+        "chunk_size": 1000,
+        "overlap": 150,
+    })
+    corpus = write_json(tmp_path / "corpus.json", manifest)
+    questions = write_json(tmp_path / "questions.json", dataset)
+    output = tmp_path / "report.json"
+    events = []
+    provenance = {
+        "git_commit": "a" * 40,
+        "git_working_tree_dirty": False,
+        "git_metadata_status": "available",
+    }
+    packages = {"torch": None, "numpy": "test-version"}
+
+    def metadata():
+        events.append("metadata")
+        return provenance, packages
+
+    def embedder(*args, **kwargs):
+        events.append("model")
+        assert events == ["metadata", "model"]
+        assert kwargs["revision"] == evaluator.MODEL_REVISION
+        return object()
+
+    retriever = Mock()
+    retriever.search.return_value = []
+    monkeypatch.setattr(evaluator, "collect_run_metadata", metadata)
+    monkeypatch.setattr(evaluator, "SentenceTransformerEmbedder", embedder)
+    for name in ("BM25Retriever", "DenseRetriever", "HybridRetriever"):
+        monkeypatch.setattr(evaluator, name, Mock(return_value=retriever))
+    monkeypatch.setattr(sys, "argv", [
+        "evaluate_retrieval.py",
+        "--corpus", str(corpus),
+        "--questions", str(questions),
+        "--output", str(output),
+    ])
+
+    evaluator.main()
+
+    report = json.loads(output.read_text(encoding="utf-8"))
+    assert report["provenance"] == provenance
+    assert report["package_versions"] == packages
+    assert report["report_schema_version"] == 1
+    assert set(report["methods"]) == {"bm25", "dense", "hybrid"}
+    assert report["corpus_sha256"] == hashlib.sha256(
+        corpus.read_bytes()
+    ).hexdigest()
+    assert report["questions_sha256"] == hashlib.sha256(
+        questions.read_bytes()
+    ).hexdigest()
+    for metrics in report["methods"].values():
+        assert metrics["hit_rate_at_k"] == 0.0
+        assert metrics["mrr_at_k"] == 0.0
+    assert events == ["metadata", "model"]
