@@ -303,3 +303,54 @@ def test_cache_identity_includes_content_source_and_configuration(
     ):
         changed = dict(first, **{key: "changed"})
         assert cli.module._cache_path(tmp_path, changed) != path
+
+
+@pytest.mark.parametrize("profiled", [False, True])
+def test_retriever_selection_by_filename(cli, monkeypatch, profiled):
+    filename = (
+        "paper_434b99d68f495a91946c64b36b4602f9.pdf"
+        if profiled else "generic.pdf"
+    )
+    set_arguments(monkeypatch, filename, "Summarize this document.")
+    cli.module.main()
+
+    reranked = cli.module.RerankedRetriever.return_value
+    cli.module.RerankedRetriever.assert_called_once_with(
+        cli.module.HybridRetriever.return_value,
+        cli.module.Reranker.return_value,
+    )
+    if profiled:
+        cli.module.PaperSectionRetriever.assert_called_once_with(
+            reranked,
+            cli.module.Reranker.return_value,
+            cli.module.chunk_pages.return_value,
+        )
+        active = cli.module.PaperSectionRetriever.return_value
+    else:
+        cli.module.PaperSectionRetriever.assert_not_called()
+        active = reranked
+    cli.module.RAGPipeline.assert_called_once_with(
+        active, cli.module.AnswerGenerator.return_value, top_k=3
+    )
+
+
+@pytest.mark.parametrize("profiled", [False, True])
+def test_conclusion_abstention_is_profile_specific(
+    cli, monkeypatch, capsys, profiled
+):
+    filename = (
+        "paper_434b99d68f495a91946c64b36b4602f9.pdf"
+        if profiled else "generic.pdf"
+    )
+    question = "Summarize the conclusion."
+    set_arguments(monkeypatch, filename, question)
+    cli.module.main()
+
+    if profiled:
+        cli.pipeline.answer.assert_not_called()
+        output = capsys.readouterr().out
+        assert "STATUS: abstained" in output
+        assert "No explicitly titled Conclusion section" in output
+    else:
+        cli.pipeline.answer.assert_called_once_with(question, point_count=None)
+        assert "STATUS: answered" in capsys.readouterr().out
