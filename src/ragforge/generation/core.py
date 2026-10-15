@@ -13,6 +13,7 @@ from typing import Literal, Protocol
 
 from ragforge.ingestion.chunking import TextChunk
 from ragforge.retrieval.types import SearchResult
+from ragforge.generation.support import verify_support
 
 
 class LLM(Protocol):
@@ -133,10 +134,33 @@ def _question(value: str) -> str:
 class AnswerGenerator:
     """Select whole chunks, invoke an injected backend, and validate output."""
 
-    def __init__(self, llm: LLM, *, max_evidence_chars: int = 12000) -> None:
+    def __init__(
+        self,
+        llm: LLM,
+        *,
+        max_evidence_chars: int = 12000,
+        verification_llm: LLM | None = None,
+    ) -> None:
         _positive_integer(max_evidence_chars, "max_evidence_chars")
         self.llm = llm
         self.max_evidence_chars = max_evidence_chars
+        self.verification_llm = verification_llm
+
+    def _verify(self, question: str, answer: Answer) -> Answer:
+        if answer.status != "answered" or self.verification_llm is None:
+            return answer
+        if verify_support(self.verification_llm, question, answer):
+            return answer
+        return Answer(
+            text=(
+                "The proposed answer could not be verified as answering "
+                "the question using its cited evidence."
+            ),
+            status="abstained",
+            citations=(),
+            evidence=answer.evidence,
+            points=(),
+        )
 
     def generate(
         self,
@@ -206,7 +230,7 @@ class AnswerGenerator:
                 user_prompt=user_prompt,
             )
             try:
-                return self._parse(raw, evidence, point_count=point_count)
+                answer = self._parse(raw, evidence, point_count=point_count)
             except InvalidLLMResponse as exc:
                 if os.environ.get("RAGFORGE_DEBUG_LLM") == "1":
                     print(
@@ -242,6 +266,11 @@ class AnswerGenerator:
                     "For insufficient evidence, use abstain=true, points=[], "
                     "and a full-sentence explanation in reason."
                 )
+
+            else:
+                # Verification is outside the answer-contract retry handler.
+                # Verifier/backend errors are not evidence insufficiency.
+                return self._verify(question, answer)
 
         raise AssertionError("Unreachable retry state.")
 

@@ -1,8 +1,6 @@
 """Exercise production retrieval wrappers with synthetic, model-free inputs."""
 
-import importlib.util
 from dataclasses import replace
-from pathlib import Path
 from unittest.mock import Mock
 
 import pytest
@@ -13,12 +11,9 @@ from ragforge.retrieval.types import SearchResult
 
 @pytest.fixture
 def module():
-    script = Path(__file__).resolve().parents[1] / "scripts" / "ask_pdf.py"
-    spec = importlib.util.spec_from_file_location("ragforge_routing_tests", script)
-    assert spec is not None and spec.loader is not None
-    loaded = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(loaded)
-    return loaded
+    from ragforge import application
+
+    return application
 
 
 @pytest.fixture
@@ -62,14 +57,16 @@ def make_chunks(pages):
             midpoint = len(text) // 2
             spans = [(0, midpoint + 12), (midpoint, len(text))]
         for number, (start, end) in enumerate(spans, start=1):
-            chunks.append(TextChunk(
-                source="synthetic-profile.pdf",
-                page_number=page,
-                chunk_number=number,
-                start_char=start,
-                end_char=end,
-                text=text[start:end],
-            ))
+            chunks.append(
+                TextChunk(
+                    source="synthetic-profile.pdf",
+                    page_number=page,
+                    chunk_number=number,
+                    start_char=start,
+                    end_char=end,
+                    text=text[start:end],
+                )
+            )
     return chunks
 
 
@@ -85,9 +82,7 @@ def routing(module, pages):
         ][:top_k]
 
     reranker.rerank.side_effect = rerank
-    retriever = module.PaperSectionRetriever(
-        fallback, reranker, make_chunks(pages)
-    )
+    retriever = module.PaperSectionRetriever(fallback, reranker, make_chunks(pages))
     return retriever, fallback, reranker
 
 
@@ -95,19 +90,13 @@ def routing(module, pages):
     ("candidate_k", "top_k", "expected_pool"),
     [(30, 3, 30), (30, 40, 40), (8, 3, 8)],
 )
-def test_wrapper_widens_pool_and_delegates(
-    module, candidate_k, top_k, expected_pool
-):
+def test_wrapper_widens_pool_and_delegates(module, candidate_k, top_k, expected_pool):
     backend = Mock()
     reranker = Mock()
-    wrapper = module.RerankedRetriever(
-        backend, reranker, candidate_k=candidate_k
-    )
+    wrapper = module.RerankedRetriever(backend, reranker, candidate_k=candidate_k)
     result = wrapper.search("A synthetic query", top_k=top_k)
 
-    backend.search.assert_called_once_with(
-        "A synthetic query", top_k=expected_pool
-    )
+    backend.search.assert_called_once_with("A synthetic query", top_k=expected_pool)
     reranker.rerank.assert_called_once_with(
         "A synthetic query", backend.search.return_value, top_k=top_k
     )
@@ -153,12 +142,14 @@ def test_sections_have_exact_boundaries_and_preserve_metadata(routing, pages):
                 end[1] if chunk.page_number == end[0] else chunk.end_char,
             )
             if left < right:
-                expected.append(replace(
-                    chunk,
-                    start_char=left,
-                    end_char=right,
-                    text=pages[chunk.page_number][left:right],
-                ))
+                expected.append(
+                    replace(
+                        chunk,
+                        start_char=left,
+                        end_char=right,
+                        text=pages[chunk.page_number][left:right],
+                    )
+                )
         assert retriever._sections[section] == expected
         assert expected
 
@@ -195,17 +186,18 @@ def test_routes_and_precedence(routing, query, section):
     candidates = call.args[1]
     assert [item.chunk for item in candidates] == retriever._sections[section]
     assert all(item.score == 0.0 for item in candidates)
-    assert [item.chunk for item in results] == [
-        item.chunk for item in reversed(candidates)
-    ][:3]
+    assert [item.chunk for item in results] == [item.chunk for item in reversed(candidates)][:3]
 
 
-@pytest.mark.parametrize("query", [
-    "Explain the methods",
-    "What is the future of this field?",
-    "Explain section 5.4",
-    "Explain abstractness and strengthsfulness",
-])
+@pytest.mark.parametrize(
+    "query",
+    [
+        "Explain the methods",
+        "What is the future of this field?",
+        "Explain section 5.4",
+        "Explain abstractness and strengthsfulness",
+    ],
+)
 def test_unmatched_queries_use_fallback(routing, query):
     retriever, fallback, reranker = routing
     assert retriever.search(query, top_k=2) is fallback.search.return_value
@@ -288,8 +280,7 @@ def test_missing_verified_markers_fail(module, pages, page, marker):
 def test_inconsistent_overlapping_text_fails(module, pages):
     chunks = make_chunks(pages)
     index = next(
-        i for i, chunk in enumerate(chunks)
-        if chunk.page_number == 16 and chunk.chunk_number == 2
+        i for i, chunk in enumerate(chunks) if chunk.page_number == 16 and chunk.chunk_number == 2
     )
     chunks[index] = replace(chunks[index], text="!" + chunks[index].text[1:])
     with pytest.raises(ValueError, match="Overlapping chunk text disagrees"):
