@@ -497,3 +497,64 @@ def test_unspecified_count_keeps_existing_behavior():
     answer = AnswerGenerator(llm).generate("Give one point.", [hit()])
     assert len(answer.points) == 3
     assert "requested_point_count" not in json.loads(llm.calls[0][1])
+
+
+@pytest.mark.parametrize("second_text", [
+    "Revenue grew.",
+    "  Revenue grew.  ",
+    "REVENUE GREW.",
+    "Revenue \n\t grew.",
+])
+@pytest.mark.parametrize("point_count", [None, 2])
+def test_duplicate_point_text_is_rejected(second_text, point_count):
+    raw = structured_response([
+        {"text": "Revenue grew.", "citations": ["S1"]},
+        {"text": second_text, "citations": ["S2"]},
+    ])
+    llm = FakeLLM(raw)
+    with pytest.raises(InvalidLLMResponse, match="duplicate point text"):
+        AnswerGenerator(llm).generate(
+            "Summarize.",
+            [hit("Revenue grew."), hit("Revenue grew significantly.", page=2)],
+            point_count=point_count,
+        )
+    assert len(llm.calls) == 2
+
+
+def test_duplicate_points_retry_with_unchanged_request():
+    duplicate = structured_response([
+        {"text": "Revenue grew.", "citations": ["S1"]},
+        {"text": "Revenue grew.", "citations": ["S1"]},
+    ])
+    distinct = structured_response([
+        {"text": "Revenue grew.", "citations": ["S1"]},
+        {"text": "Costs fell.", "citations": ["S1"]},
+    ])
+    llm = Mock()
+    llm.complete.side_effect = [duplicate, distinct]
+    answer = AnswerGenerator(llm).generate(
+        "Summarize.", [hit("Revenue grew. Costs fell.")], point_count=2
+    )
+    assert answer.status == "answered"
+    assert [point.text for point in answer.points] == [
+        "Revenue grew.", "Costs fell.",
+    ]
+    assert llm.complete.call_count == 2
+    first, second = [call.kwargs for call in llm.complete.call_args_list]
+    assert first["user_prompt"] == second["user_prompt"]
+    assert "duplicate point text" in second["system_prompt"]
+
+
+def test_distinct_points_can_share_a_citation():
+    raw = structured_response([
+        {"text": "Revenue grew.", "citations": ["S1"]},
+        {"text": "Costs fell.", "citations": ["S1"]},
+    ])
+    llm = FakeLLM(raw)
+    answer = AnswerGenerator(llm).generate(
+        "Summarize.", [hit("Revenue grew. Costs fell.")], point_count=2
+    )
+    assert answer.status == "answered"
+    assert len(answer.points) == 2
+    assert len(answer.citations) == 1
+    assert len(llm.calls) == 1

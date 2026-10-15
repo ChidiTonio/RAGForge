@@ -336,6 +336,7 @@ class AnswerGenerator:
         points: list[AnswerPoint] = []
         cited: list[Evidence] = []
         seen_labels: set[str] = set()
+        seen_point_texts: set[str] = set()
 
         for point in raw_points:
             if not isinstance(point, dict) or set(point) != {"text", "citations"}:
@@ -360,6 +361,13 @@ class AnswerGenerator:
                 raise InvalidLLMResponse(
                     "Point citations must not contain duplicates."
                 )
+
+            normalized_text = " ".join(text.split()).casefold()
+            if normalized_text in seen_point_texts:
+                raise InvalidLLMResponse(
+                    "An answer must not contain duplicate point text."
+                )
+            seen_point_texts.add(normalized_text)
 
             resolved = tuple(lookup[label] for label in labels)
             points.append(AnswerPoint(text=text.strip(), citations=resolved))
