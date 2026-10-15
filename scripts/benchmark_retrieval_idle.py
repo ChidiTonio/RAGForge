@@ -465,10 +465,10 @@ def main():
         ])
     if args.prediction_detail_timing:
         report["limitations"].extend([
-            "Detailed timing temporarily wraps a module-level transfer "
-            "reference; concurrent prediction in this process is unsupported.",
-            "Forward host time is not completed GPU execution time; "
-            "the remainder is not isolated output-transfer time.",
+            ("Detailed timing temporarily wraps a module-level transfer "
+             "reference; concurrent prediction in this process is unsupported."),
+            ("Forward host time is not completed GPU execution time; "
+             "the remainder is not isolated output-transfer time."),
         ])
     if args.cuda_pre_transfer_probe:
         report["settings"]["stage_timing_definition"] = (

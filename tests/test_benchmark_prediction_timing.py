@@ -193,14 +193,13 @@ def test_detailed_failure_restores_all_patches(timing, monkeypatch, failure):
         now[0] += 0.007
         raise RuntimeError("probe failed")
 
-    with pytest.raises(RuntimeError, match=f"{failure} failed"):
-        with timing.prediction_timing(
-            backend,
-            clock=lambda: now[0],
-            detailed=True,
-            before_input_transfer=failing_probe if failure == "probe" else None,
-        ) as totals:
-            backend.predict(["a", "b"])
+    with pytest.raises(RuntimeError, match=f"{failure} failed"), timing.prediction_timing(
+        backend,
+        clock=lambda: now[0],
+        detailed=True,
+        before_input_transfer=failing_probe if failure == "probe" else None,
+    ) as totals:
+        backend.predict(["a", "b"])
 
     assert vars(backend) == before
     assert prediction_globals["batch_to_device"] is original_transfer
@@ -220,9 +219,8 @@ def test_detailed_failure_restores_all_patches(timing, monkeypatch, failure):
 def test_probe_requires_detailed_timing(timing):
     backend = Backend([0.0])
     before = dict(vars(backend))
-    with pytest.raises(ValueError, match="requires detailed timing"):
-        with timing.prediction_timing(
-            backend, before_input_transfer=lambda: None,
-        ):
-            pass
+    with pytest.raises(ValueError, match="requires detailed timing"), timing.prediction_timing(
+        backend, before_input_transfer=lambda: None,
+    ):
+        pass
     assert vars(backend) == before

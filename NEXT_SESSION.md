@@ -158,3 +158,23 @@ compatibility metadata, then integrate cache reuse into the local PDF CLI.
 Confirmed CLI ingestion settings: chunk_size=800, overlap=120, followed
 by word-token filtering. Embedding adapter currently uses its default
 sentence-transformers/all-MiniLM-L6-v2 model.
+
+## Local CLI acceptance — 2026-10-15
+
+This entry supersedes earlier pending CLI-cache integration notes.
+
+- Routing/reranking tests committed as 12f36d5.
+- Five lint findings corrected; Ruff and all 588 tests passed.
+- Live service at 127.0.0.1:11434 exposed qwen2.5:7b.
+- Offline-model cache acceptance passed: 21 pages, 167 usable chunks.
+- First process saved the index; second reused it without PDF reparsing.
+- Both returned the same one-point abstract answer, collectively supported
+  by the displayed cited passages.
+- Index readiness was 13.09s then 3.52s; not a controlled benchmark.
+- Embedding revision remained unpinned.
+- Local logs/cache: data/cache-acceptance.XmivMj; do not stage.
+- README added with setup, usage, caching, and known limitations.
+
+Current scope is the validated local PDF CLI. Web deployment and automatic
+factual-support/quotation validation remain separate work.
+Do not repeat completed diagnostics without a new requirement or issue.

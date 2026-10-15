@@ -116,7 +116,7 @@ def prediction_timing(
             setattr(backend, name, wrapper)
             installed.append(name)
         if detailed:
-            setattr(backend, "forward", stage_wrapper("forward", "forward"))
+            backend.forward = stage_wrapper("forward", "forward")
             installed.append("forward")
             transfer_globals["batch_to_device"] = stage_wrapper(
                 "input_transfer", "input_transfer"
