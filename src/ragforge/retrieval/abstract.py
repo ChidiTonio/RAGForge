@@ -98,6 +98,16 @@ class AbstractSectionRetriever:
             raise TypeError("query must be a string.")
         if not query.strip():
             return []
+
+        if re.search(
+            r"\bsections?\s+\d+(?:\.\d+)*\b", query, re.IGNORECASE
+        ):
+            self._report(
+                "Numbered-section scope unavailable; "
+                "no unrelated evidence supplied."
+            )
+            return []
+
         if not re.search(r"\babstract\b", query, re.IGNORECASE):
             return self._fallback.search(query, top_k=top_k)
         if not self._abstract:

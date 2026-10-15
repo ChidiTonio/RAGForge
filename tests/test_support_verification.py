@@ -16,6 +16,20 @@ def hit(text):
         chunk=TextChunk("sample.pdf", 1, 1, 0, len(text), text),
         score=0.0,
     )
+def test_unsupported_numbered_section_does_not_use_fallback():
+    from ragforge.retrieval.abstract import AbstractSectionRetriever
+
+    fallback = Mock()
+    reranker = Mock()
+    retriever = AbstractSectionRetriever(fallback, reranker, [])
+    results = retriever.search(
+        "According to section 5.4, what measurable value contributions "
+        "are described?",
+        top_k=3,
+    )
+    assert results == []
+    fallback.search.assert_not_called()
+    reranker.rerank.assert_not_called()
 
 
 def response(points):
@@ -156,3 +170,17 @@ def test_verification_runs_once_after_answer_contract_retry():
     assert answer.status == "answered"
     assert generator_llm.complete.call_count == 2
     verifier.complete.assert_called_once()
+def test_verifier_receives_only_cited_evidence():
+    generator_llm = Mock()
+    generator_llm.complete.return_value = response([
+        {"text": "Revenue grew.", "citations": ["S1"]}
+    ])
+    verifier = Mock()
+    verifier.complete.return_value = '{"supported": true}'
+    AnswerGenerator(generator_llm, verification_llm=verifier).generate(
+        "What changed?",
+        [hit("Revenue grew."), hit("Uncited contextual evidence.")],
+    )
+    request = json.loads(verifier.complete.call_args.kwargs["user_prompt"])
+    assert [item["label"] for item in request["evidence"]] == ["S1"]
+    assert request["evidence"][0]["text"] == "Revenue grew."

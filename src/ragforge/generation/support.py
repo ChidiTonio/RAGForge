@@ -1,6 +1,9 @@
 """Optional model-based support checking; not a truth guarantee."""
 
 import json
+import os
+import sys
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -21,6 +24,13 @@ VERIFICATION_PROMPT = (
     "by the question and every point is directly supported by its own "
     "cited passages. For named-section questions, support must come from "
     "that section. Topical similarity is not sufficient. "
+    "Check responsiveness, citation support, and requested-section provenance "
+    "separately; all must pass. A supported list of categories does not "
+    "answer a request for benefits or value contributions. For a named "
+    "section, the cited evidence must establish that it belongs to the "
+    "requested section. Matching facts elsewhere do not satisfy this "
+    "constraint. If section provenance cannot be established from the "
+    "supplied evidence and metadata, return supported=false. "
     "Use false for missing requested facts, unsupported claims, or "
     "conclusions inferred from absence in the supplied passages. "
     "If a question asks for a numerical percentage, an answer saying "
@@ -56,13 +66,25 @@ def verify_support(llm: "LLM", question: str, answer: "Answer") -> bool:
                 "end_char": item.chunk.end_char,
                 "text": item.chunk.text,
             }
-            for item in answer.evidence
+            for item in answer.citations
         ],
     }
     raw = llm.complete(
         system_prompt=VERIFICATION_PROMPT,
         user_prompt=json.dumps(payload, ensure_ascii=False),
     )
+    if os.environ.get("RAGFORGE_DEBUG_LLM") == "1":
+        print(
+            f"[RAGForge] Verification question: {question!r}",
+            file=sys.stderr,
+            flush=True,
+        )
+        print(
+            f"[RAGForge] Verifier raw response: {raw!r}",
+            file=sys.stderr,
+            flush=True,
+        )
+
     if not isinstance(raw, str):
         raise InvalidVerificationResponse("Verifier response must be JSON text.")
     try:
