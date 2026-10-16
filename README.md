@@ -63,7 +63,6 @@ also rejects uploads larger than 20 MiB before copying their bytes, and
 These checks are not a PDF sandbox or an extraction timeout. Compatible
 cache hits skip parsing and therefore do not reapply the parser limits.
 
-
 ## Retrieval and caching
 
 The PDF CLI uses BM25/dense hybrid retrieval and cross-encoder reranking.
@@ -99,7 +98,6 @@ Models are instantiated per session, so concurrent sessions increase memory
 use. Host CPU/RAM capacity must be measured before deployment. Access control
 must be provided separately; upload limits do not provide authentication.
 
-
 ## Validation and limitations
 
 Run:
@@ -110,12 +108,12 @@ python -m pytest -q
 ```
 
 At the 2026-10-15 checkpoint, Ruff and all 588 tests passed.
+Live qwen2.5:7b checks covered supported answers, multi-point output,
+abstention, explicit counts, and two-process cache saving/reuse.
 
 At the 2026-10-16 ingestion-hardening checkpoint, Ruff and all 670 tests
 passed, including PDF-limit and Streamlit upload-guard regression tests.
 The hardening changes are recorded in commit afaadac.
-Live qwen2.5:7b checks covered supported answers, multi-point output,
-abstention, explicit counts, and two-process cache saving/reuse.
 
 - No OCR: text-based PDFs only.
 - Citation membership does not prove factual support or quotation fidelity.
@@ -126,7 +124,6 @@ abstention, explicit counts, and two-process cache saving/reuse.
 - data/ is ignored by Git; exclude other cache directories separately.
 - Retrieved evidence is sent to the configured Ollama service.
 - Live validation covered the local CLI, not a deployed web service.
-
 
 See [reranking results](docs/reranking-experiment.md) and
 [unresolved idle latency](docs/performance/idle-latency.md).
