@@ -11,6 +11,7 @@ import streamlit as st
 from ragforge.application import build_pdf_session
 from ragforge.generation.core import InvalidLLMResponse
 from ragforge.generation.ollama import OllamaError
+from ragforge.ingestion.pdf import MAX_PDF_BYTES
 
 
 def upload_filename(name: str) -> str:
@@ -84,7 +85,17 @@ def main() -> None:
         )
 
     uploaded = st.file_uploader("Choose a PDF", type=["pdf"])
+    if uploaded is not None and uploaded.size > MAX_PDF_BYTES:
+        for key in ("pdf_session", "session_key", "last_result"):
+            st.session_state.pop(key, None)
+        st.error(
+            f"PDF exceeds the upload limit of {MAX_PDF_BYTES // (1024 * 1024)} MiB. "
+            "Please choose a smaller file."
+        )
+        return
+
     data = uploaded.getvalue() if uploaded is not None else None
+
     filename = upload_filename(uploaded.name) if uploaded is not None else None
     current_key = (
         (hashlib.sha256(data).hexdigest(), filename, model, revision) if data is not None else None
