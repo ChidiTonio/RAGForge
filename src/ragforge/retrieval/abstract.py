@@ -5,7 +5,6 @@ from dataclasses import replace
 
 from ragforge.retrieval.types import SearchResult
 
-
 _START = re.compile(
     r"^[ \t]*(?:\d+[.)]?[ \t]+)?abstract[ \t]*:?[ \t]*$",
     re.IGNORECASE | re.MULTILINE,

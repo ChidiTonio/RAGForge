@@ -11,9 +11,9 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import Literal, Protocol
 
+from ragforge.generation.support import verify_support
 from ragforge.ingestion.chunking import TextChunk
 from ragforge.retrieval.types import SearchResult
-from ragforge.generation.support import verify_support
 
 
 class LLM(Protocol):
